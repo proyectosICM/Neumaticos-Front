@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { InfoUserURL } from "../../api/apiurl";
-import { ListItems } from "./hooks/crudhooks";
+import { ListItems } from '../../hooks/crudhooks';
 
 export function Welcome() {
   const navigate = useNavigate();

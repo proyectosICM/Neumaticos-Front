@@ -1,0 +1,30 @@
+
+
+.vehicle-item-card {
+  height: 20rem;
+  width: 18rem;
+  margin: 2rem;
+  background: blue;
+  /* Otros estilos según sea necesario */
+  border-radius: 2%;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-color: antiquewhite;
+}
+
+.vehicle-menu-container{
+  width: 80%;
+  height: 25%;
+  margin: 2% auto;
+  padding: 2%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #E5E7E9;
+  border-radius: 1%;
+} 

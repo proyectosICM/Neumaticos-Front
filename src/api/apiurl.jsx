@@ -8,4 +8,7 @@ export const apiURL = `${base}/api/`
 export const UserURL = `${apiURL}user`
 export const InfoUserURL = `${UserURL}/info/`
 
-
+// Vehicle
+export const VehicleURL = `${apiURL}vehicle`
+export const VehicleCompanyURL = `${apiURL}vehicle/findByCompany`
+export const VehicleCompanyStatusURL = `${apiURL}vehicle/findByCompanyAndStatus`

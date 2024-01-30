@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { routes } from './routes';
-
+import './GeneralStyles/menus-items.css';
 function App() {
   return (
     <div className="App">
