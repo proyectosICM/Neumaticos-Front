@@ -22,6 +22,8 @@ export function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  // Hook to access navigation functionality
   const navigate = useNavigate();
 
   /**
@@ -29,8 +31,11 @@ export function Login() {
    * @param {Object} e - The event object.
    */
   const handleLogin = async (e) => {
+    // Prevent the default form submission behavior
     e.preventDefault();
+
     try {
+      // Attempt to login by making a POST request to the login endpoint
       const response = await axiosInstance.post(loginURL, {
         username,
         password,
@@ -57,6 +62,7 @@ export function Login() {
     }
   }, [navigate]);
 
+  // Invoking the LogoutToken function to check the validity of the access token and, if invalid, terminating the session
   LogoutToken();
 
   return (

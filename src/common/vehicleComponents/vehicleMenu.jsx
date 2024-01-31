@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import "./styles/vehicle-menu.css";
 import { VehicleItem } from "./vehicleItem";
 import { VehicleCompanyURL } from "../../api/apiurl";
 import { ListItems, ListItemsPaginated } from "../../hooks/crudhooks";

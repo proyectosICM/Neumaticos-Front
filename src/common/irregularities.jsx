@@ -9,13 +9,12 @@ export function Irregularities() {
           <tr>
             <th>Dia</th>
             <th>Hora</th>
+            <th>Placa de Vehiculo</th>
+            <th>Neumatico asociado</th>
             <th>Incidencia</th>
-            <th>Bateria</th>
-            <th>Placa</th>
-            <th>Conductor</th>
+            <th>Detalles</th>
             <th>Estado</th>
             <th>Gestion</th>
-            <th>Detalles</th>
           </tr>
         </thead>
         <tbody>
@@ -26,8 +25,6 @@ export function Irregularities() {
             }}
           >
             <td>{/* new Date(incidencia.dia).toLocaleDateString() */}</td>
-
-    
           </tr>
         </tbody>
       </Table>

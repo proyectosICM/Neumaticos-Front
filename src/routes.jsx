@@ -9,6 +9,8 @@ import { SADashboard } from "./Views/systemAdministrator/saDashboard";
 import { SupervisorDashboard } from "./Views/supervisor/supervisorDashboard";
 import { SupervisorMenu } from "./Views/supervisor/supervisorMenu";
 import { Irregularities } from "./common/irregularities";
+import { SupervisorVinfo } from "./Views/supervisor/supervisorVInfo";
+import { ForkliftWith4Tires } from "./common/tireComponents/tireGraphics/forkliftWith4Tires";
 
 // Array of route definitions
 export const routes = [
@@ -20,12 +22,16 @@ export const routes = [
   { path: "/welcome", component: <Welcome /> },
   { path: "/redirect", component: <Redirect /> },
 
+  //
+  { path: "/detalles", component: <VehicleInfo /> },
+
   //Driver
   { path: "/driver", component: <DriverDashboard /> },
 
   //Supervisor
   { path: "/supervisor", component: <SupervisorDashboard /> },
   { path: "/supervisor-menu", component: <SupervisorMenu /> },
+  { path: "/supervisor-detalles", component: <SupervisorVinfo /> },
 
   //System Administrator
   { path: "/sa", component: <SADashboard /> },
@@ -35,4 +41,6 @@ export const routes = [
   { path: "/vehicle-info", component: <VehicleInfo /> },
   { path: "/vehicle-menu", component: <VehicleMenu /> },
   { path: "/irregularities", component: <Irregularities /> },
+
+  { path: "/f4", component: <ForkliftWith4Tires /> },
 ];

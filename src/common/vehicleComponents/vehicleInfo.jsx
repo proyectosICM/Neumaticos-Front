@@ -17,11 +17,11 @@ export function VehicleInfo() {
   const vehicleId = 1;
 
   // Fetch vehicle information and update the state
-  ListItems(`${VehicleURL}/${vehicleId}`, setData);
+  ListItems(`${VehicleURL}/${vehicleId}`, setData); 
 
   return (
     <div className="vehicle-info-container">
-      <h2>Información del Vehículo</h2>
+      <h2 style={{width: "100%"}}>Información del Vehículo</h2>
 
       <div className="vehicle-info-column">
         <p>Placa: {data && data.placa}</p>
