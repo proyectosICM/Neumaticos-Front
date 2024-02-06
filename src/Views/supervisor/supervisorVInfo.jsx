@@ -11,7 +11,7 @@ import { IrregularitiesPanel } from "../../common/vehicleComponents/irregulariti
  */
 export function SupervisorVinfo() {
   const { id } = useParams();
-  return (
+  return ( 
     <>
       {/* Render the supervisor-specific navigation bar */}
       <NavbarSupervisor />

@@ -10,7 +10,8 @@ import { SupervisorDashboard } from "./Views/supervisor/supervisorDashboard";
 import { SupervisorMenu } from "./Views/supervisor/supervisorMenu";
 import { Irregularities } from "./common/irregularities";
 import { SupervisorVinfo } from "./Views/supervisor/supervisorVInfo";
-import { ForkliftWith4Tires } from "./common/tireComponents/tireGraphics/forkliftWith4Tires";
+import { ForkliftWith4Tires } from "./common/tireComponents/forkliftsTypes/forkliftWith4Tires";
+import { SupervisorFullPerformance } from "./Views/supervisor/supervisorFullPerformance";
 
 // Array of route definitions
 export const routes = [
@@ -32,7 +33,7 @@ export const routes = [
   { path: "/supervisor", component: <SupervisorDashboard /> },
   { path: "/supervisor-menu", component: <SupervisorMenu /> },
   { path: "/supervisor-detalles/:id", component: <SupervisorVinfo /> },
-
+  { path: "/panel-performance", component: <SupervisorFullPerformance /> },
   //System Administrator
   { path: "/sa", component: <SADashboard /> },
 
