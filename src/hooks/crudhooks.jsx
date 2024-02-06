@@ -13,6 +13,7 @@ export function ListItems(url, setData) {
         });
         setData(response.data);
         console.log("Data updated");
+
       } catch (error) {
         console.error("Error listing items", error);
         const token = await localStorage.getItem("token");

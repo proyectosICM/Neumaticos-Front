@@ -90,10 +90,6 @@ export function Login() {
         {error && <p>{error}</p>}
       </div>
 
-      <div className="login-info">
-        <h2>Gestiona y analiza el funcionamiento de tus baterías de camiones</h2>
-        <Link to="/contratar">Contratar</Link>
-      </div>
     </div>
   );
 }

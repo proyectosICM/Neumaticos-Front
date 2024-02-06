@@ -31,7 +31,7 @@ export const routes = [
   //Supervisor
   { path: "/supervisor", component: <SupervisorDashboard /> },
   { path: "/supervisor-menu", component: <SupervisorMenu /> },
-  { path: "/supervisor-detalles", component: <SupervisorVinfo /> },
+  { path: "/supervisor-detalles/:id", component: <SupervisorVinfo /> },
 
   //System Administrator
   { path: "/sa", component: <SADashboard /> },

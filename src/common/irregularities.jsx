@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 
 export function Irregularities() {
   return (
@@ -9,7 +9,8 @@ export function Irregularities() {
           <tr>
             <th>Dia</th>
             <th>Hora</th>
-            <th>Placa de Vehiculo</th>
+            <th>Placa</th>
+            <th>Categoria</th>
             <th>Neumatico asociado</th>
             <th>Incidencia</th>
             <th>Detalles</th>

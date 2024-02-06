@@ -1,6 +1,19 @@
 .menu-container {
   width: 80%;
   height: 25%;
+  margin: 0rem auto;
+  padding: 2%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1%;
+}
+
+.menu-container-border {
+  width: 80%;
+  height: 25%;
   margin: 2% auto;
   padding: 2%;
   display: flex;
@@ -14,21 +27,41 @@
 
 
 .item-card {
-  height: 20rem;
-  width: 18rem;
-  margin: 2rem;
-  background: blue;
+  height: 18rem;
+  width: 16rem;
+  margin: 1.5rem 1.5rem 1.0rem;
   /* Otros estilos según sea necesario */
-  border-radius: 2%;
+  border-radius: 10%;
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
   align-items: center;
-  background-color: antiquewhite;
+  background-color: black;
+  color: white;
   cursor: pointer;
+  border: 2px white solid;
+  font-size: 1.5rem;
 }
 
 .icon-card{
-  font-size: 20rem;
+  font-size: 6rem;
+}
+
+.item-body{
+ margin: 0px;
+/*
+ border: 2px white solid;
+*/
+ width: 100%;
+}
+
+.titulo{
+  width: 100%;
+  color: white;
+}
+
+
+.boton-filtro{
+  margin: 0 0.25rem;
 }

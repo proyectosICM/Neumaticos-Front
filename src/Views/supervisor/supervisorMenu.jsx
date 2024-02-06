@@ -5,7 +5,7 @@ import { VehicleMenu } from "./../../common/vehicleComponents/vehicleMenu";
 /**
  * SupervisorMenu component, representing the main menu for a supervisor.
  * It includes the NavbarSupervisor for navigation and the VehicleMenu for vehicle-related actions.
- */
+ */ 
 export function SupervisorMenu() {
   return (
     <div>

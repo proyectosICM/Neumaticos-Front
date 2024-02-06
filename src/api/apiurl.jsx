@@ -4,6 +4,9 @@ export const loginURL = `${base}/login`;
 
 export const apiURL = `${base}/api/`
 
+// VehicleTypes
+export const VehicleTypeURL = `${apiURL}vehicletypes`
+
 // User
 export const UserURL = `${apiURL}user`
 export const InfoUserURL = `${UserURL}/info/`
