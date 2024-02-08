@@ -1,46 +1,22 @@
 import React, { useState } from "react";
 
 import "./forklift4.css";
-import { TiresByVehicleAndPositionURL } from "../../../api/apiurl";
-import axios from "axios";
+import { useTireDetails } from "../../../hooks/crudhooks";
 
 /**
  * Displays a forklift graphic where users can interact with each tire to view detailed information.
+ * Uses the custom hook `useTireDetails` to fetch tire details based on the vehicle ID and the positioning of the tire clicked.
  * @param {number} vehicleId - Identifier for the vehicle to fetch tire details.
  */
 export const ForkliftWith4Tires = ({ vehicleId }) => {
-  // State to hold the details of the selected tire.
-  const [tireDetails, setTireDetails] = useState("");
+  const [positioning, setPositioning] = useState(null);
+  const { tireDetails, loading, error } = useTireDetails(vehicleId, positioning);
 
   /**
-   * Fetches details for a tire based on its position on the forklift and updates state.
-   * @param {number} positioning - The position code of the tire to fetch details for.
+   * Event handler for tire selection. Updates the `positioning` state which triggers fetching tire details.
+   * @param {number} pos - The position code of the selected tire.
    */
-  const handleSelectTire = async (positioning) => {
-    try {
-      const token = localStorage.getItem("token");
-
-      // Fetch tire details from the API using the vehicle ID and tire positioning code.
-      const { data } = await axios.get(`${TiresByVehicleAndPositionURL}?vehicleId=${vehicleId}&positioningCode=${positioning}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      // If data is received, parse and set the tire details for display.
-      if (data && data.length > 0) {
-        const {
-          pressure,
-          temperature,
-          batteryLevel,
-          positioning: { locationCode },
-        } = data[0];
-        setTireDetails(`${locationCode} : ${pressure} PSI - ${temperature} º C - ${batteryLevel} %`);
-      }
-    } catch (error) {
-      console.error("Error fetching tire details", error);
-      // Clear previous details in case of error to avoid displaying incorrect information.
-      setTireDetails("");
-    }
-  };
+  const handleSelectTire = (pos) => setPositioning(pos);
 
   return (
     <>

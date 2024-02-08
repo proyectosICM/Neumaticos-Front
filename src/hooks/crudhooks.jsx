@@ -23,8 +23,8 @@ export const useTireDetails = (vehicleId, positioning) => {
           setTireDetails(`${locationCode} : ${pressure} PSI - ${temperature} º C - ${batteryLevel} %`);
         }
       } catch (error) {
-        console.error("Error fetching tire details", error);
-        setError(error);
+        console.error("Error fetching tire details", error.message); // Solo muestra el mensaje de error
+        setError("Could not fetch tire details."); // Mensaje genérico para el usuario
         setTireDetails(""); // Limpia los detalles en caso de error
       } finally {
         setLoading(false);
