@@ -1,30 +1,27 @@
 .base-forklift {
     width: 10rem;
     height: 90%;
-    border: 2px solid red;
+
     margin: 1rem auto;
     background-image: url('../../../images/forklift.jpg');
     background-position: center;
     background-size: cover;
 }
 
-.tires-l,
-.tires-r {
+.tires-l-m4,
+.tires-r-m4 {
     width: 4rem;
     height: 90%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    /* Ajusta los neumáticos uniformemente */
     border: 2px solid gree;
     margin: 1rem auto;
-    border: 2px solid green;
 }
 
-.tires-l .tire {
-    border: 2px solid red;
+.tires-l-m4 .tire-m4 {
+
     flex: 1;
-    /* Hace que los neumáticos llenen el espacio disponible */
     margin: 0.5rem 0%;
     /* Ajusta según sea necesario */
     background-position: center;
@@ -32,10 +29,10 @@
     background-image: url('../../../images/llanta.jpg');
     width: 100%;
     cursor: pointer;
+
 }
 
 .info {
-    border: 2px solid red;
     flex: 1;
     /* Hace que los neumáticos llenen el espacio disponible */
     margin: 0.5rem 0%;
@@ -51,38 +48,27 @@
 
 
 .tire-content {
-    border: 2px solid yellow;
     flex: 1;
-    /* Hace que los neumáticos llenen el espacio disponible */
-
-    /* Ajusta según sea necesario */
     background-position: center;
     background-size: cover;
     height: 100%;
 }
 
-.tires-r .tire {
-    border: 2px solid greenyellow;
+.tires-r-m4 .tire-m4 {
     flex: 1;
-    /* Hace que los neumáticos llenen el espacio disponible */
-
-    /* Ajusta según sea necesario */
     background-position: center;
     background-size: cover;
     background-image: url('../../../images/llanta.jpg');
     cursor: pointer;
+    margin: 0.5rem 0%;
 }
 
 
 
-.spare-info {
-    width: 3    0%;
+.info-tire {
+    width: 60%;
     height: 10%;
-    border: 2px solid red;
     margin: 0 auto;
-
-    background-position: center;
-    background-size: cover;
 }
 
 

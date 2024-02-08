@@ -9,20 +9,19 @@ import { ListItems } from "../../hooks/crudhooks";
  * VehicleInfo component to display information about a specific vehicle.
  * It fetches vehicle data based on the vehicleId and renders the information.
  */
-export function VehicleInfo({vehicleId}) {
+export function VehicleInfo({ vehicleId }) {
   // State to store vehicle data
   const [data, setData] = useState(null);
 
- 
-
   // Fetch vehicle information and update the state
-  ListItems(`${VehicleURL}/${vehicleId}`, setData); 
+  ListItems(`${VehicleURL}/${vehicleId}`, setData);
 
   return (
     <div className="vehicle-info-container">
-      <h2 style={{width: "100%", color:"white"}}>Información del Vehículo</h2>
+      <h2 style={{ width: "100%", color: "white" }}>Información del Vehículo</h2>
 
       <div className="vehicle-info-column">
+        <p>Id: {data && data.id}</p>
         <p>Placa: {data && data.placa}</p>
         <p>Marca: {data && data.marca}</p>
         <p>Modelo: {data && data.modelo}</p>

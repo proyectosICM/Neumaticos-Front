@@ -23,8 +23,8 @@ export function SupervisorVinfo() {
         </div>
         
         <div className="panel-container">
-          <PerformancePanel />
-        </div>
+          <PerformancePanel vehicleId={id} />
+        </div> 
         <div className="panel-container">
           <IrregularitiesPanel />
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
-import { NavbarSupervisor } from "./navbarSupervisor";
-import { VehicleMenu } from "./../../common/vehicleComponents/vehicleMenu";
+import { NavbarSupervisor } from "../navbarSupervisor";
+import { VehicleMenu } from "../../../common/vehicleComponents/vehicleMenu";
 
 /**
  * SupervisorMenu component, representing the main menu for a supervisor.

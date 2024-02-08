@@ -1,5 +1,41 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { TiresByVehicleAndPositionURL } from "../api/apiurl";
+
+export const useTireDetails = (vehicleId, positioning) => {
+  const [tireDetails, setTireDetails] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!vehicleId || !positioning) return; // Evita efectos innecesarios
+
+    const fetchTireDetails = async () => {
+      setLoading(true);
+      try {
+        const token = localStorage.getItem("token");
+        const { data } = await axios.get(`${TiresByVehicleAndPositionURL}?vehicleId=${vehicleId}&positioningCode=${positioning}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (data && data.length > 0) {
+          const { pressure, temperature, batteryLevel, positioning: { locationCode } } = data[0];
+          setTireDetails(`${locationCode} : ${pressure} PSI - ${temperature} º C - ${batteryLevel} %`);
+        }
+      } catch (error) {
+        console.error("Error fetching tire details", error);
+        setError(error);
+        setTireDetails(""); // Limpia los detalles en caso de error
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTireDetails();
+  }, [vehicleId, positioning]); // Dependencias del efecto
+
+  return { tireDetails, loading, error };
+};
 
 export function ListItems(url, setData) {
   useEffect(() => {

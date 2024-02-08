@@ -44,24 +44,57 @@
   font-size: 1.5rem;
 }
 
-.icon-card{
+.icon-card {
   font-size: 6rem;
 }
 
-.item-body{
- margin: 0px;
-/*
+.item-body {
+  margin: 0px;
+  /*
  border: 2px white solid;
 */
- width: 100%;
+  width: 100%;
 }
 
-.titulo{
+.titulo {
   width: 100%;
   color: white;
 }
 
 
-.boton-filtro{
+.boton-filtro {
   margin: 0 0.25rem;
+}
+
+.irregularity-block {
+  width: 45%;
+  height: 80%;
+  border: 2px solid white;
+  background-color: #978044;
+  margin: 2% auto;
+  /* Ajustado para separación entre bloques */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 1.2rem;
+}
+
+
+.coming-soon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.coming-soon-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.coming-soon-container p {
+  font-size: 1.5rem;
 }

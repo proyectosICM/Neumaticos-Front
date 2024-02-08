@@ -4,6 +4,7 @@ import { Table } from "react-bootstrap";
 export function Irregularities() {
   return (
     <>
+      <h1>Incidencias Recientes</h1>
       <Table striped bordered hover>
         <thead>
           <tr>

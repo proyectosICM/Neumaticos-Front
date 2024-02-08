@@ -1,7 +1,7 @@
 .base-forklift {
     width: 10rem;
     height: 90%;
-    border: 2px solid red;
+    border: 2px solid blue;
     margin: 1rem auto;
     background-image: url('../../../images/forklift.jpg');
     background-position: center;

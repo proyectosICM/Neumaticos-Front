@@ -16,14 +16,14 @@ export function NavbarSupervisor(){
     };
 
 
- 
+  
     return(
         <Navbar bg="dark" variant="dark" className="justify-content-between">
         <Navbar.Brand style={{marginLeft: "25px", cursor:"pointer"}} onClick={() => navigation("/supervisor")}>Inicio</Navbar.Brand>
         <Nav>
           <Nav.Link onClick={() => navigation("/supervisor-menu")} >Menu de vehiculos</Nav.Link>
-          <Nav.Link >Incidencias recientes</Nav.Link>
-          <Nav.Link >Dispositivos</Nav.Link>
+          <Nav.Link onClick={() => navigation('/is-panel')}>Incidencias recientes</Nav.Link>
+          <Nav.Link onClick={() => navigation('/ms-panel')}>Mensajes</Nav.Link>
         </Nav>
         <Button style={{marginRight: "25px"}} onClick={handleLogout} variant="outline-light">Cerrar Sesión</Button>
       </Navbar>
