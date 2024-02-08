@@ -34,6 +34,7 @@ export const routes = [
   { path: "/supervisor-menu", component: <SupervisorMenu /> },
   { path: "/supervisor-detalles/:id", component: <SupervisorVinfo /> },
   { path: "/panel-performance", component: <SupervisorFullPerformance /> },
+  
   //System Administrator
   { path: "/sa", component: <SADashboard /> },
 

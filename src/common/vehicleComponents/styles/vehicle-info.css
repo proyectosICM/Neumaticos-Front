@@ -3,7 +3,8 @@
     flex-wrap: wrap;
     text-align: center;
     justify-content: center;
-  }
+    color: white;
+  } 
   
   .vehicle-info-column {
     flex: 0 0 50%;

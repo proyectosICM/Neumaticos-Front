@@ -1,5 +1,5 @@
-export const base = "http://localhost:8082";
-
+//export const base = "http://localhost:8082";
+export const base = "http://192.168.1.232:8082";
 export const loginURL = `${base}/login`;
 
 export const apiURL = `${base}/api/`

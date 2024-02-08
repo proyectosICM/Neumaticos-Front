@@ -5,7 +5,7 @@ import { ForkliftWith4Tires } from "../../common/tireComponents/forkliftsTypes/f
 
 export function SupervisorFullPerformance() {
   return (
-    <>
+    <div style={{height: "800px"}}> 
       {/* Render the supervisor-specific navigation bar */}
       <NavbarSupervisor />
       {/*
@@ -14,10 +14,7 @@ export function SupervisorFullPerformance() {
       </div>
 */}
 
-      <div style={{ width: "100%", height: "100%" }}>
-        <h2>Rendimiento</h2>
-        <ForkliftWith4Tires />
-      </div>
-    </>
+      <ForkliftWith4Tires />
+    </div>
   );
 }

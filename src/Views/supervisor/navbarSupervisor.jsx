@@ -15,7 +15,7 @@ export function NavbarSupervisor(){
       navigation('/login');
     };
 
-    LogoutToken();
+
  
     return(
         <Navbar bg="dark" variant="dark" className="justify-content-between">

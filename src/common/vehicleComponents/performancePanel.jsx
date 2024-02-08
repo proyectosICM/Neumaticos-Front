@@ -3,12 +3,14 @@ import { ForkliftWith4Tires } from "../tireComponents/forkliftsTypes/forkliftWit
 import { ForkliftWith6Tires } from "../tireComponents/forkliftsTypes/forkliftWith6Tires";
 import { TruckWith4Tires } from "../tireComponents/trucksTypes/truckWith4Tires";
 import { TruckWith6Tires } from './../tireComponents/trucksTypes/truckWith6Tires';
+import { Button } from "react-bootstrap";
 
 export function PerformancePanel() {
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <div style={{ width: "100%", height: "90%" }}>
       <h2>Rendimiento</h2>
       <ForkliftWith4Tires />
+      <Button>Ver mas detalles</Button> 
     </div>
   );
 }
