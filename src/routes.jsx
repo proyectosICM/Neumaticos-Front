@@ -32,9 +32,6 @@ export const routes = [
   { path: "/welcome", component: <Welcome /> },
   { path: "/redirect", component: <Redirect /> },
 
-  //
-  { path: "/detalles", component: <VehicleInfo /> },
-
   /**
    * Driver
    */
@@ -47,7 +44,7 @@ export const routes = [
   { path: "/supervisor-menu", component: <SupervisorMenu /> },
   { path: "/supervisor-detalles/:id", component: <SupervisorVinfo /> },
   { path: "/panel-performance", component: <SupervisorFullPerformance /> },
-  
+
   //Panel irregularities for supervisor
   { path: "/is-panel", component: <ISPanel /> },
 
@@ -74,9 +71,5 @@ export const routes = [
   /**
    * Test routes
    */
-  { path: "/profile", component: <Profile /> },
-  { path: "/vehicle-info", component: <VehicleInfo /> },
-  { path: "/vehicle-menu", component: <VehicleMenu /> },
-  { path: "/irregularities", component: <Irregularities /> },
   { path: "/f4", component: <ForkliftWith4Tires /> },
 ];

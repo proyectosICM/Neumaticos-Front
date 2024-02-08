@@ -29,7 +29,7 @@ export function Welcome() {
       localStorage.setItem("rol", info.role.id);
       localStorage.setItem("empresa", info.company.id);
       localStorage.setItem("usuario", info.id);
-      navigate("/redirect");
+      //navigate("/redirect");
     }
   }, [info]);
 
@@ -41,7 +41,7 @@ export function Welcome() {
       {/* Render your component using the 'info' state */}
       {info && (
         <div>
-          <h1>Hola {info.id}</h1>
+          <h1>Redirigiendo {info.id}</h1>
           {/* Example: <p>{info.someData}</p> */}
         </div>
       )}
