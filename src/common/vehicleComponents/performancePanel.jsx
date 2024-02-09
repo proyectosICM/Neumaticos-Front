@@ -17,7 +17,7 @@ export function PerformancePanel({vehicleId}) {
   return (
     <div style={{ width: "100%", height: "90%" }}>
       <h2>Rendimiento</h2>
-      <ForkliftWith6Tires vehicleId={vehicleId} />
+      <ForkliftWith4Tires vehicleId={vehicleId} />
 
        {/* Button to navigate to more detailed performance data. Implement onClick handler to define the navigation logic. */}
       <Button>Ver mas detalles</Button> 
