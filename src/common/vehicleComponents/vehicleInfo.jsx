@@ -40,7 +40,7 @@ export function VehicleInfo({ vehicleId }) {
       {/* Second column for additional vehicle information */}
       <div className="vehicle-info-column">
         <p>Empresa: {data && data.company.name}</p>
-        <p>Tipo de Vehículo: {data && data.company.name}</p>
+        <p>Tipo de Vehículo: {data && data.vehicleType.name}</p>
         <p>Ejes: {data && data.company.name}</p>
       </div>
     </div>

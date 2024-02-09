@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "./truck-styles.css";
 import { useTireDetails } from "../../../hooks/crudhooks";
-export const TruckWith6Tires = ({ vehicleId }) => {
+export const TruckWith14Tires = ({ vehicleId }) => {
   const [positioning, setPositioning] = useState(null);
   const { tireDetails, loading, error } = useTireDetails(vehicleId, positioning);
 
@@ -16,15 +16,21 @@ export const TruckWith6Tires = ({ vehicleId }) => {
       <div style={{ width: "100%", height: "75%", display: "flex", flexDirection: "row" }}>
         {/* Left side tires interaction area */}
         <div className="trk-tires-l">
-          <div className="trk-blank " onClick={() => handleSelectTire(1)}></div>
-          <div className="trk-blank" onClick={() => handleSelectTire(2)}></div>
+          <div className="trk-blank"></div>
+          <div className="trk-blank"></div>
+          <div className="trk-blank"></div>
+          <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>
+          <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>
           <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>
         </div>
 
         {/* Left side tires interaction area */}
         <div className="trk-tires-l">
           <div className="trk-tire" onClick={() => handleSelectTire(1)}></div>
-          <div className="trk-blank" onClick={() => handleSelectTire(2)}></div>
+          <div className="trk-blank"></div>
+          <div className="trk-blank"></div>
+          <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>
+          <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>
           <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>
         </div>
 
@@ -33,14 +39,20 @@ export const TruckWith6Tires = ({ vehicleId }) => {
 
         {/* Right side tires interaction area */}
         <div className="trk-tires-r">
-          <div className="trk-tire" onClick={() => handleSelectTire(1)}></div>
-          <div className="trk-blank" onClick={() => handleSelectTire(2)}></div>
+          <div className="trk-tire" onClick={() => handleSelectTire(3)}></div>
+          <div className="trk-blank"></div>
+          <div className="trk-blank"></div>
+          <div className="trk-tire" onClick={() => handleSelectTire(4)}></div>
+          <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>
           <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>
         </div>
         {/* Right side tires interaction area */}
         <div className="trk-tires-r">
-          <div className="trk-blank " onClick={() => handleSelectTire(1)}></div>
-          <div className="trk-blank" onClick={() => handleSelectTire(2)}></div>
+          <div className="trk-blank"></div>
+          <div className="trk-blank"></div>
+          <div className="trk-blank"></div>
+          <div className="trk-tire" onClick={() => handleSelectTire(4)}></div>
+          <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>
           <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>
         </div>
       </div>

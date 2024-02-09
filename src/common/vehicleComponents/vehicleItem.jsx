@@ -16,7 +16,7 @@ export function VehicleItem({ data }) {
 
   return (
     <div className="item-card">
-      {/* Display basic vehicle information */}
+      {/* Display basic vehicle information */} 
       <div className="item-body">
         <div>
           <strong>Empresa:</strong> {data.company && data.company.name}
@@ -25,7 +25,7 @@ export function VehicleItem({ data }) {
           <strong>Placa:</strong> {data && data.placa}
         </div>
         <div>
-          <strong>Tipo:</strong> Camión
+          <strong>Tipo:</strong> {data && data.vehicleType.name}
         </div>
       </div>
 

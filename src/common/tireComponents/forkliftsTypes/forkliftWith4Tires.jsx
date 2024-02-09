@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import "./forklift-styles.css";
 import { useTireDetails } from "../../../hooks/crudhooks";
- 
+
 /**
  * Displays a forklift graphic where users can interact with each tire to view detailed information.
  * Uses the custom hook `useTireDetails` to fetch tire details based on the vehicle ID and the positioning of the tire clicked.
@@ -19,12 +19,13 @@ export const ForkliftWith4Tires = ({ vehicleId }) => {
    */
   const handleSelectTire = (pos) => setPositioning(pos);
 
-  return (
+  return ( 
     <>
       <div style={{ width: "100%", height: "75%", display: "flex", flexDirection: "row" }}>
         {/* Left side tires interaction area */}
         <div className="fkl-tires-l">
           <div className="fkl-tire" onClick={() => handleSelectTire(1)}></div>
+          <div className="fkl-blank"></div>
           <div className="fkl-tire" onClick={() => handleSelectTire(2)}></div>
         </div>
 
@@ -34,7 +35,8 @@ export const ForkliftWith4Tires = ({ vehicleId }) => {
         {/* Right side tires interaction area */}
         <div className="fkl-tires-r">
           <div className="fkl-tire" onClick={() => handleSelectTire(3)}></div>
-          <div className="fkl-tire" onClick={() => handleSelectTire(4)}></div>
+          <div className="fkl-blank"></div>
+          <div className="fkl-tire" onClick={() => handleSelectTire(2)}></div>
         </div>
       </div>
 
@@ -43,5 +45,5 @@ export const ForkliftWith4Tires = ({ vehicleId }) => {
         <p>{tireDetails}</p>
       </div>
     </>
-  );
+  ); 
 };
