@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavbarSupervisor } from "../../supervisor/navbarSupervisor";
-import { Irregularities } from "../../../common/irregularities";
+import { Irregularities } from "../../../common/irregularitiesComponents/irregularities";
 import { PaginacionUtils } from "../../../hooks/paginacionUtils";
 import { NavbarAdministrator } from "../navabarAdministrator";
 

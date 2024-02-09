@@ -12,7 +12,7 @@ export const ForkliftWith4Tires = ({ vehicleId }) => {
   const [positioning, setPositioning] = useState(null);
   const { tireDetails, loading, error } = useTireDetails(vehicleId, positioning);
 
-  /**
+  /** 
    * Event handler for tire selection. Updates the `positioning` state which triggers fetching tire details.
    * @param {number} pos - The position code of the selected tire.
    */

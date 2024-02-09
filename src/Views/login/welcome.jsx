@@ -29,7 +29,7 @@ export function Welcome() {
       localStorage.setItem("rol", info.role.id);
       localStorage.setItem("empresa", info.company.id);
       localStorage.setItem("usuario", info.id);
-      //navigate("/redirect");
+      navigate("/redirect");
     }
   }, [info]);
 

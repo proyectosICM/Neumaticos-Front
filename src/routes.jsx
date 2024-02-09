@@ -8,8 +8,8 @@ import { VehicleMenu } from "./common/vehicleComponents/vehicleMenu";
 import { SADashboard } from "./Views/systemAdministrator/saDashboard";
 import { SupervisorDashboard } from "./Views/supervisor/supervisorDashboard";
 import { SupervisorMenu } from "./Views/supervisor/menu-supervisor/supervisorMenu";
-import { Irregularities } from "./common/irregularities";
-import { SupervisorVinfo } from "./Views/supervisor/supervisorVInfo";
+import { Irregularities } from "./common/irregularitiesComponents/irregularities";
+import { SupervisorVinfo } from "./Views/supervisor/menu-supervisor/supervisorVInfo";
 import { ForkliftWith4Tires } from "./common/tireComponents/forkliftsTypes/forkliftWith4Tires";
 import { SupervisorFullPerformance } from "./Views/supervisor/supervisorFullPerformance";
 import { ISPanel } from "./Views/supervisor/irregularities-supervisor/is-panel";
@@ -17,6 +17,7 @@ import { MSPanel } from "./Views/supervisor/messages-supervisor/ms-panel";
 import { MAPanel } from "./Views/administrator/menu-administrator/ma-panel";
 import { IAPanel } from "./Views/administrator/irregularities-administrator/ia-panel";
 import { MSGAdministrator } from "./Views/administrator/messages-administrator/msg-administrator";
+import { ISDetails } from "./Views/supervisor/irregularities-supervisor/is-details";
 
 // Array of route definitions
 export const routes = [
@@ -41,12 +42,16 @@ export const routes = [
    * Supervisor
    */
   { path: "/supervisor", component: <SupervisorDashboard /> },
+  
   { path: "/supervisor-menu", component: <SupervisorMenu /> },
   { path: "/supervisor-detalles/:id", component: <SupervisorVinfo /> },
   { path: "/panel-performance", component: <SupervisorFullPerformance /> },
 
   //Panel irregularities for supervisor
   { path: "/is-panel", component: <ISPanel /> },
+  
+  // Route to display detailed information about a specific irregularity for supervisors.
+  { path: "/is-details/:id", component: <ISDetails /> },
 
   //Panel messages for supervisor
   { path: "/ms-panel", component: <MSPanel /> },

@@ -6,7 +6,7 @@ import { ListItems } from "../../hooks/crudhooks";
 import { PaginacionUtils } from "../../hooks/paginacionUtils";
 import axios from "axios";
 import { Button } from "react-bootstrap";
-
+ 
 /**
  * Component that displays a menu of vehicles.
  * It fetches vehicle data from the server based on company and pagination.
