@@ -16,14 +16,14 @@ export function NavbarAdministrator() {
 
   return (
     <Navbar bg="dark" variant="dark" className="justify-content-between">
-      <Navbar.Brand style={{ marginLeft: "25px", cursor: "pointer" }} onClick={() => navigation("/sa")}>
+      <Navbar.Brand style={{ marginLeft: "25px", cursor: "pointer" }} onClick={() => navigation("/menu")}>
         Inicio
       </Navbar.Brand>
       <Nav>
-        <Nav.Link onClick={() => navigation("/ma-panel")}>Menu Vehiculos</Nav.Link>
-        <Nav.Link onClick={() => navigation("/ia-panel")}>Incidencias Recientes</Nav.Link>
-        <Nav.Link onClick={() => navigation("/msg-panel")}>Mensajes</Nav.Link>
-        <Nav.Link>Panel Administrador</Nav.Link>
+        <Nav.Link onClick={() => navigation("/menu")}>Menu Vehiculos</Nav.Link>
+        <Nav.Link onClick={() => navigation("/incidencias")}>Incidencias Recientes</Nav.Link>
+        <Nav.Link onClick={() => navigation("/mensajes")}>Mensajes</Nav.Link>
+        <Nav.Link onClick={() => navigation("/ca-panel")}>Panel Administrador</Nav.Link>
       </Nav>
       <Button style={{ marginRight: "25px" }} onClick={handleLogout} variant="outline-light">
         Cerrar Sesión

@@ -57,7 +57,7 @@ export function IrregularitiesPanel({ vehicleId }) {
 
   return (
     <div className="menu-container">
-      <h1 className="title-center">Irregularidades Recientes { vehicleId }</h1>
+      <h1 className="title-center">Irregularidades Recientes</h1>
       {data &&
         data.content.map((irregularity, index) => (
           <div key={index} className="irregularity-block" onClick={() => navigation(`/is-details/${irregularity.id}`)}>

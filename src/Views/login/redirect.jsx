@@ -25,10 +25,10 @@ export function Redirect() {
         tempNav = "/driver";
         break;
       case "2":
-        tempNav = `/supervisor-menu`;
+        tempNav = `/menu`;
         break;
       case "3":
-        tempNav = "/ma-panel";
+        tempNav = "/menu";
         break;
       case "4":
         tempNav = "/sa";

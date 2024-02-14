@@ -1,19 +1,23 @@
 import React from "react";
-import { NavbarSupervisor } from "../navbarSupervisor";
-import { VehicleInfo } from "../../../common/vehicleComponents/vehicleInfo";
+
 import { useNavigate, useParams } from "react-router-dom";
-import "../../../common/vehicleComponents/styles/vehicle-info.css";
-import { PerformancePanel } from "../../../common/vehicleComponents/performancePanel";
-import { IrregularitiesPanel } from "../../../common/vehicleComponents/irregularitiesPanel";
-import "./supervisorVinfo.css";
+import "./styles/vehicle-info.css";
+
+//import "./supervisorVinfo.css";
 import { Button } from "react-bootstrap";
+import { NavbarDriver } from "../../Views/driver/navbarDriver";
+import { NavbarSupervisor } from "../../Views/supervisor/navbarSupervisor";
+import { NavbarAdministrator } from "../../Views/administrator/navabarAdministrator";
+import { VehicleInfo } from "./vehicleInfo";
+import { PerformancePanel } from "./performancePanel";
+import { IrregularitiesPanel } from './irregularitiesPanel';
 
 /**
  * SupervisorVinfo component, representing the supervisor-specific view for vehicle information.
  * It includes the NavbarSupervisor for navigation and the VehicleInfo component for displaying vehicle details.
  * Additionally, it integrates PerformancePanel and IrregularitiesPanel for a comprehensive overview of vehicle performance and issues.
  */
-export function SupervisorVinfo() {
+export function DetailsVehicle() {
   const navigation = useNavigate();
   /**
    * Retrieves the vehicle's ID from the URL parameters, ensuring that the ID can be passed to subcomponents for fetching and displaying vehicle-specific data. This ID is crucial for rendering detailed information, performance metrics, and irregularities for the specified vehicle within the supervisor's view.
@@ -21,12 +25,13 @@ export function SupervisorVinfo() {
   const { id } = useParams();
 
   localStorage.setItem("vehicleId", id);
-
+  const rol = +localStorage.getItem("rol");
   return ( 
     <>
       {/* Render the supervisor-specific navigation bar */}
-      <NavbarSupervisor />
-      <Button className="button-back" onClick={() => navigation(`/supervisor-menu`)}>Atras</Button>
+      {rol === 1 ? <NavbarDriver /> : rol === 2 ? <NavbarSupervisor /> : rol === 3 ? <NavbarAdministrator /> : <h1>sd</h1>}
+
+      <Button className="button-back" onClick={() => navigation(`/menu`)}>Atras</Button>
       <div className="menu-container-border">
         {/* Display detailed information for the selected vehicle */}
         <div style={{ width: "100%" }}>

@@ -6,12 +6,16 @@ import { ListItems } from "../../hooks/crudhooks";
 import { PaginacionUtils } from "../../hooks/paginacionUtils";
 import axios from "axios";
 import { Button } from "react-bootstrap";
- 
+import { NavbarSupervisor } from "../../Views/supervisor/navbarSupervisor";
+import { NavbarDriver } from "./../../Views/driver/navbarDriver";
+import { NavbarAdministrator } from "./../../Views/administrator/navabarAdministrator";
+
 /**
  * Component that displays a menu of vehicles.
  * It fetches vehicle data from the server based on company and pagination.
  */
-export function VehicleMenu({ company }) {
+export function VehicleMenu() {
+  const company = localStorage.getItem("empresa");
   // Pagination state
   const [pageNumber, setPageNumber] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
@@ -46,23 +50,34 @@ export function VehicleMenu({ company }) {
   }, [pageNumber]);
 
   ListItems(VehicleTypeURL, setVehicletypes);
-
+  
+  const rol = +localStorage.getItem("rol");
   return (
-    <div className="menu-container">
-      <div className="titulo">
-        <h1> Vehiculos de la Empresa</h1>
+    <div>
+      {/* Render the supervisor-specific navigation bar */}
+      {rol === 1 ? <NavbarDriver /> : rol === 2 ? <NavbarSupervisor /> : rol === 3 ? <NavbarAdministrator /> : <h1>sd</h1>}
+
+      <div className="menu-container">
+        <div className="titulo">
+          <h1> Vehiculos de la Empresa</h1>
+        </div>
+
+        <div className="titulo">
+          <h5>Filtrar por</h5>
+
+          <Button className="boton-filtro">Todos</Button>
+
+          {vehicletypes &&
+            vehicletypes.map((d, index) => (
+              <Button key={index} className="boton-filtro">
+                {d.name}
+              </Button>
+            ))}
+        </div>
+
+        {data && data.map((d, index) => <VehicleItem key={index} data={d} />)}
+        <PaginacionUtils setPageNumber={setPageNumber} setCurrentPage={setCurrentPage} currentPage={currentPage} totalPages={totalPages} />
       </div>
-
-      <div className="titulo">
-        <h5>Filtrar por</h5>
-
-        <Button className="boton-filtro">Todos</Button>
-
-        {vehicletypes && vehicletypes.map((d, index) => <Button key={index} className="boton-filtro">{d.name}</Button>  )}
-      </div>
-
-      {data && data.map((d, index) => <VehicleItem key={index} data={d} />)}
-      <PaginacionUtils setPageNumber={setPageNumber} setCurrentPage={setCurrentPage} currentPage={currentPage} totalPages={totalPages} />
     </div>
   );
 }

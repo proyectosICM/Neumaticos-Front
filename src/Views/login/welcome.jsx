@@ -30,7 +30,7 @@ export function Welcome() {
       localStorage.setItem("empresa", info.company.id);
       localStorage.setItem("usuario", info.id);
       navigate("/redirect");
-    }
+    } 
   }, [info]);
 
   // Invoking the LogoutToken function to check the validity of the access token and, if invalid, terminating the session

@@ -37,3 +37,23 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* supervisorVinfo.css */
+
+.panel-container {
+  width: 45%;
+  height: 30rem;
+  margin: 2rem auto ;
+  border: white 2px solid;
+  font-size: 1em;
+  border-radius: 1.4rem;
+}
+
+/* Estilos responsivos para dispositivos más pequeños */
+@media (max-width: 768px) {
+  .panel-container {
+    width: 90%; /* Ajusta los paneles para que ocupen más espacio en pantallas pequeñas */
+    font-size: 0.2em;
+  }
+}

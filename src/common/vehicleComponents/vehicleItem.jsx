@@ -16,7 +16,7 @@ export function VehicleItem({ data }) {
 
   return (
     <div className="item-card">
-      {/* Display basic vehicle information */} 
+      {/* Display basic vehicle information */}  
       <div className="item-body">
         <div>
           <strong>Empresa:</strong> {data.company && data.company.name}
@@ -35,7 +35,7 @@ export function VehicleItem({ data }) {
       {/* Button to navigate to the vehicle's detail view */}
       <Button
         style={{ width: "80%" }}
-        onClick={() => navigate(`/supervisor-detalles/${data.id}`)}
+        onClick={() => navigate(`/detalles/${data.id}`)}
         variant="outline-primary"
         title="Editar"
         className="float-end"

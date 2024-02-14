@@ -36,7 +36,7 @@ export const useTireDetails = (vehicleId, positioning) => {
 
   return { tireDetails, loading, error };
 };
-
+ 
 export function ListItems(url, setData) {
   useEffect(() => {
     const fetchData = async () => {

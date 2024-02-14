@@ -5,11 +5,13 @@ import { PaginacionUtils } from "../../../hooks/paginacionUtils";
 import { ListItems, ListItemsPaginated } from "../../../hooks/crudhooks";
 import { IrregularitiesByCompanyPageURL } from "../../../api/apiurl";
 import axios from "axios";
+import { NavbarDriver } from "../../driver/navbarDriver";
+import { NavbarAdministrator } from "../../administrator/navabarAdministrator";
 
 export function ISPanel() {
   // Pagination state
   const [pageNumber, setPageNumber] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0); 
   const [totalPages, setTotalPages] = useState(0);
 
   const [data, setData] = useState();
@@ -20,7 +22,7 @@ export function ISPanel() {
   const Listar = async (page) => {
     try {
       const token = await localStorage.getItem("token");
-      const response = await axios.get(`${IrregularitiesByCompanyPageURL}/${companyId}?page=${pageNumber}`, {
+      const response = await axios.get(`${IrregularitiesByCompanyPageURL}?companyId=${companyId}&page=${page}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -38,10 +40,11 @@ export function ISPanel() {
     Listar(pageNumber);
   }, [pageNumber]);
   
-  return (
+
+
+  return ( 
     <>
-      {/* Navigation component specific to the supervisor role. */}
-      <NavbarSupervisor />
+
 
       {/* Main container that includes the issue list and pagination. */}
       <div className="menu-container-border">
