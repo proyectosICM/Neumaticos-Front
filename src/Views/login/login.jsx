@@ -57,8 +57,7 @@ export function Login() {
   // useEffect hook to automatically navigate to the welcome page if a token is present
   useEffect(() => {
     if (token) {
-      //navigate("/redirect");
-      navigate("/welcome");
+      navigate("/redirect");
     }
   }, [navigate]);
 

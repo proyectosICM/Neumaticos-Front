@@ -8,6 +8,7 @@ import { TruckWith10Tires } from "../tireComponents/trucksTypes/truckWith10Tires
 import { TruckWith14Tires } from "../tireComponents/trucksTypes/truckWith14Tires";
 import { ListItems } from "../../hooks/crudhooks";
 import { VehicleURL } from "../../api/apiurl";
+import { useNavigate } from "react-router-dom";
 
 /**
  * PerformancePanel component showcases the performance aspects of vehicles, specifically forklifts and trucks.
@@ -18,6 +19,7 @@ import { VehicleURL } from "../../api/apiurl";
  * This ID is passed down to the child components to fetch and display relevant performance data.
  */
 export function PerformancePanel({ vehicleId }) {
+  const navigation = useNavigate();
   const [data, setData] = useState();
 
   ListItems(`${VehicleURL}/${vehicleId}`, setData);
@@ -47,7 +49,7 @@ export function PerformancePanel({ vehicleId }) {
     <div style={{ width: "100%", height: "90%" }}>
       <h2>Rendimiento</h2>
       {renderVehicleComponent()}
-      <Button>Ver mas detalles</Button>
+      <Button onClick={() => navigation(`/rendimiento/${vehicleId}`)}>Ver mas detalles</Button>
     </div>
   );
 }
