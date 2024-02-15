@@ -24,7 +24,7 @@ export function DetailsVehicle() {
    */
   const { id } = useParams();
 
-  localStorage.setItem("vehicleId", id);
+  localStorage.setItem("vehicleId", id); 
   const rol = +localStorage.getItem("rol");
   return ( 
     <>

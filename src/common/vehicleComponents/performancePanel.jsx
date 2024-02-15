@@ -24,7 +24,6 @@ export function PerformancePanel({ vehicleId }) {
 
   ListItems(`${VehicleURL}/${vehicleId}`, setData);
 
-
   // Determina qué componente mostrar basado en data.vehicleType.id
   const renderVehicleComponent = () => {
     switch (data?.vehicleType?.id) {

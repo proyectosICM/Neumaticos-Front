@@ -19,7 +19,7 @@ export const TruckWith14Tires = ({ vehicleId }) => {
           <div className="trk-blank"></div>
           <div className="trk-blank"></div>
           <div className="trk-blank"></div>
-          <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>
+          <div className="trk-tire" onClick={() => handleSelectTire(1)}></div>
           <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>
           <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>
         </div>
@@ -27,6 +27,7 @@ export const TruckWith14Tires = ({ vehicleId }) => {
         {/* Left side tires interaction area */}
         <div className="trk-tires-l">
           <div className="trk-tire" onClick={() => handleSelectTire(1)}></div>
+{  /*        <div className="trk-info" onClick={() => handleSelectTire(1)}>22 PSI - 22 ºC - 100%</div> */}
           <div className="trk-blank"></div>
           <div className="trk-blank"></div>
           <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>

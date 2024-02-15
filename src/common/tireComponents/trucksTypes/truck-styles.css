@@ -49,6 +49,14 @@
     background-size: cover;
 }
 
+.trk-info{
+    flex: 1;
+    margin: 0.5rem 0%;
+    font-size: 50%;
+    border: 2px solid green;
+
+}
+
 /**
  * Styles for the area that shows details of the recovered tires, providing visibility on the status 
  * of the tires (Device pressure, temperature and battery).
@@ -58,3 +66,4 @@
     height: 10%;
     margin: 0 auto;
 }
+

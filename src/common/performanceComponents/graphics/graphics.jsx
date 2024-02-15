@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
-import { ListItems } from "../../../hooks/crudhooks";
+import { ListItems, ListItems2 } from "../../../hooks/crudhooks";
 import axios from "axios";
+import { Button } from "react-bootstrap";
+import { PerformanceTireHourlyURL } from "../../../api/apiurl";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: "Carga %",
-    },
-  },
-};
-
-export function Graphics() {
+export function Graphics({titulo}) {
   const [data, setData] = useState();
 
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: `${titulo}`,
+      },
+    },
+  };
+/*
   const Listar = async (page) => {
     try {
       const token = await localStorage.getItem("token");
@@ -39,7 +41,9 @@ export function Graphics() {
   useEffect(() => {
     Listar();
   }, []);
+*/
 
+ListItems2(`${PerformanceTireHourlyURL}?tireId=1&year=2024&month=2&day=15`, setData)
   const labels = data ? data.map((dato) => `${dato.hour}  `) : [];
 
   const avgTemperature = data ? data.map((dato) => dato.avgTemperature) : [];
@@ -76,6 +80,7 @@ export function Graphics() {
         <Line />
     */}
       <Line options={options} data={dataI} />
+      <Button>Ver detalles</Button>
     </>
   );
 }

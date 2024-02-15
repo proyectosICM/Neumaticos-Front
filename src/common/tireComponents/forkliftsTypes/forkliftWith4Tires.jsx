@@ -17,9 +17,11 @@ export const ForkliftWith4Tires = ({ vehicleId }) => {
    * Event handler for tire selection. Updates the `positioning` state which triggers fetching tire details.
    * @param {number} pos - The position code of the selected tire.
    */
-  const handleSelectTire = (pos) => setPositioning(pos);
-
-  return ( 
+  const handleSelectTire = (pos) => {
+    setPositioning(pos);
+    localStorage.setItem("tireSelected", pos);
+  }
+  return (  
     <>
       <div style={{ width: "100%", height: "75%", display: "flex", flexDirection: "row" }}>
         {/* Left side tires interaction area */}
