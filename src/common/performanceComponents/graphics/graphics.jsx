@@ -4,13 +4,11 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 import { ListItems, ListItems2 } from "../../../hooks/crudhooks";
 import axios from "axios";
 import { Button } from "react-bootstrap";
-import { PerformanceTireHourlyURL } from "../../../api/apiurl";
+import { PerformanceTireDaylyURL } from "../../../api/apiurl";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-export function Graphics({titulo}) {
-  const [data, setData] = useState();
-
+export function Graphics({ titulo, data, labs }) {
   const options = {
     responsive: true,
     plugins: {
@@ -23,28 +21,31 @@ export function Graphics({titulo}) {
       },
     },
   };
-/*
-  const Listar = async (page) => {
-    try {
-      const token = await localStorage.getItem("token");
-      const response = await axios.get(`http://localhost:8082/api/performance-tire/hourly-averages?tireId=1&year=2024&month=2&day=15`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setData(response.data);
-    } catch (error) {
-      console.error("Error al listar", error);
-    }
-  };
-  // useEffect hook to trigger data loading when 'pageNumber' changes
-  useEffect(() => {
-    Listar();
-  }, []);
-*/
 
-ListItems2(`${PerformanceTireHourlyURL}?tireId=1&year=2024&month=2&day=15`, setData)
-  const labels = data ? data.map((dato) => `${dato.hour}  `) : [];
+  const [labels, setLabels] = useState();
+
+  //ListItems2(`${PerformanceTireDaylyURL}?tireId=1&year=2024&month=2&day=15`, setData);
+  useEffect(() => {
+    let lbl = [];
+    switch (labs) {
+      case "day":
+        lbl = data ? data.map((dato) => `${dato.hour}`) : [];
+        break;
+      case "month":
+        lbl = data ? data.map((dato) => `${dato.day}`) : [];
+        break;
+      case "year":
+        lbl = data ? data.map((dato) => `${dato.month}`) : [];
+        break;
+      case "ayear":
+        lbl = data ? data.map((dato) => `${dato.year} Y`) : [];
+        break;
+      default:
+        break;
+    }
+    setLabels(lbl);
+  }, [data, labs]);
+
 
   const avgTemperature = data ? data.map((dato) => dato.avgTemperature) : [];
   const avgPressure = data ? data.map((dato) => dato.avgPressure) : [];
@@ -70,7 +71,7 @@ ListItems2(`${PerformanceTireHourlyURL}?tireId=1&year=2024&month=2&day=15`, setD
         data: avgBatteryLevel,
         borderColor: "rgba(255, 206, 86, 1)",
         backgroundColor: "rgba(255, 206, 86, 0.5)",
-      }
+      },
     ],
   };
 

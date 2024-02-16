@@ -64,10 +64,10 @@ export const RecentIrregularitiesTiredURL = `${IrregularitiesTiredBaseURL}/recen
  */
 export const PerformanceTireURL = `${apiURL}performance-tire`;
 // Retrieves the most recent irregularities across all vehicles.
-export const PerformanceTireHourlyURL = `${PerformanceTireURL}/hourly-averages`;
+export const PerformanceTireDaylyURL = `${PerformanceTireURL}/hourly-averages`;
 // Retrieves the most recent irregularities across all vehicles.
-export const PerformanceTireDaylyURL = `${PerformanceTireURL}/daily-averages`;
+export const PerformanceTireMonthlyURL = `${PerformanceTireURL}/daily-averages`;
 // Retrieves the most recent irregularities across all vehicles.
-export const PerformanceTireMonthlyURL = `${PerformanceTireURL}/monthly-averages`;
+export const PerformanceTireYearlyURL = `${PerformanceTireURL}/monthly-averages`;
 // Retrieves the most recent irregularities across all vehicles.
-export const PerformanceTireYearlyURL = `${PerformanceTireURL}/yearly-averages`;
+export const PerformanceTireAllYearslyURL = `${PerformanceTireURL}/yearly-averages`;
