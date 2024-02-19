@@ -22,6 +22,8 @@ export function IrregularitiesPanel({ vehicleId }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+
+
   // Fetches the recent irregularities for the specified vehicleId and updates the state.
   useEffect(() => {
     const fetchIrregularities = async () => {
@@ -29,7 +31,6 @@ export function IrregularitiesPanel({ vehicleId }) {
       setLoading(true);
       try {
         const token = localStorage.getItem("token");
-        console.log(`${RecentIrregularitiesTiredURL}/${vehicleId}`)
         const response = await axios.get(`${RecentIrregularitiesTiredURL}/${vehicleId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -60,11 +61,11 @@ export function IrregularitiesPanel({ vehicleId }) {
       <h1 className="title-center">Irregularidades Recientes</h1>
       {data &&
         data.content.map((irregularity, index) => (
-          <div key={index} className="irregularity-block" onClick={() => navigation(`/is-details/${irregularity.id}`)}>
+          <div key={index} className="irregularity-block" onClick={() => navigation(`/incidencia-detalles/${irregularity.id}/r`)}>
             {irregularity.nameIrregularity} 
           </div>
         ))}
-      <Button style={{ margin: "1.5rem auto" }}>Ver mas detalles</Button>
+      <Button onClick={() => navigation(`/incidencias/v`)} style={{ margin: "1.5rem auto" }}>Ver mas detalles</Button>
     </div>
   );
 }

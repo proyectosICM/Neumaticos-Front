@@ -9,6 +9,7 @@ import { Button } from "react-bootstrap";
 import { NavbarSupervisor } from "../../Views/supervisor/navbarSupervisor";
 import { NavbarDriver } from "./../../Views/driver/navbarDriver";
 import { NavbarAdministrator } from "./../../Views/administrator/navabarAdministrator";
+import { ListPaginatedData } from "../../hooks/listPaginatedData";
 
 /**
  * Component that displays a menu of vehicles.
@@ -28,29 +29,15 @@ export function VehicleMenu() {
    * Function to fetch and update the list of vehicles based on pagination and company.
    * @param {number} page - The page number to retrieve.
    */
-  const Listar = async (page) => {
-    try {
-      const token = await localStorage.getItem("token");
-      const response = await axios.get(`${VehicleCompanyURL}?companyId=${company}&page=${pageNumber}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setData(response.data.content);
-      setTotalPages(response.data.totalPages);
-      setCurrentPage(response.data.number + 0);
-    } catch (error) {
-      console.error("Error al listar", error);
-    }
-  };
-
-  // useEffect hook to trigger data loading when 'pageNumber' changes
   useEffect(() => {
+    const Listar = async (page) => {
+     ListPaginatedData(`${VehicleCompanyURL}?companyId=${company}&page=${page}`, setData, setTotalPages, setCurrentPage);
+    };
     Listar(pageNumber);
   }, [pageNumber]);
 
   ListItems(VehicleTypeURL, setVehicletypes);
-  
+
   const rol = +localStorage.getItem("rol");
   return (
     <div>

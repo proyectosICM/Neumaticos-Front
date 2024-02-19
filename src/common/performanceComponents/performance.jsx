@@ -23,7 +23,7 @@ export function Performance() {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth() + 1; // JavaScript months are 0-based.
-  const currentDay = currentDate.getDate();
+  const currentDay = currentDate.getDate(); 
 
   // UseEffect for handling tireSelected updates and fetching data
   useEffect(() => {

@@ -11,6 +11,7 @@ import { Irregularities } from "./common/irregularitiesComponents/irregularities
 import { ComingSoonPage } from "./common/comingSoonPage";
 import { DetailsVehicle } from "./common/vehicleComponents/detailsVehicle";
 import { Performance } from "./common/performanceComponents/performance";
+import { IrregularitiesDetails } from "./common/irregularitiesComponents/irregularitiesDetails";
 
 // Array of route definitions for the application
 export const routes = [
@@ -33,7 +34,9 @@ export const routes = [
   { path: "/mensajes", component: <ComingSoonPage /> },
 
   // Route for displaying a table od irregularities
-  { path: "/incidencias", component: <Irregularities /> },
+  { path: "/incidencias/:p", component: <Irregularities /> },
+
+  { path: "/incidencia-detalles/:id/:b", component: <IrregularitiesDetails /> },
 
   // Route for displaying a page that contains deails of vehicle
   { path: "/detalles/:id", component: <DetailsVehicle /> },

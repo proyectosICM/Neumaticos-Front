@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { NavbarDriver } from "../../Views/driver/navbarDriver";
 import { NavbarSupervisor } from "../../Views/supervisor/navbarSupervisor";
 import { NavbarAdministrator } from "../../Views/administrator/navabarAdministrator";
 import axios from "axios";
 import { IrregularitiesByCompanyPageURL } from "../../api/apiurl";
+import { PaginacionUtils } from "../../hooks/paginacionUtils";
+import { ListPaginatedData } from "../../hooks/listPaginatedData";
 
 export function Irregularities() {
   const navigation = useNavigate();
   const rol = +localStorage.getItem("rol");
+
+  const { p } = useParams();
 
   // Pagination state
   const [pageNumber, setPageNumber] = useState(0);
@@ -18,7 +22,8 @@ export function Irregularities() {
 
   const [data, setData] = useState();
   const companyId = localStorage.getItem("empresa");
-
+  const vehicleId = +localStorage.getItem("vehicleId");
+/*
   const Listar = async (page) => {
     try {
       const token = await localStorage.getItem("token");
@@ -28,7 +33,7 @@ export function Irregularities() {
         },
       });
       setData(response.data.content);
-      setTotalPages(response.data.totalPages);
+      setTotalPages(response.data.totalPages); 
       setCurrentPage(response.data.number + 0);
     } catch (error) {
       console.error("Error al listar", error);
@@ -40,10 +45,34 @@ export function Irregularities() {
     Listar(pageNumber);
   }, [pageNumber]);
 
+  */
+
+  useEffect(() => {
+    const Listar = async (page) => {
+     ListPaginatedData(`${IrregularitiesByCompanyPageURL}?companyId=${companyId}&page=${page}`, setData, setTotalPages, setCurrentPage);
+    };
+    Listar(pageNumber);
+  }, [pageNumber]);
+
+/*
+  const handleDetails = (id) => {
+    if (p === "v") {
+      navigation(`/incidencia-detalles/${id}/v`);
+    } else if (p == "g") {
+      navigation(`/incidencia-detalles/${id}/g`);
+    }
+  };
+*/
   return (
     <div>
       {/* Render the supervisor-specific navigation bar */}
       {rol === 1 ? <NavbarDriver /> : rol === 2 ? <NavbarSupervisor /> : rol === 3 ? <NavbarAdministrator /> : <h1>sd</h1>}
+
+      {p === "v" && (
+        <Button className="button-back" onClick={() => navigation(`/detalles/${vehicleId}`)}>
+          Atras
+        </Button>
+      )}
 
       <div className="menu-container-border">
         <h1>Incidencias Recientes</h1>
@@ -80,12 +109,14 @@ export function Irregularities() {
                   <td>{incidencia.detailsIrregularity}</td>
                   <td>{incidencia.status ? "Activo" : "Inactivo"}</td>
                   <td>
-                    <Button onClick={() => navigation(`/is-details/${incidencia.id}`)}>Ver detalles</Button>
+                    {/*   <Button onClick={() => handleDetails(incidencia.id)}>Ver detalles</Button> */}
+                    <Button onClick={() => navigation(`/incidencia-detalles/${incidencia.id}/${p}`)}>Ver detalles</Button>
                   </td>
                 </tr>
               ))}
           </tbody>
         </Table>
+        <PaginacionUtils setPageNumber={setPageNumber} setCurrentPage={setCurrentPage} currentPage={currentPage} totalPages={totalPages} />
       </div>
     </div>
   );

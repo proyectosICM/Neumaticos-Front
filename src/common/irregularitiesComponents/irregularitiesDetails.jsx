@@ -2,30 +2,51 @@ import React, { useState } from "react";
 import { ListItems } from "../../hooks/crudhooks";
 import { IrregularitiesTiredBaseURL } from "../../api/apiurl";
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export function IrregularitiesDetails({ id, vehicleId }) {
+export function IrregularitiesDetails() {
   const navigation = useNavigate();
+  const { id, b } = useParams();
   const [data, setData] = useState();
 
   ListItems(`${IrregularitiesTiredBaseURL}/${id}`, setData);
-  console.log(data);
+  const vehicleId = +localStorage.getItem("vehicleId");
+
+  const handleBack = () => {
+    if (b == "r") {
+      return navigation(`/detalles/${vehicleId}`);
+    } else {
+      return navigation(`/incidencias/${b}`);
+    }
+  };
 
   return (
     <div>
-        <Button className="button-back" onClick={() => navigation(`/supervisor-detalles/${vehicleId}`)}>Atras</Button>
+      <Button className="button-back" onClick={() => handleBack()}>
+        Atras
+      </Button>
       {data ? (
         <div>
           <h2>Detalle de Irregularidad</h2>
-          <p><strong>Nombre:</strong> {data.nameIrregularity}</p>
-          <p><strong>Detalles:</strong> {data.detailsIrregularity}</p>
-          <p><strong>Placa del Vehículo:</strong> {data.vehicleModel.placa}</p>
-          <p><strong>Compañía:</strong> {data.company.name}</p>
-          <p><strong>Tipo de Vehículo:</strong> {data.vehicleModel.vehicleType.name}</p>
-          {/* Agrega más detalles según sea necesario */}
+          <p>
+            <strong>Nombre:</strong> {data.nameIrregularity}
+          </p>
+          <p>
+            <strong>Detalles:</strong> {data.detailsIrregularity}
+          </p>
+          <p>
+            <strong>Placa del Vehículo:</strong> {data.vehicleModel.placa}
+          </p>
+          <p>
+            <strong>Compañía:</strong> {data.company.name}
+          </p>
+          <p>
+            <strong>Tipo de Vehículo:</strong> {data.vehicleModel.vehicleType.name}
+          </p>
+
         </div>
       ) : (
-        <p>Cargando detalles de la irregularidad...</p> // Mensaje mientras se carga la data o en caso de que no haya data
+        <p>Cargando detalles de la irregularidad...</p> 
       )}
     </div>
   );

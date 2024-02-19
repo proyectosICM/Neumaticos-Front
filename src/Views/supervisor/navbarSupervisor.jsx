@@ -28,7 +28,7 @@ export function NavbarSupervisor() {
       {/* Navigation links to different sections of the supervisor's dashboard */}
       <Nav>
         <Nav.Link onClick={() => navigation("/menu")}>Menu de vehiculos</Nav.Link>
-        <Nav.Link onClick={() => navigation("/incidencias")}>Incidencias recientes</Nav.Link>
+        <Nav.Link onClick={() => navigation("/incidencias/g")}>Incidencias recientes</Nav.Link>
         <Nav.Link onClick={() => navigation("/mensajes")}>Mensajes</Nav.Link>
       </Nav>
       {/* Logout button to end the session */}
