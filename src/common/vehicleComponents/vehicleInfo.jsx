@@ -24,7 +24,7 @@ export function VehicleInfo({ vehicleId }) {
    */
   ListItems(`${VehicleURL}/${vehicleId}`, setData);
 
-  return (
+  return ( 
     <div className="vehicle-info-container">
       {/* Header displaying the purpose of the container */}
       <h2 style={{ width: "100%", color: "white" }}>Información del Vehículo { vehicleId }</h2>

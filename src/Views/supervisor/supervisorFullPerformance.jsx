@@ -13,7 +13,6 @@ export function SupervisorFullPerformance() {
         <PerformancePanel />
       </div>
 */}
-
       <ForkliftWith4Tires />
     </div>
   );

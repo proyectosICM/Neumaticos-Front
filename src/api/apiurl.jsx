@@ -54,7 +54,7 @@ export const IrregularitiesTiredBaseURL = `${apiURL}irregularities`;
 
 // Endpoint for retrieving paginated irregularities associated with a specific company.
 export const IrregularitiesByCompanyPageURL = `${IrregularitiesTiredBaseURL}/company/page`;
-
+export const IrregularitiesByCompanyAndVehiclePageURL = `${IrregularitiesTiredBaseURL}/companyAndVehicle/page`;
 
 // Retrieves the most recent irregularities across all vehicles.
 export const RecentIrregularitiesTiredURL = `${IrregularitiesTiredBaseURL}/recent`;

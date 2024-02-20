@@ -16,16 +16,16 @@ export const TruckWith6Tires = ({ vehicleId }) => {
       <div style={{ width: "100%", height: "75%", display: "flex", flexDirection: "row" }}>
         {/* Left side tires interaction area */}
         <div className="trk-tires-l">
-          <div className="trk-blank " onClick={() => handleSelectTire(1)}></div>
-          <div className="trk-blank" onClick={() => handleSelectTire(2)}></div>
-          <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>
+          <div className="trk-blank"></div>
+          <div className="trk-blank"></div>
+          <div className="trk-tire" onClick={() => handleSelectTire(3)}></div>
         </div>
 
         {/* Left side tires interaction area */}
         <div className="trk-tires-l">
           <div className="trk-tire" onClick={() => handleSelectTire(1)}></div>
-          <div className="trk-blank" onClick={() => handleSelectTire(2)}></div>
-          <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>
+          <div className="trk-blank"></div>
+          <div className="trk-tire" onClick={() => handleSelectTire(4)}></div>
         </div>
 
         {/* Center placeholder for the truck base */}
@@ -33,22 +33,19 @@ export const TruckWith6Tires = ({ vehicleId }) => {
 
         {/* Right side tires interaction area */}
         <div className="trk-tires-r">
-          <div className="trk-tire" onClick={() => handleSelectTire(1)}></div>
-          <div className="trk-blank" onClick={() => handleSelectTire(2)}></div>
           <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>
+          <div className="trk-blank"></div>
+          <div className="trk-tire" onClick={() => handleSelectTire(5)}></div>
         </div>
         {/* Right side tires interaction area */}
         <div className="trk-tires-r">
-          <div className="trk-blank " onClick={() => handleSelectTire(1)}></div>
-          <div className="trk-blank" onClick={() => handleSelectTire(2)}></div>
-          <div className="trk-tire" onClick={() => handleSelectTire(2)}></div>
+          <div className="trk-blank"></div>
+          <div className="trk-blank"></div>
+          <div className="trk-tire" onClick={() => handleSelectTire(6)}></div>
         </div>
       </div>
-      <div className="spare-tire"></div>
-      <div className="spare-info">
-        <div style={{ margin: "5% 0" }}>
-          <div>22 PSI - 22 ºC - 100%</div>
-        </div>
+      <div className="trk-info-tire">
+          <div>{positioning}</div>
       </div>
     </>
   );

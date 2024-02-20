@@ -40,7 +40,7 @@ export const ForkliftWith4Tires = ({ vehicleId }) => {
           <div className="fkl-blank"></div>
           <div className="fkl-tire" onClick={() => handleSelectTire(4)}></div>
         </div>
-      </div>
+      </div> 
 
       {/* Display area for the fetched tire details. */}
       <div className="fkl-info-tire">

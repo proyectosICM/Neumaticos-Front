@@ -27,7 +27,7 @@ export function DetailsVehicle() {
   localStorage.setItem("vehicleId", id); 
   const rol = +localStorage.getItem("rol");
   return ( 
-    <>
+    <> 
       {/* Render the supervisor-specific navigation bar */}
       {rol === 1 ? <NavbarDriver /> : rol === 2 ? <NavbarSupervisor /> : rol === 3 ? <NavbarAdministrator /> : <h1>sd</h1>}
 

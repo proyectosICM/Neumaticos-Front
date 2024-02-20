@@ -48,7 +48,6 @@ export const routes = [
   /**
    * Administrator
    */
-
   //Panel crud for administrator
   { path: "/ca-panel", component: <CaPanel /> },
 
@@ -56,9 +55,4 @@ export const routes = [
    * System Administrator
    */
   { path: "/sa", component: <SADashboard /> },
-
-  /**
-   * Test routes
-   */
-  { path: "/f4", component: <ForkliftWith4Tires /> },
 ];

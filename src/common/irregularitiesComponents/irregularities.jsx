@@ -5,7 +5,7 @@ import { NavbarDriver } from "../../Views/driver/navbarDriver";
 import { NavbarSupervisor } from "../../Views/supervisor/navbarSupervisor";
 import { NavbarAdministrator } from "../../Views/administrator/navabarAdministrator";
 import axios from "axios";
-import { IrregularitiesByCompanyPageURL } from "../../api/apiurl";
+import { IrregularitiesByCompanyAndVehiclePageURL, IrregularitiesByCompanyPageURL } from "../../api/apiurl";
 import { PaginacionUtils } from "../../hooks/paginacionUtils";
 import { ListPaginatedData } from "../../hooks/listPaginatedData";
 
@@ -23,46 +23,20 @@ export function Irregularities() {
   const [data, setData] = useState();
   const companyId = localStorage.getItem("empresa");
   const vehicleId = +localStorage.getItem("vehicleId");
-/*
-  const Listar = async (page) => {
-    try {
-      const token = await localStorage.getItem("token");
-      const response = await axios.get(`${IrregularitiesByCompanyPageURL}?companyId=${companyId}&page=${page}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setData(response.data.content);
-      setTotalPages(response.data.totalPages); 
-      setCurrentPage(response.data.number + 0);
-    } catch (error) {
-      console.error("Error al listar", error);
+
+  useEffect(() => {
+    let url;
+    if (p === "v") {
+      url = `${IrregularitiesByCompanyAndVehiclePageURL}?companyId=${companyId}&vehicleId=${vehicleId}`;
+    } else if (p == "g") {
+      url = `${IrregularitiesByCompanyPageURL}?companyId=${companyId}`;
     }
-  };
-
-  // useEffect hook to trigger data loading when 'pageNumber' changes
-  useEffect(() => {
-    Listar(pageNumber);
-  }, [pageNumber]);
-
-  */
-
-  useEffect(() => {
     const Listar = async (page) => {
-     ListPaginatedData(`${IrregularitiesByCompanyPageURL}?companyId=${companyId}&page=${page}`, setData, setTotalPages, setCurrentPage);
+      ListPaginatedData(`${url}&page=${page}`, setData, setTotalPages, setCurrentPage);
     };
     Listar(pageNumber);
-  }, [pageNumber]);
+  }, [pageNumber, p]);
 
-/*
-  const handleDetails = (id) => {
-    if (p === "v") {
-      navigation(`/incidencia-detalles/${id}/v`);
-    } else if (p == "g") {
-      navigation(`/incidencia-detalles/${id}/g`);
-    }
-  };
-*/
   return (
     <div>
       {/* Render the supervisor-specific navigation bar */}
@@ -79,6 +53,7 @@ export function Irregularities() {
         <Table striped bordered hover>
           <thead>
             <tr>
+              <th>Id</th>
               <th>Día</th>
               <th>Hora</th>
               <th>Placa</th>
@@ -100,6 +75,7 @@ export function Irregularities() {
                     background: incidencia.status ? "green" : "red", // Ejemplo de cómo podrías cambiar el color de fondo basado en el estado
                   }}
                 >
+                  <td>{incidencia.id}</td>
                   <td>{new Date(incidencia.createdAt).toLocaleDateString()}</td>
                   <td>{new Date(incidencia.createdAt).toLocaleTimeString()}</td>
                   <td>{incidencia.vehicleModel.placa}</td>

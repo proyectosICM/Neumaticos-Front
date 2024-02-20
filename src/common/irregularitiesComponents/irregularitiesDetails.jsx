@@ -3,6 +3,10 @@ import { ListItems } from "../../hooks/crudhooks";
 import { IrregularitiesTiredBaseURL } from "../../api/apiurl";
 import { Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import { PerformancePanel } from "../vehicleComponents/performancePanel";
+import { NavbarDriver } from "../../Views/driver/navbarDriver";
+import { NavbarSupervisor } from "../../Views/supervisor/navbarSupervisor";
+import { NavbarAdministrator } from "../../Views/administrator/navabarAdministrator";
 
 export function IrregularitiesDetails() {
   const navigation = useNavigate();
@@ -19,15 +23,23 @@ export function IrregularitiesDetails() {
       return navigation(`/incidencias/${b}`);
     }
   };
-
+  const rol = +localStorage.getItem("rol");
   return (
     <div>
+      {/* Render the supervisor-specific navigation bar */}
+      {rol === 1 ? <NavbarDriver /> : rol === 2 ? <NavbarSupervisor /> : rol === 3 ? <NavbarAdministrator /> : <h1>sd</h1>}
       <Button className="button-back" onClick={() => handleBack()}>
         Atras
       </Button>
       {data ? (
-        <div>
-          <h2>Detalle de Irregularidad</h2>
+        <div style={{ margin: "2rem auto", width: "80%", fontSize: "1.5rem" }}>
+          <h2>Detalle de Irregularidad {data.id} </h2>
+          <p>
+            <strong>Dia en que se registro la incidencia: </strong> {new Date(data.createdAt).toLocaleDateString()}
+          </p>
+          <p>
+            <strong>Hora en que se registro la incidencia: </strong> {new Date(data.createdAt).toLocaleTimeString()}
+          </p>
           <p>
             <strong>Nombre:</strong> {data.nameIrregularity}
           </p>
@@ -43,10 +55,25 @@ export function IrregularitiesDetails() {
           <p>
             <strong>Tipo de Vehículo:</strong> {data.vehicleModel.vehicleType.name}
           </p>
+          {/* Ajustar Visibilidad */}
+          {data.status !== true && (
+            <div>
+              <p>
+                <strong>Incidencia Revisada por:</strong> Supervisor Marco
+              </p>
+              <p>
+                <strong>Dia de Revision:</strong> {new Date(data.updatedAt).toLocaleDateString()}
+              </p>
+              <Button>Marcar como revisada</Button>
+            </div>
+          )}
 
+          <div className="panel-container">
+            <PerformancePanel vehicleId={data.vehicleModel.id} />
+          </div>
         </div>
       ) : (
-        <p>Cargando detalles de la irregularidad...</p> 
+        <p>Cargando detalles de la irregularidad...</p>
       )}
     </div>
   );

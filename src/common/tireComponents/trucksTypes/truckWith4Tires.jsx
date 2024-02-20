@@ -12,7 +12,7 @@ export const TruckWith4Tires = () => {
             <div style={{ margin: "50% 0" }}>
               <div>22 PSI</div> <div>22 ºC</div> <div>100%</div>
             </div>
-          </div>
+          </div> 
           <div className="info tire-2">
             <div style={{ margin: "50% 0" }}>
               <div>22 PSI</div> <div>22 ºC</div> <div>100%</div>

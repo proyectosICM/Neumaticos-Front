@@ -21,7 +21,7 @@ export function Performance() {
   const [tireSelected, setTireSelected] = useState(localStorage.getItem("tireSelected"));
 
   const currentDate = new Date();
-  const currentYear = currentDate.getFullYear();
+  const currentYear = currentDate.getFullYear(); 
   const currentMonth = currentDate.getMonth() + 1; // JavaScript months are 0-based.
   const currentDay = currentDate.getDate(); 
 

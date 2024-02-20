@@ -10,12 +10,14 @@ import { NavbarSupervisor } from "../../Views/supervisor/navbarSupervisor";
 import { NavbarDriver } from "./../../Views/driver/navbarDriver";
 import { NavbarAdministrator } from "./../../Views/administrator/navabarAdministrator";
 import { ListPaginatedData } from "../../hooks/listPaginatedData";
+import { LogoutToken } from "../../hooks/logoutToken";
 
 /**
  * Component that displays a menu of vehicles.
  * It fetches vehicle data from the server based on company and pagination.
  */
 export function VehicleMenu() {
+  LogoutToken();
   const company = localStorage.getItem("empresa");
   // Pagination state
   const [pageNumber, setPageNumber] = useState(0);
