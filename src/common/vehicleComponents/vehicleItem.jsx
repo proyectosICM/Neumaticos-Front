@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Card, CardBody, CardText, CardTitle } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FaTruck } from "react-icons/fa";
+import { LogoutToken } from "../../hooks/logoutToken";
 
 /**
  * Component to display a single vehicle item in a list or grid.
@@ -11,6 +12,7 @@ import { FaTruck } from "react-icons/fa";
  * @returns A card component representing a vehicle.
  */
 export function VehicleItem({ data }) {
+  LogoutToken();
   const navigate = useNavigate();
   const rol = localStorage.getItem("rol");
 

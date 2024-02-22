@@ -46,6 +46,6 @@ export const ForkliftWith4Tires = ({ vehicleId }) => {
       <div className="fkl-info-tire">
         <p>{tireDetails}</p>
       </div>
-    </>
+    </> 
   ); 
 };

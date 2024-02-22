@@ -11,6 +11,9 @@ import { LogoutToken } from "../../hooks/logoutToken";
  * The LogoutToken hook is used to clear authentication tokens if the token is invalid
  */
 export function Welcome() {
+  // Invoking the LogoutToken function to check the validity of the access token and, if invalid, terminating the session
+  LogoutToken();
+
   // Hook to access navigation functionality
   const navigate = useNavigate();
   // Hook to access navigation functionality
@@ -30,11 +33,8 @@ export function Welcome() {
       localStorage.setItem("empresa", info.company.id);
       localStorage.setItem("usuario", info.id);
       navigate("/redirect");
-    } 
-  }, [info]);
-
-  // Invoking the LogoutToken function to check the validity of the access token and, if invalid, terminating the session
-  LogoutToken();
+    }
+  }, [info]); 
 
   return (
     <>

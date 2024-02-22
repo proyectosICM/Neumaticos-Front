@@ -4,8 +4,8 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { routes } from './routes';
 import './GeneralStyles/menus-items.css';
 import { LogoutToken } from './hooks/logoutToken';
-function App() { 
-  
+function App() {
+
 
 
   return (

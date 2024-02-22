@@ -8,8 +8,11 @@ import axios from "axios";
 import { IrregularitiesByCompanyAndVehiclePageURL, IrregularitiesByCompanyPageURL } from "../../api/apiurl";
 import { PaginacionUtils } from "../../hooks/paginacionUtils";
 import { ListPaginatedData } from "../../hooks/listPaginatedData";
+import { LogoutToken } from "../../hooks/logoutToken";
 
 export function Irregularities() {
+
+  LogoutToken();
   const navigation = useNavigate();
   const rol = +localStorage.getItem("rol");
 

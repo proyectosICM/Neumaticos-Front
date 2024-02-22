@@ -7,6 +7,7 @@ import { PerformancePanel } from "../vehicleComponents/performancePanel";
 import { NavbarDriver } from "../../Views/driver/navbarDriver";
 import { NavbarSupervisor } from "../../Views/supervisor/navbarSupervisor";
 import { NavbarAdministrator } from "../../Views/administrator/navabarAdministrator";
+import { LogoutToken } from "../../hooks/logoutToken";
 
 export function IrregularitiesDetails() {
   const navigation = useNavigate();

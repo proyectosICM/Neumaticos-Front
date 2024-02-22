@@ -1,21 +1,27 @@
+import { jwtDecode } from "jwt-decode";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+//import jwtDecode from "jwt-decode";
 
-/**
- * LogoutToken component to handle automatic redirection to the login page if the token is not present.
- * It checks for the presence of a token in localStorage and navigates to the login page if no token is found.
- */
 export function LogoutToken() {
-  const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
-  // useEffect hook to automatically navigate to the login page if no token is present
   useEffect(() => {
-    if (!token) {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const currentDate = new Date();
+
+      // Convertir la fecha de expiración de segundos a milisegundos
+      if (decodedToken.exp * 1000 < currentDate.getTime()) {
+        console.log("El token ha expirado");
+        localStorage.removeItem("token"); // Opcional: eliminar el token expirado
+        navigate("/login");
+      }
+    } else {
       navigate("/login");
     }
-  }, [token, navigate]);
+  }, [navigate]);
 
-  // Returning null as this component does not render anything
   return null;
 }

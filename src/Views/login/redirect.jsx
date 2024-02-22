@@ -7,15 +7,14 @@ import { LogoutToken } from "../../hooks/logoutToken";
  * Utilizes the LogoutToken hook to clear authentication tokens in case the token is invalid during component initialization.
  */
 export function Redirect() {
+  // Invoking the LogoutToken function to check the validity of the access token and, if invalid, terminating the session
+  LogoutToken();
   // State to store the destination navigation path
   const [nav, setNav] = useState();
   // Hook to access navigation functionality
   const navigate = useNavigate();
   // Retrieve the user's role from local storage
   const rol = localStorage.getItem("rol");
-
-  // Invoking the LogoutToken function to check the validity of the access token and, if invalid, terminating the session
-  LogoutToken();
 
   // Effect to determine the destination navigation path based on the user's role
   useEffect(() => {

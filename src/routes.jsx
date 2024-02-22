@@ -12,12 +12,12 @@ import { ComingSoonPage } from "./common/comingSoonPage";
 import { DetailsVehicle } from "./common/vehicleComponents/detailsVehicle";
 import { Performance } from "./common/performanceComponents/performance";
 import { IrregularitiesDetails } from "./common/irregularitiesComponents/irregularitiesDetails";
+import { NotAuthorized } from "./common/notAuthorized";
+
 
 // Array of route definitions for the application
 export const routes = [
-  /**
-   * Default route
-   */
+  // Default route
   { path: "/", component: <Login /> },
 
   // Route for the login page
@@ -26,6 +26,8 @@ export const routes = [
   { path: "/welcome", component: <Welcome /> },
   // Route for redirecting users after certain actions
   { path: "/redirect", component: <Redirect /> },
+
+  { path: "/notAuthorized", component: <NotAuthorized /> },
 
   // Route for displaying a paginated menu of vehicles
   { path: "/menu", component: <VehicleMenu /> },
@@ -41,18 +43,18 @@ export const routes = [
   // Route for displaying a page that contains deails of vehicle
   { path: "/detalles/:id", component: <DetailsVehicle /> },
 
-  { path: "/rendimiento/:id", component: <Performance /> },
+  { path: "/rendimiento/:id/:b", component: <Performance /> },
 
   { path: "/panel-performance", component: <SupervisorFullPerformance /> },
 
-  /**
-   * Administrator
-   */
+
+  // Administrator
+
   //Panel crud for administrator
   { path: "/ca-panel", component: <CaPanel /> },
 
-  /**
-   * System Administrator
-   */
+  // System Administrator
   { path: "/sa", component: <SADashboard /> },
 ];
+
+

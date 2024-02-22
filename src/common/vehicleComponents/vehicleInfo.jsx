@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { VehicleCompanyStatusURL, VehicleURL } from "../../api/apiurl";
 import { ListItems } from "../../hooks/crudhooks";
+import { useNotAuthorized } from "../../hooks/useNotAuthorized";
 
 /**
  * Displays detailed information for a specific vehicle identified by its vehicleId.
@@ -11,7 +12,7 @@ import { ListItems } from "../../hooks/crudhooks";
  *
  * @param {number} vehicleId - Identifier of the vehicle to fetch and display information for.
  */
-export function VehicleInfo({ vehicleId }) {
+export function VehicleInfo({ vehicleId }) { 
   // State to store vehicle data
   const [data, setData] = useState(null);
 
@@ -23,7 +24,7 @@ export function VehicleInfo({ vehicleId }) {
    * @param {Function} setData - The state setter function to update the component state with fetched data.
    */
   ListItems(`${VehicleURL}/${vehicleId}`, setData);
-
+  // useNotAuthorized(data.id);
   return ( 
     <div className="vehicle-info-container">
       {/* Header displaying the purpose of the container */}

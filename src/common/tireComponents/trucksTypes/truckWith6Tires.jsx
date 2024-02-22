@@ -47,6 +47,6 @@ export const TruckWith6Tires = ({ vehicleId }) => {
       <div className="trk-info-tire">
           <div>{positioning}</div>
       </div>
-    </>
+    </> 
   );
 };

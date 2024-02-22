@@ -39,7 +39,7 @@ export function VehicleMenu() {
   }, [pageNumber]);
 
   ListItems(VehicleTypeURL, setVehicletypes);
-
+ 
   const rol = +localStorage.getItem("rol");
   return (
     <div>

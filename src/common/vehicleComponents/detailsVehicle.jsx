@@ -10,7 +10,8 @@ import { NavbarSupervisor } from "../../Views/supervisor/navbarSupervisor";
 import { NavbarAdministrator } from "../../Views/administrator/navabarAdministrator";
 import { VehicleInfo } from "./vehicleInfo";
 import { PerformancePanel } from "./performancePanel";
-import { IrregularitiesPanel } from './irregularitiesPanel';
+import { IrregularitiesPanel } from "./irregularitiesPanel";
+import { useNotAuthorized } from "../../hooks/useNotAuthorized";
 
 /**
  * SupervisorVinfo component, representing the supervisor-specific view for vehicle information.
@@ -24,14 +25,17 @@ export function DetailsVehicle() {
    */
   const { id } = useParams();
 
-  localStorage.setItem("vehicleId", id); 
+  localStorage.setItem("vehicleId", id);
   const rol = +localStorage.getItem("rol");
-  return ( 
-    <> 
+
+  return (
+    <>
       {/* Render the supervisor-specific navigation bar */}
       {rol === 1 ? <NavbarDriver /> : rol === 2 ? <NavbarSupervisor /> : rol === 3 ? <NavbarAdministrator /> : <h1>sd</h1>}
 
-      <Button className="button-back" onClick={() => navigation(`/menu`)}>Atras</Button>
+      <Button className="button-back" onClick={() => navigation(`/menu`)}>
+        Atras
+      </Button>
       <div className="menu-container-border">
         {/* Display detailed information for the selected vehicle */}
         <div style={{ width: "100%" }}>
@@ -40,7 +44,8 @@ export function DetailsVehicle() {
 
         {/* Basic performance analysis panel for the selected vehicle */}
         <div className="panel-container">
-          <PerformancePanel vehicleId={id} />
+          <PerformancePanel vehicleId={id} bdetails={true} />
+    
         </div>
 
         {/* Panel listing the six most recent irregularities associated with the selected vehicle */}
