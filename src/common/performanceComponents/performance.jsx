@@ -65,7 +65,7 @@ export function Performance() {
         Atras
       </Button>
       <div className="panel-container">
-        <PerformancePanel vehicleId={id} bdetails={false} />
+        <PerformancePanel vehicleId={id} bdetails={false} title={"Rendimiento"} />
       </div>
 
       <div style={{ width: "80%", height: "300px", margin: "auto", display: "flex", flexDirection: "row" }}>

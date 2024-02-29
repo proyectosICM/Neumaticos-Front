@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
  * @param {number} vehicleId - The unique identifier of the vehicle for which the performance details are displayed.
  * This ID is passed down to the child components to fetch and display relevant performance data.
  */
-export function PerformancePanel({ vehicleId, bdetails }) {
+export function PerformancePanel({ vehicleId, bdetails, title }) {
   const navigation = useNavigate();
   const [data, setData] = useState();
 
@@ -46,7 +46,7 @@ export function PerformancePanel({ vehicleId, bdetails }) {
 
   return (
     <div style={{ width: "100%", height: "90%", padding: "2rem 0 0 0" }}>
-      <h2>Rendimiento</h2>
+      <h2>{title}</h2>
       {renderVehicleComponent()}
       {bdetails && <Button onClick={() => navigation(`/rendimiento/${vehicleId}/v`)}>Ver mas detalles</Button>}
     </div>

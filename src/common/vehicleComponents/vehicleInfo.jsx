@@ -33,16 +33,14 @@ export function VehicleInfo({ vehicleId }) {
       {/* First column for basic vehicle information */}
       <div className="vehicle-info-column">
         <p>Id: {data && data.id}</p>
-        <p>Placa: {data && data.placa}</p>
-        <p>Marca: {data && data.marca}</p>
-        <p>Modelo: {data && data.modelo}</p>
+        <p>Placa: {data && data.placa}  - Ejes: {data && data.company.name}</p>
       </div>
 
       {/* Second column for additional vehicle information */}
       <div className="vehicle-info-column">
         <p>Empresa: {data && data.company.name}</p>
         <p>Tipo de Vehículo: {data && data.vehicleType.name}</p>
-        <p>Ejes: {data && data.company.name}</p>
+        <p></p>
       </div>
     </div>
   );

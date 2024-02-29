@@ -13,6 +13,7 @@ import { DetailsVehicle } from "./common/vehicleComponents/detailsVehicle";
 import { Performance } from "./common/performanceComponents/performance";
 import { IrregularitiesDetails } from "./common/irregularitiesComponents/irregularitiesDetails";
 import { NotAuthorized } from "./common/notAuthorized";
+import { ChangeTire } from "./common/changeTire";
 
 
 // Array of route definitions for the application
@@ -42,6 +43,8 @@ export const routes = [
 
   // Route for displaying a page that contains deails of vehicle
   { path: "/detalles/:id", component: <DetailsVehicle /> },
+
+  { path: "/cambiar-neumatico/:id", component: <ChangeTire /> },
 
   { path: "/rendimiento/:id/:b", component: <Performance /> },
 

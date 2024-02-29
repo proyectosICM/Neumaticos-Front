@@ -12,7 +12,7 @@ export const apiURL = `${base}/api/`;
 
 export const VehicleTypeURL = `${apiURL}vehicletypes`;
 
-// User
+// User 
 export const UserURL = `${apiURL}users`;
 export const InfoUserURL = `${UserURL}/info/`;
 
@@ -21,6 +21,10 @@ export const  VehicleURL = `${apiURL}vehicle`;
 export const VehicleCompanyURL = `${apiURL}vehicle/findByCompany`;
 export const VehicleCompanyStatusURL = `${apiURL}vehicle/findByCompanyAndStatus`;
 
+
+/**
+ * Tires
+ */
 // Base URL for tire-related operations
 export const TiresBaseURL = `${apiURL}tire`;
 
@@ -28,8 +32,26 @@ export const TiresBaseURL = `${apiURL}tire`;
 export const TiresByVehicleURL = `${TiresBaseURL}/vehicle`;
 
 // Retrieves tires based on vehicle ID and tire position
-export const TiresByVehicleAndPositionURL = `${TiresBaseURL}/byVehicleAndPositioning`;
+export const TiresByVehicleAndPositionURL = `${TiresBaseURL}/findByVehicleModelIdAndPositioningLocationCode`;
 
+
+/**
+ * Tires Sensor
+ */
+// Base URL for tire-related operations
+export const TiresSensorBaseURL = `${apiURL}tireSensor`;
+
+// Retrieves tires associated with a specific vehicle
+export const TiresSensorByVehicleURL = `${TiresBaseURL}/vehicle`;
+
+// Retrieves tires based on vehicle ID and tire position
+export const TiresSenorByVehicleAndPositionURL = `${TiresBaseURL}/byVehicleAndPositioning`;
+
+
+
+/**
+ * Irregularities
+ */
 //Base URL for irregularity-related operations.
 export const IrregularitiesTiredBaseURL = `${apiURL}irregularities`;
 
@@ -41,7 +63,9 @@ export const IrregularitiesByCompanyAndVehiclePageURL = `${IrregularitiesTiredBa
 export const RecentIrregularitiesTiredURL = `${IrregularitiesTiredBaseURL}/recent`;
 
 
-// Performance
+/**
+ * Performance
+ */
 export const PerformanceTireURL = `${apiURL}performance-tire`;
 // Retrieves the most recent irregularities across all vehicles.
 export const PerformanceTireDaylyURL = `${PerformanceTireURL}/hourly-averages`;

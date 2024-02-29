@@ -44,14 +44,17 @@ export function DetailsVehicle() {
 
         {/* Basic performance analysis panel for the selected vehicle */}
         <div className="panel-container">
-          <PerformancePanel vehicleId={id} bdetails={true} />
-    
+          <PerformancePanel vehicleId={id} bdetails={true} title={"Rendimiento"} />
         </div>
 
         {/* Panel listing the six most recent irregularities associated with the selected vehicle */}
         <div className="panel-container">
           <IrregularitiesPanel vehicleId={id} />
         </div>
+
+        <div style={{width: "100%"}}>
+          <Button onClick={() => navigation(`/cambiar-neumatico/${id}`) }>Registar cambio de llantas</Button>
+        </div> 
       </div>
     </>
   );
