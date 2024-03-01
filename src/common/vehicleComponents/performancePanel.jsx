@@ -28,7 +28,7 @@ export function PerformancePanel({ vehicleId, bdetails, title }) {
   const renderVehicleComponent = () => {
     switch (data?.vehicleType?.id) {
       case 1:
-        return <ForkliftWith4Tires vehicleId={vehicleId} />;
+        return <ForkliftWith4Tires vehicleId={vehicleId} bdetails={bdetails} />;
       case 2:
         return <ForkliftWith6Tires vehicleId={vehicleId} />;
       case 3:
@@ -48,7 +48,7 @@ export function PerformancePanel({ vehicleId, bdetails, title }) {
     <div style={{ width: "100%", height: "90%", padding: "2rem 0 0 0" }}>
       <h2>{title}</h2>
       {renderVehicleComponent()}
-      {bdetails && <Button onClick={() => navigation(`/rendimiento/${vehicleId}/v`)}>Ver mas detalles</Button>}
+
     </div>
   );
 }

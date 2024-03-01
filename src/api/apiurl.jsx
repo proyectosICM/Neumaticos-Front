@@ -42,10 +42,10 @@ export const TiresByVehicleAndPositionURL = `${TiresBaseURL}/findByVehicleModelI
 export const TiresSensorBaseURL = `${apiURL}tireSensor`;
 
 // Retrieves tires associated with a specific vehicle
-export const TiresSensorByVehicleURL = `${TiresBaseURL}/vehicle`;
+export const TiresSensorByVehicleURL = `${TiresSensorBaseURL}/vehicle`;
 
 // Retrieves tires based on vehicle ID and tire position
-export const TiresSenorByVehicleAndPositionURL = `${TiresBaseURL}/byVehicleAndPositioning`;
+export const TiresSensorByVehicleAndPositionURL = `${TiresSensorBaseURL}/byVehicleAndPositioning`;
 
 
 

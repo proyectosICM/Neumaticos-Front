@@ -5,7 +5,7 @@ import { NavbarDriver } from "../Views/driver/navbarDriver";
 import { NavbarSupervisor } from "../Views/supervisor/navbarSupervisor";
 import { NavbarAdministrator } from "../Views/administrator/navabarAdministrator";
 import { PerformancePanel } from "./vehicleComponents/performancePanel";
-import { ListItems, ListItems2, editarElemento } from "../hooks/crudhooks";
+import { ListItems, ListItems2, editarElemento, useTireDetails } from "../hooks/crudhooks";
 import { TiresBaseURL, TiresByVehicleAndPositionURL, TiresByVehicleURL, TiresSensorBaseURL } from "../api/apiurl";
 
 export function ChangeTire() {
@@ -20,42 +20,52 @@ export function ChangeTire() {
   const [tireData, setTireData] = useState();
   const [sensorData, setSensorData] = useState();
 
+  const { tireDetails, tireCode, sensorCode, tireId, sensorId, loading, error } = useTireDetails(id, tireSelected);
+
   useEffect(() => {
- 
     ListItems2(`${TiresByVehicleURL}?vehicleId=${id}&status=FREE`, setTireData);
     ListItems2(`${TiresSensorBaseURL}?vehicleId=${id}`, setSensorData);
-  
+
     const currentTireSelected = localStorage.getItem("tireSelected");
     if (currentTireSelected !== tireSelected) {
       setTireSelected(currentTireSelected);
     }
   }, [id, tireSelected]);
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const currentTireSelected = localStorage.getItem("tireSelected");
+      if (currentTireSelected !== tireSelected) {
+        setTireSelected(currentTireSelected);
+      }
+    }, 500);
+    return () => clearInterval(intervalId);
+  }, [tireSelected]);
+
   const handleSend = () => {
-    
     const requestData1 = {
-      status: 'FREE',
+      status: "FREE",
       vehicleModel: {
-        id: null
+        id: 1,
       },
       positioning: {
-        id: null
-      }
+        id: 1,
+      },
     };
 
-    editarElemento(`${TiresBaseURL}/changeTire/${data && data[0].id}`, requestData1);
-
+    editarElemento(`${TiresBaseURL}/changeTire/${tireId}`, requestData1);
     const requestData2 = {
-      status: 'IN_USE',
+      status: "IN_USE",
       vehicleModel: {
-        id: id
+        id: id,
       },
       positioning: {
-        id: tireSelected
-      }
+        id: tireSelected,
+      },
     };
 
     editarElemento(`${TiresBaseURL}/changeTire/${tireSelected}`, requestData2);
+    console.log("Dat  ", tireSelected);
   };
 
   return (
@@ -73,7 +83,7 @@ export function ChangeTire() {
         <div className="panel-container">
           <h1>Neumatico asociado</h1>
           <div style={{ border: "3px solid white", width: "70%", margin: "2rem auto" }}>
-            <h2>AAASASA {tireSelected}</h2>
+            <h2>{tireCode}</h2>
           </div>
 
           <Form style={{ width: "70%", margin: "2rem auto" }}>
@@ -96,7 +106,7 @@ export function ChangeTire() {
         <div className="panel-container">
           <h1>Sensor asociado</h1>
           <div style={{ border: "3px solid white", width: "70%", margin: "2rem auto" }}>
-            <h2>AAASASA</h2>
+            <h2>{sensorCode}</h2>
           </div>
 
           <Form style={{ width: "70%", margin: "2rem auto" }}>

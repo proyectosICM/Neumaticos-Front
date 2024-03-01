@@ -1,11 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { TiresByVehicleAndPositionURL, TiresSenorByVehicleAndPositionURL } from "../api/apiurl";
+import { TiresByVehicleAndPositionURL, TiresSensorByVehicleAndPositionURL } from "../api/apiurl";
 
 export const useTireDetails = (vehicleId, positioning) => {
   const [tireDetails, setTireDetails] = useState("");
+  const [tireCode, setTireCode] = useState();
+  const [sensorCode, setSensorCode] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const [tireId, setTireId] = useState();
+  const [sensorId, setSensorId] = useState();
 
   useEffect(() => {
     if (!vehicleId || !positioning) return; // Evita efectos innecesarios
@@ -14,18 +19,33 @@ export const useTireDetails = (vehicleId, positioning) => {
       setLoading(true);
       try {
         const token = localStorage.getItem("token");
-        const { data } = await axios.get(`${TiresSenorByVehicleAndPositionURL}?vehicleId=${vehicleId}&positioningCode=${positioning}`, {
+        const { data } = await axios.get(`${TiresSensorByVehicleAndPositionURL}?vehicleId=${vehicleId}&positioningCode=${positioning}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-
+        const response2 = await axios.get(`${TiresByVehicleAndPositionURL}?vehicleId=${vehicleId}&positioning=${positioning}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data2 = response2.data; 
+        console.log(data2);
+        console.log(`${TiresByVehicleAndPositionURL}?vehicleId=${vehicleId}&positioning=${positioning}`);
         if (data && data.length > 0) {
           const {
             pressure,
             temperature,
             batteryLevel,
             positioning: { locationCode },
+            identificationCode,
+            id
           } = data[0];
           setTireDetails(`${locationCode} : ${pressure} PSI - ${temperature} º C - ${batteryLevel} %`);
+          setTireCode(`${identificationCode}`);
+          setTireId(id);
+        }
+        console.log(data2);
+        if (data2 && data2.length > 0) {
+          const { codname, id } = data2[0];
+          setSensorCode(`${codname}`);
+          setSensorId(id)
         }
       } catch (error) {
         console.error("Error fetching tire details", error.message); // Solo muestra el mensaje de error
@@ -39,7 +59,7 @@ export const useTireDetails = (vehicleId, positioning) => {
     fetchTireDetails();
   }, [vehicleId, positioning]); // Dependencias del efecto
 
-  return { tireDetails, loading, error };
+  return { tireDetails, tireCode, sensorCode,tireId, sensorId, loading, error };
 };
 
 export function ListItems(url, setData) {
@@ -116,7 +136,6 @@ export async function editarElemento(url, requestData) {
 
     // Lógica para cerrar el modal o para acciones después de la actualización exitosa
     console.log("Elemento actualizado con éxito");
-
   } catch (error) {
     // Manejo de errores, por ejemplo, mostrar un mensaje de error
     console.error("Error al actualizar el elemento:", error);
