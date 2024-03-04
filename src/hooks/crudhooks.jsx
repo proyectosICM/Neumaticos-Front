@@ -26,8 +26,6 @@ export const useTireDetails = (vehicleId, positioning) => {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data2 = response2.data; 
-        console.log(data2);
-        console.log(`${TiresByVehicleAndPositionURL}?vehicleId=${vehicleId}&positioning=${positioning}`);
         if (data && data.length > 0) {
           const {
             pressure,
@@ -41,7 +39,6 @@ export const useTireDetails = (vehicleId, positioning) => {
           setSensorCode(`${identificationCode}`);
           setTireId(id);
         }
-        console.log(data2);
         if (data2 && data2.length > 0) {
           const { codname, id } = data2[0];
           setTireCode(`${codname}`);
@@ -73,9 +70,7 @@ export function ListItems(url, setData) {
           },
         });
         setData(response.data);
-        console.log("Data updated");
       } catch (error) {
-        console.error("Error listing items", error);
         const token = await localStorage.getItem("token");
       }
     };
@@ -94,9 +89,7 @@ export function ListItems2(url, setData) {
         },
       });
       setData(response.data);
-      console.log("Data updated");
     } catch (error) {
-      console.error("Error listing items", error);
       const token = await localStorage.getItem("token");
     }
   };
