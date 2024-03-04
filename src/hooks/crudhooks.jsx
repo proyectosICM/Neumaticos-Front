@@ -7,7 +7,7 @@ export const useTireDetails = (vehicleId, positioning) => {
   const [tireCode, setTireCode] = useState();
   const [sensorCode, setSensorCode] = useState();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); 
 
   const [tireId, setTireId] = useState();
   const [sensorId, setSensorId] = useState();
@@ -38,13 +38,13 @@ export const useTireDetails = (vehicleId, positioning) => {
             id
           } = data[0];
           setTireDetails(`${locationCode} : ${pressure} PSI - ${temperature} º C - ${batteryLevel} %`);
-          setTireCode(`${identificationCode}`);
+          setSensorCode(`${identificationCode}`);
           setTireId(id);
         }
         console.log(data2);
         if (data2 && data2.length > 0) {
           const { codname, id } = data2[0];
-          setSensorCode(`${codname}`);
+          setTireCode(`${codname}`);
           setSensorId(id)
         }
       } catch (error) {
