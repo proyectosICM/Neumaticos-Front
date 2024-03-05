@@ -7,56 +7,61 @@ export const useTireDetails = (vehicleId, positioning) => {
   const [tireCode, setTireCode] = useState();
   const [sensorCode, setSensorCode] = useState();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
 
   const [tireId, setTireId] = useState();
   const [sensorId, setSensorId] = useState();
-
+  const posSel = localStorage.getItem("tireSelected");
   useEffect(() => {
     if (!vehicleId || !positioning) return; // Evita efectos innecesarios
 
-    const fetchTireDetails = async () => {
-      setLoading(true);
-      try {
-        const token = localStorage.getItem("token");
-        const { data } = await axios.get(`${TiresSensorByVehicleAndPositionURL}?vehicleId=${vehicleId}&positioningCode=${positioning}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const response2 = await axios.get(`${TiresByVehicleAndPositionURL}?vehicleId=${vehicleId}&positioning=${positioning}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const data2 = response2.data; 
-        if (data && data.length > 0) {
-          const {
-            pressure,
-            temperature,
-            batteryLevel,
-            positioning: { locationCode },
-            identificationCode,
-            id
-          } = data[0];
-          setTireDetails(`${locationCode} : ${pressure} PSI - ${temperature} º C - ${batteryLevel} %`);
-          setSensorCode(`${identificationCode}`);
-          setTireId(id);
+    if (posSel != null) {
+      const fetchTireDetails = async () => {
+        setLoading(true);
+        try {
+          const token = localStorage.getItem("token");
+          const { data } = await axios.get(`${TiresSensorByVehicleAndPositionURL}?vehicleId=${vehicleId}&positioningCode=${positioning}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          const response2 = await axios.get(`${TiresByVehicleAndPositionURL}?vehicleId=${vehicleId}&positioning=${positioning}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          const data2 = response2.data;
+          if (data && data.length > 0) {
+            const {
+              pressure,
+              temperature,
+              batteryLevel,
+              positioning: { locationCode },
+              identificationCode,
+              id,
+            } = data[0];
+            setTireDetails(`${locationCode} : ${pressure} PSI - ${temperature} º C - ${batteryLevel} %`);
+            setSensorCode(`${identificationCode}`);
+            setTireId(id);
+          }
+          if (data2 && data2.length > 0) {
+            const { codname, id } = data2[0];
+            setTireCode(`${codname}`);
+            setSensorId(id);
+          }
+        } catch (error) {
+          console.error("Error fetching tire details", error.message); // Solo muestra el mensaje de error
+          setError("Could not fetch tire details."); // Mensaje genérico para el usuario
+          setTireDetails(""); // Limpia los detalles en caso de error
+        } finally {
+          setLoading(false);
         }
-        if (data2 && data2.length > 0) {
-          const { codname, id } = data2[0];
-          setTireCode(`${codname}`);
-          setSensorId(id)
-        }
-      } catch (error) {
-        console.error("Error fetching tire details", error.message); // Solo muestra el mensaje de error
-        setError("Could not fetch tire details."); // Mensaje genérico para el usuario
-        setTireDetails(""); // Limpia los detalles en caso de error
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTireDetails();
+      };
+      fetchTireDetails();
+    } else {
+      setTireDetails("");
+      setSensorCode("");
+      setTireId("");
+    }
   }, [vehicleId, positioning]); // Dependencias del efecto
 
-  return { tireDetails, tireCode, sensorCode,tireId, sensorId, loading, error };
+  return { tireDetails, tireCode, sensorCode, tireId, sensorId, loading, error };
 };
 
 export function ListItems(url, setData) {

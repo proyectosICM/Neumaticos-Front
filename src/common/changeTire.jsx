@@ -6,7 +6,7 @@ import { NavbarSupervisor } from "../Views/supervisor/navbarSupervisor";
 import { NavbarAdministrator } from "../Views/administrator/navabarAdministrator";
 import { PerformancePanel } from "./vehicleComponents/performancePanel";
 import { ListItems, ListItems2, editarElemento, useTireDetails } from "../hooks/crudhooks";
-import { TiresBaseURL, TiresByVehicleAndPositionURL, TiresByVehicleURL, TiresSensorBaseURL } from "../api/apiurl";
+import { TiresBaseURL, TiresByVehicleAndPositionURL, TiresByVehicleURL, TiresSensorBaseURL, TiresSensorByCompanyAndStatus } from "../api/apiurl";
 import Swal from "sweetalert2";
 
 export function ChangeTire() {
@@ -21,11 +21,13 @@ export function ChangeTire() {
   const [tireData, setTireData] = useState();
   const [sensorData, setSensorData] = useState();
 
+  const company = localStorage.getItem("empresa");
+
   const { tireDetails, tireCode, sensorCode, tireId, sensorId, loading, error } = useTireDetails(id, tireSelected);
 
   useEffect(() => {
     ListItems2(`${TiresByVehicleURL}?status=FREE`, setTireData);
-    ListItems2(`${TiresSensorBaseURL}?vehicleId=${id}`, setSensorData);
+    ListItems2(`${TiresSensorByCompanyAndStatus}?companyId=${company}&status=${false}`, setSensorData);
 
     const currentTireSelected = localStorage.getItem("tireSelected");
     if (currentTireSelected !== tireSelected) {
@@ -43,9 +45,54 @@ export function ChangeTire() {
     return () => clearInterval(intervalId);
   }, [tireSelected]);
 
+  const handleTire = () => {
+    console.log(tireId);
+    console.log(tireSelected);
+    if (tireId !=null & selectedTire != 0) {
+      const requestData1 = {
+        status: "FREE",
+        vehicleModel: {
+          id: 1,
+        },
+        positioning: {
+          id: 1,
+        },
+      };
 
+      console.log("Enviadoooooooo ");
 
-  const handleSend = () => {
+      Swal.fire({
+        title: "Procesando...",
+        text: "Por favor, espere.",
+        allowOutsideClick: false,
+        didOpen: async () => {
+          Swal.showLoading();
+          Promise.all([
+            await editarElemento(`${TiresBaseURL}/changeTire2?id1=${tireId}&id2=${selectedTire}&pos=${tireSelected}&v=${id}`, requestData1),
+          ])
+            .then(() => {
+              Swal.fire({
+                title: "¡Completado!",
+                text: "El cambio de neumáticos ha sido registrado exitosamente.",
+                icon: "success",
+              });
+            })
+            .catch((error) => {
+              Swal.fire({
+                title: "Error",
+                text: "Hubo un problema al registrar el cambio de neumáticos.",
+                icon: "error",
+              });
+            });
+        },
+      });
+      localStorage.removeItem("tireSelected");
+      setSelectedTire(0);
+      tireId == null;
+    }
+  };
+
+  const handleSensor = () => {
     const requestData1 = {
       status: "FREE",
       vehicleModel: {
@@ -56,73 +103,32 @@ export function ChangeTire() {
       },
     };
 
-    const requestData2 = {
-      status: "IN_USE",
-      vehicleModel: {
-        id: id,
-      },
-      positioning: {
-        id: tireSelected,
-      },
-    };
-
-    Swal.fire ({
-      title: 'Procesando...',
-      text: 'Por favor, espere.',
+    Swal.fire({
+      title: "Procesando...",
+      text: "Por favor, espere.",
       allowOutsideClick: false,
-      didOpen: async() => {
+      didOpen: async () => {
         Swal.showLoading();
         Promise.all([
-          await editarElemento(`${TiresBaseURL}/changeTire/${tireId}`, requestData1),
-          await editarElemento(`${TiresBaseURL}/changeTire/${selectedTire}`, requestData2),
+          await editarElemento(`${TiresSensorBaseURL}/changeSensor?id1=${sensorId}&id2=${selectedSensor}&pos=${tireSelected}&v=${id}`, requestData1),
         ])
-        .then(() => {
-          Swal.fire({
-            title: '¡Completado!',
-            text: 'El cambio de neumáticos ha sido registrado exitosamente.',
-            icon: 'success',
+          .then(() => {
+            Swal.fire({
+              title: "¡Completado!",
+              text: "El cambio de neumáticos ha sido registrado exitosamente.",
+              icon: "success",
+            });
+          })
+          .catch((error) => {
+            Swal.fire({
+              title: "Error",
+              text: "Hubo un problema al registrar el cambio de neumáticos.",
+              icon: "error",
+            });
           });
-        })
-        .catch((error) => {
-          Swal.fire({
-            title: 'Error',
-            text: 'Hubo un problema al registrar el cambio de neumáticos.',
-            icon: 'error',
-          });
-        });
-      }
+      },
     });
   };
-
-  /*
-  const handleSend = async () => {
-    const requestData1 = {
-      status: "FREE",
-      vehicleModel: {
-        id: 2,
-      },
-      positioning: {
-        id: 2,
-      },
-    };
-
-    const requestData2 = {
-      status: "IN_USE",
-      vehicleModel: {
-        id: id,
-      },
-      positioning: {
-        id: tireSelected,
-      },
-    };
-
-    console.log("Antiguo Neumatico ", tireId);
-    await editarElemento(`${TiresBaseURL}/changeTire/${tireId}`, requestData1);
-
-    console.log("Nuevo Neumatico ", selectedTire);
-    await editarElemento(`${TiresBaseURL}/changeTire/${selectedTire}`, requestData2);
-  };
-*/
   return (
     <>
       {/* Render the supervisor-specific navigation bar */}
@@ -158,7 +164,7 @@ export function ChangeTire() {
                 </Form.Group>
               </Form>
 
-              <Button onClick={() => handleSend()}>Cambiar el neumatico</Button>
+              <Button onClick={() => handleTire()}>Cambiar el neumatico</Button>
             </div>
             <div className="panel-container">
               <h1>Sensor asociado</h1>
@@ -179,7 +185,7 @@ export function ChangeTire() {
                   </Form.Select>
                 </Form.Group>
               </Form>
-              <Button>Cambiar el sensor instalado en el neumatico</Button>
+              <Button onClick={() => handleSensor()}>Cambiar el sensor instalado en el neumatico</Button>
             </div>
           </>
         )}

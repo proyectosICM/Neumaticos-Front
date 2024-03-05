@@ -21,10 +21,10 @@ export const ForkliftWith4Tires = ({ vehicleId,bdetails  }) => {
   const handleSelectTire = (pos) => {
     setPositioning(pos);
     localStorage.setItem("tireSelected", pos); 
-    console.log("Cambios " ,pos)
   };
 
-  
+  const posSel = localStorage.getItem("tireSelected");
+  console.log(posSel)
 
   return (
     <>
