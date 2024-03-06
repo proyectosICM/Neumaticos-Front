@@ -14,6 +14,7 @@ import { Performance } from "./common/performanceComponents/performance";
 import { IrregularitiesDetails } from "./common/irregularitiesComponents/irregularitiesDetails";
 import { NotAuthorized } from "./common/notAuthorized";
 import { ChangeTire } from "./common/changeTire";
+import { TireC } from "./Views/administrator/crud-administrator/tireCRUD/tireC";
 
 
 // Array of route definitions for the application
@@ -55,6 +56,9 @@ export const routes = [
 
   //Panel crud for administrator
   { path: "/ca-panel", component: <CaPanel /> },
+
+  // CRUD Neumaticos
+  { path: "/tireCRUD", component: <TireC /> },
 
   // System Administrator
   { path: "/sa", component: <SADashboard /> },

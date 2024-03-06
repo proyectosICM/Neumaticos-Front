@@ -24,7 +24,7 @@ export function ChangeTire() {
   const company = localStorage.getItem("empresa");
 
   const { tireDetails, tireCode, sensorCode, tireId, sensorId, loading, error } = useTireDetails(id, tireSelected);
-
+  console.log(`${TiresBaseURL}/changeTire2?id1=${tireId}&id2=${selectedTire}&pos=${tireSelected}&v=${id}`)
   useEffect(() => {
     ListItems2(`${TiresByVehicleURL}?status=FREE`, setTireData);
     ListItems2(`${TiresSensorByCompanyAndStatus}?companyId=${company}&status=${false}`, setSensorData);

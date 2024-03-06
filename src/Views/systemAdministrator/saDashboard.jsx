@@ -1,7 +1,7 @@
 import React from "react";
 import { DASHBOARD_ITEMS } from "./dashboardSAConstants";
 import { NavbarSA } from "./navbarSA";
-import { ItemDashboard } from "./itemDashboard";
+import { ItemDashboard } from "./itemDashboard"; 
 
 /**
  * System Administrator Dashboard component displaying a set of predefined items.

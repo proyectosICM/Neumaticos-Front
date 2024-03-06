@@ -9,18 +9,16 @@ export const apiURL = `${base}/api/`;
 
 // VehicleTypes
 
-
 export const VehicleTypeURL = `${apiURL}vehicletypes`;
 
-// User 
+// User
 export const UserURL = `${apiURL}users`;
 export const InfoUserURL = `${UserURL}/info/`;
 
 // Vehicle
-export const  VehicleURL = `${apiURL}vehicle`;
+export const VehicleURL = `${apiURL}vehicle`;
 export const VehicleCompanyURL = `${apiURL}vehicle/findByCompany`;
 export const VehicleCompanyStatusURL = `${apiURL}vehicle/findByCompanyAndStatus`;
-
 
 /**
  * Tires
@@ -33,7 +31,6 @@ export const TiresByVehicleURL = `${TiresBaseURL}/vehicle`;
 
 // Retrieves tires based on vehicle ID and tire position
 export const TiresByVehicleAndPositionURL = `${TiresBaseURL}/findByVehicleModelIdAndPositioningLocationCode`;
-
 
 /**
  * Tires Sensor
@@ -48,8 +45,6 @@ export const TiresSensorByVehicleURL = `${TiresSensorBaseURL}/vehicle`;
 // Retrieves tires based on vehicle ID and tire position
 export const TiresSensorByVehicleAndPositionURL = `${TiresSensorBaseURL}/byVehicleAndPositioning`;
 
-
-
 /**
  * Irregularities
  */
@@ -62,7 +57,6 @@ export const IrregularitiesByCompanyAndVehiclePageURL = `${IrregularitiesTiredBa
 
 // Retrieves the most recent irregularities across all vehicles.
 export const RecentIrregularitiesTiredURL = `${IrregularitiesTiredBaseURL}/recent`;
-
 
 /**
  * Performance

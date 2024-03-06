@@ -11,10 +11,11 @@ export function CaPanel() {
     <>
       {/* Navigation component specific to the administrator role. */}
       <NavbarAdministrator />
-      <h1>Hola</h1>
+      <h1>Administrar Recursos</h1>
       <div className="menu-container">
         <CaItem name="Neumaticos" />
-        <CaItem name="Vehiculos" />
+        <CaItem name="Sensores" />
+        <CaItem name="Vehiculos" /> 
         <CaItem name="Usuarios" />
       </div>
     </>

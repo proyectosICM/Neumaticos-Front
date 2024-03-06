@@ -130,12 +130,28 @@ export async function editarElemento(url, requestData) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    });
-
-    // Lógica para cerrar el modal o para acciones después de la actualización exitosa
-    console.log("Elemento actualizado con éxito");
+    }); 
   } catch (error) {
     // Manejo de errores, por ejemplo, mostrar un mensaje de error
     console.error("Error al actualizar el elemento:", error);
   }
+}
+
+export function GuardarElementos(url, requestData) {
+  const token = localStorage.getItem("token");
+  return new Promise((resolve, reject) => {
+    axios
+      .post(`${url}`, requestData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        console.error("Error al guardar los datos:", error);
+        reject(error);
+      });
+  });
 }

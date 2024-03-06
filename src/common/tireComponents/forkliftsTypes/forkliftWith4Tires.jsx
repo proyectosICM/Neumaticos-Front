@@ -24,7 +24,7 @@ export const ForkliftWith4Tires = ({ vehicleId,bdetails  }) => {
   };
 
   const posSel = localStorage.getItem("tireSelected");
-  console.log(posSel)
+  console.log(posSel);
 
   return (
     <>

@@ -25,7 +25,7 @@ export function CaItem({ name }) {
         <FaTruck className="icon-card" />
 
         {/* Button to navigate to the vehicle's detail view */}
-        <Button style={{ width: "80%" }} onClick={() => navigate(`/supervisor-detalles/`)} variant="outline-primary" title="Editar">
+        <Button style={{ width: "80%" }} onClick={() => navigate(`/tireCRUD`)} variant="outline-primary" title="Editar">
           Ver mas
         </Button>
       </div>
