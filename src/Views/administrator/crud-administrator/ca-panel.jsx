@@ -13,9 +13,9 @@ export function CaPanel() {
       <NavbarAdministrator />
       <h1>Administrar Recursos</h1>
       <div className="menu-container">
-        <CaItem name="Neumaticos" />
-        <CaItem name="Sensores" />
-        <CaItem name="Vehiculos" /> 
+        <CaItem name="Neumaticos" ruta="/tireCRUD" />
+        <CaItem name="Sensores" ruta="/sensorCRUD" />
+        <CaItem name="Vehiculos" ruta="/vehicleCRUD" /> 
         <CaItem name="Usuarios" />
       </div>
     </>

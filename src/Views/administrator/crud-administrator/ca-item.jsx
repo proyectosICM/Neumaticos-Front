@@ -10,7 +10,7 @@ import { FaTruck } from "react-icons/fa";
  * @param {Object} data - The vehicle data including company, placa (license plate), and type.
  * @returns A card component representing a vehicle.
  */
-export function CaItem({ name }) {
+export function CaItem({ name, ruta }) {
   const navigate = useNavigate();
   const rol = localStorage.getItem("rol");
 
@@ -25,7 +25,7 @@ export function CaItem({ name }) {
         <FaTruck className="icon-card" />
 
         {/* Button to navigate to the vehicle's detail view */}
-        <Button style={{ width: "80%" }} onClick={() => navigate(`/tireCRUD`)} variant="outline-primary" title="Editar">
+        <Button style={{ width: "80%" }} onClick={() => navigate(`${ruta}`)} variant="outline-primary" title="Editar">
           Ver mas
         </Button>
       </div>

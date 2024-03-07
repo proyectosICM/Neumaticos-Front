@@ -15,6 +15,8 @@ import { IrregularitiesDetails } from "./common/irregularitiesComponents/irregul
 import { NotAuthorized } from "./common/notAuthorized";
 import { ChangeTire } from "./common/changeTire";
 import { TireC } from "./Views/administrator/crud-administrator/tireCRUD/tireC";
+import { SensorC } from "./Views/administrator/crud-administrator/sensorCRUD/sensorC";
+import { VehicleC } from "./Views/administrator/crud-administrator/vehicleCRUD/vehicleC";
 
 
 // Array of route definitions for the application
@@ -59,7 +61,9 @@ export const routes = [
 
   // CRUD Neumaticos
   { path: "/tireCRUD", component: <TireC /> },
+  { path: "/sensorCRUD", component: <SensorC /> },
 
+  { path: "/vehicleCRUD", component: <VehicleC /> },
   // System Administrator
   { path: "/sa", component: <SADashboard /> },
 ];
