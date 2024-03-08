@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ListItems } from "../../hooks/crudhooks";
 import { IrregularitiesTiredBaseURL } from "../../api/apiurl";
-import { Button } from "react-bootstrap";
+import { Button, Modal, Table } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { PerformancePanel } from "../vehicleComponents/performancePanel";
 import { NavbarDriver } from "../../Views/driver/navbarDriver";
@@ -24,6 +24,11 @@ export function IrregularitiesDetails() {
       return navigation(`/incidencias/${b}`);
     }
   };
+
+  const [showModal, setShowModal] = useState(true);
+  const [imagesData, setImagesData] = useState();
+  const [imagesId, setImagesId] = useState();
+
   const rol = +localStorage.getItem("rol");
   return (
     <div>
@@ -34,28 +39,73 @@ export function IrregularitiesDetails() {
       </Button>
       {data ? (
         <div style={{ margin: "2rem auto", width: "80%", fontSize: "1.5rem" }}>
-          <h2>Detalle de Irregularidad {data.id} </h2>
-          <p>
-            <strong>Dia en que se registro la incidencia: </strong> {new Date(data.createdAt).toLocaleDateString()}
-          </p>
-          <p>
-            <strong>Hora en que se registro la incidencia: </strong> {new Date(data.createdAt).toLocaleTimeString()}
-          </p>
+          <h2>Detalle de Irregularidad </h2>
           <p>
             <strong>Nombre:</strong> {data.nameIrregularity}
           </p>
           <p>
             <strong>Detalles:</strong> {data.detailsIrregularity}
           </p>
-          <p>
-            <strong>Placa del Vehículo:</strong> {data.vehicleModel.placa}
-          </p>
-          <p>
-            <strong>Compañía:</strong> {data.company.name}
-          </p>
-          <p>
-            <strong>Tipo de Vehículo:</strong> {data.vehicleModel.vehicleType.name}
-          </p>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>
+                  <strong>Dia en que se registro la incidencia: </strong>
+                </th>
+                <th>
+                  {" "}
+                  <strong>Hora en que se registro la incidencia: </strong>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{new Date(data.createdAt).toLocaleDateString()}</td>
+                <td>{new Date(data.createdAt).toLocaleTimeString()}</td>
+              </tr>
+            </tbody>
+          </Table>
+
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>
+                  <strong>Placa del Vehículo:</strong>{" "}
+                </th>
+                <th>
+                  <strong>Compañía:</strong>
+                </th>
+                <th>
+                  <strong>Tipo de Vehículo:</strong>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{data.vehicleModel.placa}</td>
+                <td>{data.company.name}</td>
+                <td>{data.vehicleModel.vehicleType.name}</td>
+              </tr>
+            </tbody>
+          </Table>
+
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Temperatura registrada en incidencia</th>
+                <th>Presion registrada en la incidencia</th>
+                <th>Bateria del dispositivo registrada en la incidencia</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{data.recordedTemperature ? `${data.recordedTemperature} °C` : "NO registrado"} </td>
+                <td>{data.recordedPressure ? `${data.recordedPressure} PSI` : "No registrado"}</td>
+                <td>{data.recordedBatteryLevel ? `${data.recordedBatteryLevel} %` : "No registrado"}</td>
+              </tr>
+            </tbody>
+          </Table>
+
           {/* Ajustar Visibilidad */}
           {data.status !== true && (
             <div>
@@ -69,8 +119,94 @@ export function IrregularitiesDetails() {
             </div>
           )}
 
-          <div className="panel-container">
-            <PerformancePanel vehicleId={data.vehicleModel.id} />
+          <Modal show={showModal} onHide={() => setShowModal(false)} style={{width: "100%"}}>
+            <Modal.Header closeButton  >
+
+            </Modal.Header>
+          </Modal>
+
+          <div className="menu-container">
+            <div className="panel-container">
+              <PerformancePanel vehicleId={data.vehicleModel.id} />
+            </div>
+
+            <div className="panel-container">
+              <h1>Imagenes asociadas</h1>
+              <div className="menu-container-border" style={{ overflow: "scroll", cursor: "pointer" }}>
+                <img
+                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
+                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
+                  alt="Descripción de la imagen"
+                  onClick={() => setShowModal(true)}
+                />
+                <img
+                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
+                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
+                  alt="Descripción de la imagen"
+                  onClick={() => setShowModal(true)}
+                />
+                <img
+                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
+                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
+                  alt="Descripción de la imagen"
+                  onClick={() => setShowModal(true)}
+                />
+                <img
+                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
+                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
+                  alt="Descripción de la imagen"
+                  onClick={() => setShowModal(true)}
+                />
+                <img
+                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
+                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
+                  alt="Descripción de la imagen"
+                  onClick={() => setShowModal(true)}
+                />
+                <img
+                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
+                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
+                  alt="Descripción de la imagen"
+                  onClick={() => setShowModal(true)}
+                />
+                <img
+                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
+                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
+                  alt="Descripción de la imagen"
+                  onClick={() => setShowModal(true)}
+                />
+                <img
+                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
+                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
+                  alt="Descripción de la imagen"
+                  onClick={() => setShowModal(true)}
+                />
+                <img
+                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
+                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
+                  alt="Descripción de la imagen"
+                  onClick={() => setShowModal(true)}
+                />
+                <img
+                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
+                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
+                  alt="Descripción de la imagen"
+                  onClick={() => setShowModal(true)}
+                />
+                <img
+                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
+                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
+                  alt="Descripción de la imagen"
+                  onClick={() => setShowModal(true)}
+                />
+                <img
+                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
+                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
+                  alt="Descripción de la imagen"
+                  onClick={() => setShowModal(true)}
+                />
+              </div>
+            </div>
           </div>
         </div>
       ) : (

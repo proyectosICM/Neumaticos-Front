@@ -11,7 +11,6 @@ import { ListPaginatedData } from "../../hooks/listPaginatedData";
 import { LogoutToken } from "../../hooks/logoutToken";
 
 export function Irregularities() {
-
   LogoutToken();
   const navigation = useNavigate();
   const rol = +localStorage.getItem("rol");
@@ -82,8 +81,8 @@ export function Irregularities() {
                   <td>{new Date(incidencia.createdAt).toLocaleDateString()}</td>
                   <td>{new Date(incidencia.createdAt).toLocaleTimeString()}</td>
                   <td>{incidencia.vehicleModel.placa}</td>
-                  <td>{incidencia.vehicleModel.vehicleType.name}</td>
-                  <td>{incidencia.tire.id}</td>
+                  <td>{incidencia.vehicleModel && incidencia.vehicleModel.vehicleType.name}</td>
+                  <td>{incidencia.tire && incidencia.tire.id}</td>
                   <td>{incidencia.nameIrregularity}</td>
                   <td>{incidencia.detailsIrregularity}</td>
                   <td>{incidencia.status ? "Activo" : "Inactivo"}</td>

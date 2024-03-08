@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { VehicleCompanyURL, VehicleURL } from "../../../../api/apiurl";
-import { ListItems2 } from "../../../../hooks/crudhooks";
+import { GuardarElementos, ListItems2, editarElemento } from "../../../../hooks/crudhooks";
 import { GrEdit } from "react-icons/gr";
 import { VehicleModal } from "./vehicleModal";
 
@@ -22,6 +22,56 @@ export function VehicleTable() {
   const handleCargarDatos = (dto) => {
     setDatosAEditar(dto);
     setShowModal(true);
+  };
+
+  const handleGuardar = (dto) => {
+    const requestData = {
+      placa: dto.placa,
+      company: {
+        id: 1,
+      },
+      vehicleType: {
+        id: dto.vehicleType,
+      },
+      status: true,
+      standardTemperature: dto.standardTemperature,
+      standardPressure: dto.standardPressure,
+    };
+
+    GuardarElementos(VehicleURL, requestData)
+      .then(() => {
+        handleList(); // Actualiza la lista una vez que se haya completado el guardado
+      })
+      .catch((error) => {
+        console.error("Error al guardar el neumático:", error);
+        // Manejar el error aquí
+      });
+    setShowModal(false);
+  };
+
+  const handleEditar = (dto) => {
+    const requestData = {
+      placa: dto.placa,
+      company: {
+        id: 1,
+      },
+      vehicleType: {
+        id: dto.vehicleType,
+      },
+      status: true,
+      standardTemperature: dto.standardTemperature,
+      standardPressure: dto.standardPressure,
+    };
+
+    editarElemento(`${VehicleURL}/${dto.id}`, requestData)
+      .then(() => {
+        handleList();
+       // console.log("d")
+      })
+      .catch((error) => {
+        console.error("Error al guardar el neumático:", error);
+      });
+    setShowModal(false);
   };
 
   return (
@@ -65,7 +115,7 @@ export function VehicleTable() {
         </tbody>
       </Table>
 
-      <VehicleModal show={showModal} onHide={()=> setShowModal()} />
+      <VehicleModal show={showModal} onHide={() => setShowModal()} guardar={handleGuardar} editar={handleEditar} datosaEditar={datosaEditar} />
     </>
   );
 }

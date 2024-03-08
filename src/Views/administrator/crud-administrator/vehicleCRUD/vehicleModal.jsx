@@ -1,9 +1,10 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useEffect, useState } from "react";
-import { Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { GiCarWheel } from "react-icons/gi";
 import { ListItems2 } from "../../../../hooks/crudhooks";
 import { VehicleTypeURL } from "../../../../api/apiurl";
+import Swal from "sweetalert2";
 
 export function VehicleModal({ show, onHide, guardar, editar, datosaEditar }) {
   const company = +localStorage.getItem("empresa");
@@ -17,14 +18,39 @@ export function VehicleModal({ show, onHide, guardar, editar, datosaEditar }) {
   const initialValues = {
     id: datosaEditar ? datosaEditar.id : "",
     placa: datosaEditar ? datosaEditar.placa : "",
-    vehicleType: datosaEditar ? datosaEditar.vehicleType : "",
+    vehicleType: datosaEditar ? datosaEditar.vehicleType.id : "",
     standardTemperature: datosaEditar ? datosaEditar.standardTemperature : "",
     standardPressure: datosaEditar ? datosaEditar.standardPressure : "",
   };
 
-  const handleSave = () => {
-    console.log("d");
+  const handleSave = (dto) => {
+    let errors = [];
+
+    if (dto.vehicleType != "") {
+      if (dto.standardTemperature === "") {
+        errors.push("Por favor agrega la temperatura estandar para el sensor.");
+      }
+
+      if (dto.standardPressure === "") {
+        errors.push("Por favor agrega la presion estandar para el sensor.");
+      }
+    }
+    if (errors.length > 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops... faltan algunos datos",
+        html: `<ul>${errors.map((error) => `<li>${error}</li>`).join("")}</ul>`,
+        confirmButtonText: "Aceptar",
+      });
+    } else {
+      if (datosaEditar) {
+        editar(dto);
+      } else {
+        guardar(dto);
+      }
+    }
   };
+
 
   return (
     <>
@@ -79,6 +105,10 @@ export function VehicleModal({ show, onHide, guardar, editar, datosaEditar }) {
                     <ErrorMessage name="standardPressure" component="div" className="error" />
                   </div>
                 </div>
+
+                <Button type="submit" variant="primary">
+                  Guardar
+                </Button>
               </Form>
             )}
           </Formik>

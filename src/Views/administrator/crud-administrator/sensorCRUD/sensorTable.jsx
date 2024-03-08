@@ -126,7 +126,8 @@ export function SensorTable() {
         </tbody>
       </Table>
 
-      <SensorModal show={showModal} onHide={() => setShowModal()} guardar={handleGuardar} editar={handleEditar} datosaEditar={datosaEditar} />
+      <SensorModal show={showModal} onHide={() => setShowModal()} 
+      guardar={handleGuardar} editar={handleEditar} datosaEditar={datosaEditar} />
     </>
   );
 }
