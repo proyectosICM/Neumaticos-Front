@@ -130,7 +130,7 @@ export async function editarElemento(url, requestData) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }); 
+    });
   } catch (error) {
     // Manejo de errores, por ejemplo, mostrar un mensaje de error
     console.error("Error al actualizar el elemento:", error);

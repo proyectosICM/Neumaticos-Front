@@ -7,9 +7,9 @@ import { LogoutToken } from './hooks/logoutToken';
 function App() {
 
 
-
+ 
   return (
-    <div className="App">
+    <div className="App" style={{ width:"100%", height:"100%", backgroundColor:"black"}}>
       <Router>
         <Routes>
           {routes.map((route, index) => (

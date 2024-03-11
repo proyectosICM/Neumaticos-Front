@@ -38,9 +38,9 @@ export function Irregularities() {
     };
     Listar(pageNumber);
   }, [pageNumber, p]);
-
+  
   return (
-    <div>
+    <div style={{width:"100%", height:"100%", border:"2px solid"}}>
       {/* Render the supervisor-specific navigation bar */}
       {rol === 1 ? <NavbarDriver /> : rol === 2 ? <NavbarSupervisor /> : rol === 3 ? <NavbarAdministrator /> : <h1>sd</h1>}
 
@@ -52,7 +52,7 @@ export function Irregularities() {
 
       <div className="menu-container-border">
         <h1>Incidencias Recientes</h1>
-        <Table striped bordered hover>
+        <Table striped bordered hover variant="dark">
           <thead>
             <tr>
               <th>Id</th>

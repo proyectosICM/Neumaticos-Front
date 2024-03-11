@@ -29,7 +29,7 @@ export function DetailsVehicle() {
   const rol = +localStorage.getItem("rol");
 
   return (
-    <>
+    <div style={{width:"100%", height:"100%", border:"2px solid   "}}>
       {/* Render the supervisor-specific navigation bar */}
       {rol === 1 ? <NavbarDriver /> : rol === 2 ? <NavbarSupervisor /> : rol === 3 ? <NavbarAdministrator /> : <h1>sd</h1>}
 
@@ -56,6 +56,6 @@ export function DetailsVehicle() {
           <Button onClick={() => navigation(`/cambiar-neumatico/${id}`) }>Registar cambio de llantas</Button>
         </div> 
       </div>
-    </>
+    </div>
   );
 }

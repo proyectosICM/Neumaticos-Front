@@ -21,6 +21,11 @@ export const VehicleCompanyURL = `${apiURL}vehicle/findByCompany`;
 export const VehicleCompanyStatusURL = `${apiURL}vehicle/findByCompanyAndStatus`;
 
 /**
+ * ITT
+ */
+export const ITTURL = `${apiURL}ITT`;
+
+/**
  * Tires
  */
 // Base URL for tire-related operations
