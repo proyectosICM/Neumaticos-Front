@@ -23,8 +23,8 @@ export const VehicleCompanyStatusURL = `${apiURL}vehicle/findByCompanyAndStatus`
 /**
  * ITT
  */
-export const ITTURL = `${apiURL}ITT`;
-
+export const ITTURL = `${apiURL}IIT`;
+export const ITTiURL = `${apiURL}IIT/image`;
 /**
  * Tires
  */

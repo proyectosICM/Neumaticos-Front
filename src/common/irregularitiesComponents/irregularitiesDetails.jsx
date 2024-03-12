@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ListItems } from "../../hooks/crudhooks";
-import { ITTURL, IrregularitiesTiredBaseURL } from "../../api/apiurl";
+import { ITTURL, ITTiURL, IrregularitiesTiredBaseURL } from "../../api/apiurl";
 import { Button, Modal, Table } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { PerformancePanel } from "../vehicleComponents/performancePanel";
@@ -50,40 +50,33 @@ export function IrregularitiesDetails() {
 
   const uploadImage = async () => {
     if (!selectedFile) {
-      alert("Por favor, selecciona un archivo.");
+      alert('Por favor, selecciona un archivo.');
       return;
     }
-  
-    const formDataI = new FormData();
-    formDataI.append("file", selectedFile);
 
-    const requestData = {
-      irregularitiesTireModel: {
-        id: id,
-      },
-      companyModel: {
-        id: 1,
-      },
-      details: "Si",
-    };
-  
-    // Agrega otros campos si son necesarios, por ejemplo:
-    // formData.append('otherField', 'valor');
-    // Asegúrate de reemplazar la URL con la ruta correcta de tu API
-    const token = localStorage.getItem("token");
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+    formData.append('irregularitiesTireModelId', id);
+    formData.append('companyModelId', 1);
+    formData.append('details', "NO")
+
     try {
-      const response = await axios.post(ITTURL, requestData, formDataI, {
-        headers: { Authorization: `Bearer ${token}` },
+      const token = await localStorage.getItem("token");
+      const response = await axios.post(ITTURL, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
       });
-  
+
       if (response.status === 201) {
-        console.log("Imagen cargada con éxito");
-        // Realiza acciones adicionales si es necesario
+        alert('Imagen cargada con éxito');
       } else {
-        console.error("Error al cargar la imagen");
+        alert('Error al cargar la imagen');
       }
     } catch (error) {
-      console.error("Excepción al cargar la imagen", error);
+      console.error('Error al cargar la imagen:', error);
+      alert('Error al cargar la imagen');
     }
   };
 
