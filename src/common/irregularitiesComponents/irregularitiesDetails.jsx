@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ListItems } from "../../hooks/crudhooks";
-import { ITTURL, ITTiURL, IrregularitiesTiredBaseURL } from "../../api/apiurl";
+import { ITTURL, ITTbyIrregularityURL, ITTiURL, IrregularitiesTiredBaseURL } from "../../api/apiurl";
 import { Button, Modal, Table } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { PerformancePanel } from "../vehicleComponents/performancePanel";
@@ -11,13 +11,19 @@ import { LogoutToken } from "../../hooks/logoutToken";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { CiCamera } from "react-icons/ci";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export function IrregularitiesDetails() {
   const navigation = useNavigate();
   const { id, b } = useParams();
   const [data, setData] = useState();
+  const [images, setImages] = useState();
 
   ListItems(`${IrregularitiesTiredBaseURL}/${id}`, setData);
+  ListItems(`${ITTbyIrregularityURL}/${id}`, setImages);
+
+  console.log(images);
+
   const vehicleId = +localStorage.getItem("vehicleId");
 
   const handleBack = () => {
@@ -50,37 +56,40 @@ export function IrregularitiesDetails() {
 
   const uploadImage = async () => {
     if (!selectedFile) {
-      alert('Por favor, selecciona un archivo.');
+      alert("Por favor, selecciona un archivo.");
       return;
     }
 
     const formData = new FormData();
-    formData.append('file', selectedFile);
-    formData.append('irregularitiesTireModelId', id);
-    formData.append('companyModelId', 1);
-    formData.append('details', "NO")
+    formData.append("file", selectedFile);
+    formData.append("irregularitiesTireModelId", id);
+    formData.append("companyModelId", 1);
+    formData.append("details", "NO");
 
     try {
       const token = await localStorage.getItem("token");
       const response = await axios.post(ITTURL, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       });
 
       if (response.status === 201) {
-        alert('Imagen cargada con éxito');
+        Swal.fire("Imagen cargada con éxito");
+        setPreviewUrl(null);
+        setSelectedFile(null);
       } else {
-        alert('Error al cargar la imagen');
+        Swal.fire("Error al cargar la imagen");
       }
     } catch (error) {
-      console.error('Error al cargar la imagen:', error);
-      alert('Error al cargar la imagen');
+      console.error("Error al cargar la imagen:", error);
+      Swal.fire("Error al cargar la imagen");
     }
   };
 
   const rol = +localStorage.getItem("rol");
+
   return (
     <div style={{ border: "2px solid", width: "100%" }}>
       {/* Render the supervisor-specific navigation bar */}
@@ -167,7 +176,7 @@ export function IrregularitiesDetails() {
             {previewUrl && (
               <div style={{ width: "40%", height: "40%", margin: "0% 30%" }}>
                 <img src={previewUrl} alt="Preview" style={{ width: "100%", margin: "5% 0%", height: "100%", objectFit: "cover" }} />
-                <Button onClick={()=> uploadImage()}>Enviar Imagen</Button>
+                <Button onClick={() => uploadImage()}>Enviar Imagen</Button>
               </div>
             )}
           </div>
@@ -185,7 +194,7 @@ export function IrregularitiesDetails() {
             </div>
           )}
 
-          <div style={{ width: "100%", border: "2px solid red" }}>
+          <div style={{ width: "100%", border: "2px solid" }}>
             <Modal show={showModal} onHide={() => setShowModal(false)} style={{ width: "100%" }}>
               <Modal.Header closeButton style={{ width: "150%", backgroundColor: "white", color: "white" }}></Modal.Header>
               <Modal.Body style={{ width: "150%", backgroundColor: "black" }}>
@@ -213,12 +222,18 @@ export function IrregularitiesDetails() {
             <div className="panel-container">
               <h1>Imagenes asociadas</h1>
               <div className="menu-container-border" style={{ overflow: "scroll", cursor: "pointer" }}>
+
+              {images &&
+              images.map((incidencia, index) => (
                 <img
-                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
-                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
-                  alt="Descripción de la imagen"
-                  onClick={() => setShowModal(true)}
-                />
+                style={{ width: "30%", height: "30%", margin: "0% 10%" }}
+                src="https://i.pinimg.com/564x/02/fc/b8/02fcb811b1098c13c20f49e48cf336aa.jpg"
+                alt="Descripción de la imagen"
+                onClick={() => setShowModal(true)}
+                key={index}
+              />
+              ))}
+          
                 <img
                   style={{ width: "30%", height: "30%", margin: "0% 10%" }}
                   src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"

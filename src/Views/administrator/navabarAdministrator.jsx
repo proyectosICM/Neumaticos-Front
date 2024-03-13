@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 export function NavbarAdministrator() {
   const navigation = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = () => { 
     localStorage.removeItem("token");
     navigation("/login");
   };
@@ -21,7 +21,7 @@ export function NavbarAdministrator() {
       </Navbar.Brand>
       <Nav>
         <Nav.Link onClick={() => navigation("/menu")}>Menu Vehiculos</Nav.Link>
-        <Nav.Link onClick={() => navigation("/incidencias")}>Incidencias Recientes</Nav.Link>
+        <Nav.Link onClick={() => navigation("/incidencias/g")}>Incidencias Recientes</Nav.Link>
         <Nav.Link onClick={() => navigation("/mensajes")}>Mensajes</Nav.Link>
         <Nav.Link onClick={() => navigation("/ca-panel")}>Panel Administrador</Nav.Link>
       </Nav>

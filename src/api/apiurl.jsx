@@ -20,11 +20,15 @@ export const VehicleURL = `${apiURL}vehicle`;
 export const VehicleCompanyURL = `${apiURL}vehicle/findByCompany`;
 export const VehicleCompanyStatusURL = `${apiURL}vehicle/findByCompanyAndStatus`;
 
+
 /**
  * ITT
  */
 export const ITTURL = `${apiURL}IIT`;
 export const ITTiURL = `${apiURL}IIT/image`;
+export const ITTbyIrregularityURL = `${apiURL}IIT/byIrregularities`;
+export const ServerITT = `${apiURL}IIT/byIrregularities`;
+export const ImageFiles = `${apiURL}files/images`;
 /**
  * Tires
  */

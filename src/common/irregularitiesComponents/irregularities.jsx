@@ -25,6 +25,7 @@ export function Irregularities() {
   const [data, setData] = useState();
   const companyId = localStorage.getItem("empresa");
   const vehicleId = +localStorage.getItem("vehicleId");
+  
 
   useEffect(() => {
     let url;
@@ -61,6 +62,7 @@ export function Irregularities() {
               <th>Placa</th>
               <th>Categoría</th>
               <th>Neumático asociado</th>
+              <th>Sensor asociado</th>
               <th>Incidencia</th>
               <th>Detalles</th>
               <th>Estado</th>
@@ -82,7 +84,8 @@ export function Irregularities() {
                   <td>{new Date(incidencia.createdAt).toLocaleTimeString()}</td>
                   <td>{incidencia.vehicleModel && incidencia.vehicleModel.placa}</td>
                   <td>{incidencia.vehicleModel && incidencia.vehicleModel.vehicleType.name}</td>
-                  <td>{incidencia.tire && incidencia.tire.id}</td>
+                  <td>{incidencia.tireModel && incidencia.tireModel.codname}</td>
+                  <td>{incidencia.tireSensorModel && incidencia.tireSensorModel.identificationCode}</td>
                   <td>{incidencia.nameIrregularity}</td>
                   <td>{incidencia.detailsIrregularity}</td>
                   <td>{incidencia.status ? "Activo" : "Inactivo"}</td>

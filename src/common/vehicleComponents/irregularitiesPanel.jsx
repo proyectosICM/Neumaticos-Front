@@ -22,8 +22,6 @@ export function IrregularitiesPanel({ vehicleId }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-
-
   // Fetches the recent irregularities for the specified vehicleId and updates the state.
   useEffect(() => {
     const fetchIrregularities = async () => {
@@ -40,7 +38,7 @@ export function IrregularitiesPanel({ vehicleId }) {
       } catch (error) {
         console.error("Error fetching irregularities data:", error);
         setError("Failed to fetch data");
-        setData("")
+        setData("");
       } finally {
         setLoading(false);
       }
@@ -62,10 +60,14 @@ export function IrregularitiesPanel({ vehicleId }) {
       {data &&
         data.content.map((irregularity, index) => (
           <div key={index} className="irregularity-block" onClick={() => navigation(`/incidencia-detalles/${irregularity.id}/r`)}>
-            {irregularity.nameIrregularity} 
+            {irregularity.nameIrregularity}
           </div>
         ))}
-      <Button onClick={() => navigation(`/incidencias/v`)} style={{ margin: "1.5rem auto" }}>Ver mas detalles</Button>
+      <div style={{width:"100%"}}>
+        <Button onClick={() => navigation(`/incidencias/v`)} style={{ margin: "1.5rem auto" }}>
+          Ver mas detalles
+        </Button>
+      </div>
     </div>
   );
 }

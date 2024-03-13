@@ -17,7 +17,7 @@ export function NavbarSupervisor() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigation("/login");
-  };
+  }; 
 
   return (
     <Navbar bg="dark" variant="dark" className="justify-content-between">
