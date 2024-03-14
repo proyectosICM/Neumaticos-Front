@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ListItems } from "../../hooks/crudhooks";
-import { ITTURL, ITTbyIrregularityURL, ITTiURL, IrregularitiesTiredBaseURL } from "../../api/apiurl";
+import { ITTURL, ITTbyIrregularityURL, ITTiURL, ImageFiles, IrregularitiesTiredBaseURL } from "../../api/apiurl";
 import { Button, Modal, Table } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { PerformancePanel } from "../vehicleComponents/performancePanel";
@@ -19,9 +19,13 @@ export function IrregularitiesDetails() {
   const [data, setData] = useState();
   const [images, setImages] = useState();
 
-  ListItems(`${IrregularitiesTiredBaseURL}/${id}`, setData);
-  ListItems(`${ITTbyIrregularityURL}/${id}`, setImages);
+  const companyId = +localStorage.getItem("empresa");
 
+  ListItems(`${IrregularitiesTiredBaseURL}/${id}`, setData);
+  ListItems(`${ImageFiles}?company=${companyId}&irregularity=${id}`, setImages);
+
+  // ListItems(`${ImageFiles}`)
+  console.log(companyId);
   console.log(images);
 
   const vehicleId = +localStorage.getItem("vehicleId");
@@ -49,9 +53,15 @@ export function IrregularitiesDetails() {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    console.log(file.name);
     setSelectedFile(file);
     setPreviewUrl(URL.createObjectURL(file));
+  };
+
+  const [selectedImage, setSelectedImage] = useState();
+
+  const handleFullImage = (data) => {
+    setShowModal(true);
+    setSelectedImage(data);
   };
 
   const uploadImage = async () => {
@@ -89,6 +99,20 @@ export function IrregularitiesDetails() {
   };
 
   const rol = +localStorage.getItem("rol");
+
+  const handleChangeImage = (direction) => {
+    let newIndex = direction === "+" ? index + 1 : index - 1;
+  
+    // Asegurarse de que el índice esté dentro de los límites del arreglo
+    if (newIndex >= images.length) {
+      newIndex = 0; // Vuelve al inicio si se pasa del final
+    } else if (newIndex < 0) {
+      newIndex = images.length - 1; // Va al final si se pasa del inicio
+    }
+  
+    setSelectedImage(images[newIndex]);
+    setImagesId(newIndex);
+  };
 
   return (
     <div style={{ border: "2px solid", width: "100%" }}>
@@ -199,16 +223,11 @@ export function IrregularitiesDetails() {
               <Modal.Header closeButton style={{ width: "150%", backgroundColor: "white", color: "white" }}></Modal.Header>
               <Modal.Body style={{ width: "150%", backgroundColor: "black" }}>
                 <div style={{ alignItems: "center", justifyItems: "center", justifyItems: "center", display: "flex", flexDirection: "row" }}>
-                  <FaAngleLeft style={{ color: "white", cursor: "pointer", width: "25%", height: "100px", fontSize: "200px" }} />
+                  <FaAngleLeft onClick={() => handleChangeImage("-")}  style={{ color: "white", cursor: "pointer", width: "25%", height: "100px", fontSize: "200px" }} />
 
-                  <img
-                    style={{ width: "50%", height: "50%" }}
-                    src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
-                    alt="Descripción de la imagen"
-                    onClick={() => setShowModal(true)}
-                  />
+                  {selectedImage && <img src={selectedImage.url} alt="Imagen seleccionada" style={{ width: "100%" }} />}
 
-                  <FaAngleRight style={{ color: "white", cursor: "pointer", width: "25%", height: "100px", fontSize: "200px" }} />
+                  <FaAngleRight onClick={() => handleChangeImage("+")}  style={{ color: "white", cursor: "pointer", width: "25%", height: "100px", fontSize: "200px" }} />
                 </div>
               </Modal.Body>
             </Modal>
@@ -222,84 +241,16 @@ export function IrregularitiesDetails() {
             <div className="panel-container">
               <h1>Imagenes asociadas</h1>
               <div className="menu-container-border" style={{ overflow: "scroll", cursor: "pointer" }}>
-
-              {images &&
-              images.map((incidencia, index) => (
-                <img
-                style={{ width: "30%", height: "30%", margin: "0% 10%" }}
-                src="https://i.pinimg.com/564x/02/fc/b8/02fcb811b1098c13c20f49e48cf336aa.jpg"
-                alt="Descripción de la imagen"
-                onClick={() => setShowModal(true)}
-                key={index}
-              />
-              ))}
-          
-                <img
-                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
-                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
-                  alt="Descripción de la imagen"
-                  onClick={() => setShowModal(true)}
-                />
-                <img
-                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
-                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
-                  alt="Descripción de la imagen"
-                  onClick={() => setShowModal(true)}
-                />
-                <img
-                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
-                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
-                  alt="Descripción de la imagen"
-                  onClick={() => setShowModal(true)}
-                />
-                <img
-                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
-                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
-                  alt="Descripción de la imagen"
-                  onClick={() => setShowModal(true)}
-                />
-                <img
-                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
-                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
-                  alt="Descripción de la imagen"
-                  onClick={() => setShowModal(true)}
-                />
-                <img
-                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
-                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
-                  alt="Descripción de la imagen"
-                  onClick={() => setShowModal(true)}
-                />
-                <img
-                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
-                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
-                  alt="Descripción de la imagen"
-                  onClick={() => setShowModal(true)}
-                />
-                <img
-                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
-                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
-                  alt="Descripción de la imagen"
-                  onClick={() => setShowModal(true)}
-                />
-                <img
-                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
-                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
-                  alt="Descripción de la imagen"
-                  onClick={() => setShowModal(true)}
-                />
-                <img
-                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
-                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
-                  alt="Descripción de la imagen"
-                  onClick={() => setShowModal(true)}
-                />
-                <img
-                  style={{ width: "30%", height: "30%", margin: "0% 10%" }}
-                  src="https://i.pinimg.com/564x/e4/1e/69/e41e69cc589d2143144da845b872a2bc.jpg"
-                  alt="Descripción de la imagen"
-                  onClick={() => setShowModal(true)}
-                />
+                {images &&
+                  images.map((data, index) => (
+                    <img
+                      style={{ width: "30%", height: "30%", margin: "0% 10%" }}
+                      src={`${data.url}`}
+                      alt="Descripción de la imagen"
+                      onClick={() => handleFullImage(data)}
+                      key={index}
+                    />
+                  ))}
               </div>
             </div>
           </div>

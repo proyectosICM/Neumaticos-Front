@@ -28,7 +28,7 @@ export const ITTURL = `${apiURL}IIT`;
 export const ITTiURL = `${apiURL}IIT/image`;
 export const ITTbyIrregularityURL = `${apiURL}IIT/byIrregularities`;
 export const ServerITT = `${apiURL}IIT/byIrregularities`;
-export const ImageFiles = `${apiURL}files/images`;
+export const ImageFiles = `${apiURL}files/allImages`;
 /**
  * Tires
  */
