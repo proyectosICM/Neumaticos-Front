@@ -59,11 +59,12 @@ export function IrregularitiesDetails() {
 
   const [selectedImage, setSelectedImage] = useState();
 
-  const handleFullImage = (data) => {
+  const handleFullImage = (index) => {
     setShowModal(true);
-    setSelectedImage(data);
+    setSelectedImage(images[index]);
+    setImagesId(index);
   };
-
+  
   const uploadImage = async () => {
     if (!selectedFile) {
       alert("Por favor, selecciona un archivo.");
@@ -101,18 +102,18 @@ export function IrregularitiesDetails() {
   const rol = +localStorage.getItem("rol");
 
   const handleChangeImage = (direction) => {
-    let newIndex = direction === "+" ? index + 1 : index - 1;
+    let newIndex = direction === "+" ? imagesId + 1 : imagesId - 1;
   
-    // Asegurarse de que el índice esté dentro de los límites del arreglo
     if (newIndex >= images.length) {
-      newIndex = 0; // Vuelve al inicio si se pasa del final
+      newIndex = 0;
     } else if (newIndex < 0) {
-      newIndex = images.length - 1; // Va al final si se pasa del inicio
+      newIndex = images.length - 1;
     }
   
     setSelectedImage(images[newIndex]);
     setImagesId(newIndex);
   };
+  
 
   return (
     <div style={{ border: "2px solid", width: "100%" }}>
@@ -225,7 +226,7 @@ export function IrregularitiesDetails() {
                 <div style={{ alignItems: "center", justifyItems: "center", justifyItems: "center", display: "flex", flexDirection: "row" }}>
                   <FaAngleLeft onClick={() => handleChangeImage("-")}  style={{ color: "white", cursor: "pointer", width: "25%", height: "100px", fontSize: "200px" }} />
 
-                  {selectedImage && <img src={selectedImage.url} alt="Imagen seleccionada" style={{ width: "100%" }} />}
+                  {selectedImage && <img src={selectedImage.url} alt="Imagen seleccionada" style={{ width: "50%" }} />}
 
                   <FaAngleRight onClick={() => handleChangeImage("+")}  style={{ color: "white", cursor: "pointer", width: "25%", height: "100px", fontSize: "200px" }} />
                 </div>
@@ -247,7 +248,7 @@ export function IrregularitiesDetails() {
                       style={{ width: "30%", height: "30%", margin: "0% 10%" }}
                       src={`${data.url}`}
                       alt="Descripción de la imagen"
-                      onClick={() => handleFullImage(data)}
+                      onClick={() => handleFullImage(index)}
                       key={index}
                     />
                   ))}
