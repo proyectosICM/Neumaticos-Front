@@ -17,7 +17,7 @@ export function NavbarSupervisor() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigation("/login");
-  }; 
+  };
 
   return (
     <Navbar bg="dark" variant="dark" className="justify-content-between">
@@ -29,7 +29,7 @@ export function NavbarSupervisor() {
       <Nav>
         <Nav.Link onClick={() => navigation("/menu")}>Menu de vehiculos</Nav.Link>
         <Nav.Link onClick={() => navigation("/incidencias/g")}>Incidencias recientes</Nav.Link>
-        <Nav.Link onClick={() => navigation("/mensajes")}>Mensajes</Nav.Link>
+        {/*        <Nav.Link onClick={() => navigation("/mensajes")}>Mensajes</Nav.Link> */}
       </Nav>
       {/* Logout button to end the session */}
       <Button style={{ marginRight: "25px" }} onClick={handleLogout} variant="outline-light">

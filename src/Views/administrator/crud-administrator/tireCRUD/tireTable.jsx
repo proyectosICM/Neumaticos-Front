@@ -25,7 +25,7 @@ export function TireTable() {
           : {
               id: dto.vehicle,
             },
-      companyModel: {
+      companyModel: { 
         id: 1,
       },
     };
@@ -44,7 +44,7 @@ export function TireTable() {
     const requestData = {
       codname: dto.codname,
       status: dto.estado,
-      positioning:
+      positioningModel:
         dto.posicionamiento == ""
           ? null
           : {
@@ -112,7 +112,7 @@ export function TireTable() {
                 <td>{dato.id}</td>
                 <td>{dato.codname}</td>
                 <td>{dato.status}</td>
-                <td>{dato.positioning ? `${dato.positioning.id} - ${dato.positioning.description}` : "---"}</td>
+                <td>{dato.positioningModel ? `${dato.positioningModel.id} - ${dato.positioningModel.description}` : "---"}</td>
                 <td>{dato.vehicleModel ? dato.vehicleModel.placa : "---"}</td>
                 <td>{dato.companyModel.name}</td>
                 <td>

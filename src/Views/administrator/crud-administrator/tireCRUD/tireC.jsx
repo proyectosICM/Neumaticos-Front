@@ -13,6 +13,7 @@ export function TireC() {
     <div>
       {rol === 1 ? <NavbarDriver /> : rol === 2 ? <NavbarSupervisor /> : rol === 3 ? <NavbarAdministrator /> : <h1>sd</h1>}
       <div className="menu-container">
+        <h1 style={{width:"100%"}}>Neumaticos</h1>
         <TireTable />
       </div>
     </div>

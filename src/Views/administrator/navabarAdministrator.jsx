@@ -22,7 +22,7 @@ export function NavbarAdministrator() {
       <Nav>
         <Nav.Link onClick={() => navigation("/menu")}>Menu Vehiculos</Nav.Link>
         <Nav.Link onClick={() => navigation("/incidencias/g")}>Incidencias Recientes</Nav.Link>
-        <Nav.Link onClick={() => navigation("/mensajes")}>Mensajes</Nav.Link>
+{ /*       <Nav.Link onClick={() => navigation("/mensajes")}>Mensajes</Nav.Link> */}
         <Nav.Link onClick={() => navigation("/ca-panel")}>Panel Administrador</Nav.Link>
       </Nav>
       <Button style={{ marginRight: "25px" }} onClick={handleLogout} variant="outline-light">

@@ -24,7 +24,6 @@ export const ForkliftWith4Tires = ({ vehicleId,bdetails  }) => {
   };
 
   const posSel = localStorage.getItem("tireSelected");
-  console.log(posSel);
 
   return (
     <>
@@ -49,6 +48,7 @@ export const ForkliftWith4Tires = ({ vehicleId,bdetails  }) => {
 
       {/* Display area for the fetched tire details. */}
       <div className="fkl-info-tire">
+        <p>Posicion seleccionada </p>
         <p>{tireDetails}</p>
         <p>{tireCode && `Codigo del neumatico: ${tireCode}`}</p>
         <p>{sensorCode && `Codigo del sensor: ${sensorCode}`}</p>

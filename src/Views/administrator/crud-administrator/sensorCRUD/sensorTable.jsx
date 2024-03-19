@@ -99,6 +99,7 @@ export function SensorTable() {
             <th>IDENTIFICATION-CODE</th>
             <th>VEHICULO</th>
             <th>POSICION</th>
+            <th>ESTADO</th>
             <th>TEMPERATURA</th>
             <th>PRESION</th>
             <th>BATERIA</th>
@@ -113,6 +114,7 @@ export function SensorTable() {
                 <td>{dato.identificationCode}</td>
                 <td>{dato.vehicleModel ? dato.vehicleModel.placa : "---"}</td>
                 <td>{dato.positioning ? dato.positioning.id : "---"}</td>
+                <td>{dato.status ? "EN USO" : "LIBRE"} </td>
                 <td>{dato.temperature ? dato.temperature : "---"}</td>
                 <td>{dato.pressure ? dato.pressure : "---"}</td>
                 <td>{dato.batteryLevel ? dato.batteryLevel : "---"}</td>
@@ -126,8 +128,7 @@ export function SensorTable() {
         </tbody>
       </Table>
 
-      <SensorModal show={showModal} onHide={() => setShowModal()} 
-      guardar={handleGuardar} editar={handleEditar} datosaEditar={datosaEditar} />
+      <SensorModal show={showModal} onHide={() => setShowModal()} guardar={handleGuardar} editar={handleEditar} datosaEditar={datosaEditar} />
     </>
   );
 }

@@ -55,7 +55,7 @@ export const TiresSensorByVehicleURL = `${TiresSensorBaseURL}/vehicle`;
 export const TiresSensorByVehicleAndPositionURL = `${TiresSensorBaseURL}/byVehicleAndPositioning`;
 
 /**
- * Irregularities
+ * Irregularities 
  */
 //Base URL for irregularity-related operations.
 export const IrregularitiesTiredBaseURL = `${apiURL}irregularities`;
@@ -79,3 +79,10 @@ export const PerformanceTireMonthlyURL = `${PerformanceTireURL}/daily-averages`;
 export const PerformanceTireYearlyURL = `${PerformanceTireURL}/monthly-averages`;
 // Retrieves the most recent irregularities across all vehicles.
 export const PerformanceTireAllYearslyURL = `${PerformanceTireURL}/yearly-averages`;
+
+
+/**
+ * Positioning
+ */
+export const PositioningURL = `${apiURL}positioning`;
+export const PositioningvehicleType = `${PositioningURL}/vehicleType`

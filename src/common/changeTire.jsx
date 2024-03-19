@@ -20,11 +20,17 @@ export function ChangeTire() {
   const [data, setData] = useState("");
   const [tireData, setTireData] = useState();
   const [sensorData, setSensorData] = useState();
-
+  const [codnameSelected, setCodNameSelected] = useState();
+  const [codIdentificationCodeSelected, setCodIdentificationCodeSelected] = useState();
   const company = localStorage.getItem("empresa");
 
-  const { tireDetails, tireCode, sensorCode, tireId, sensorId, loading, error } = useTireDetails(id, tireSelected);
-  console.log(`${TiresBaseURL}/changeTire2?id1=${tireId}&id2=${selectedTire}&pos=${tireSelected}&v=${id}`)
+  const { tireDetails, tireCode, sensorCode, tireId, setTireCode, sensorId, loading, error } = useTireDetails(id, tireSelected);
+  const [mos, setMos] = useState();
+
+  useEffect(() => {
+    setMos(tireCode);
+  });
+
   useEffect(() => {
     ListItems2(`${TiresByVehicleURL}?status=FREE`, setTireData);
     ListItems2(`${TiresSensorByCompanyAndStatus}?companyId=${company}&status=${false}`, setSensorData);
@@ -45,21 +51,48 @@ export function ChangeTire() {
     return () => clearInterval(intervalId);
   }, [tireSelected]);
 
+  const handleComboTire = (event) => {
+    const selectedTireId = Number(event.target.value);
+    setSelectedTire(selectedTireId);
+
+    const tire = tireData.find((tire) => tire.id === selectedTireId);
+    if (tire) {
+      setCodNameSelected(tire.codname);
+    } else {
+      console.log("Neumático no encontrado");
+    }
+  };
+
+  const handleComboSensor = (event) => {
+    const selectedSensorId = Number(event.target.value);
+    setSelectedSensor(selectedSensorId);
+
+    const sensor = sensorData.find((sensor) => sensor.id === selectedSensorId);
+    if (sensor) {
+      setCodIdentificationCodeSelected(sensor.identificationCode);
+    } else {
+      console.log("Neumático no encontrado");
+    }
+  };
+
+
   const handleTire = () => {
     console.log(tireId);
     console.log(tireSelected);
-    if (tireId !=null & selectedTire != 0) {
-      const requestData1 = {
-        status: "FREE",
-        vehicleModel: {
-          id: 1,
+    if ((tireId != null) & (selectedTire != 0)) {
+      const requestData = {
+        codname: codnameSelected,
+        status: "IN_USE",
+        positioningModel: {
+          id: tireSelected,
         },
-        positioning: {
-          id: 1,
+        vehicleModel: {
+          id: id,
+        },
+        companyModel: {
+          id: company,
         },
       };
-
-      console.log("Enviadoooooooo ");
 
       Swal.fire({
         title: "Procesando...",
@@ -68,7 +101,11 @@ export function ChangeTire() {
         didOpen: async () => {
           Swal.showLoading();
           Promise.all([
-            await editarElemento(`${TiresBaseURL}/changeTire2?id1=${tireId}&id2=${selectedTire}&pos=${tireSelected}&v=${id}`, requestData1),
+            // await editarElemento(`${TiresBaseURL}/changeTire2?id1=${tireId}&id2=${selectedTire}&pos=${tireSelected}&v=${id}`, requestData1),
+            await editarElemento(`${TiresBaseURL}/${selectedTire}`, requestData),
+            setSelectedTire(""),
+            // setTireCode(""),
+            console.log(`${TiresBaseURL}/${selectedTire}`),
           ])
             .then(() => {
               Swal.fire({
@@ -93,13 +130,19 @@ export function ChangeTire() {
   };
 
   const handleSensor = () => {
-    const requestData1 = {
-      status: "FREE",
+
+
+    const requestData = {
+      identificationCode: codIdentificationCodeSelected,
+      status: true,
       vehicleModel: {
-        id: 1,
+        id: id,
       },
       positioning: {
-        id: 1,
+        id: tireSelected,
+      },
+      company: {
+        id: company,
       },
     };
 
@@ -110,7 +153,8 @@ export function ChangeTire() {
       didOpen: async () => {
         Swal.showLoading();
         Promise.all([
-          await editarElemento(`${TiresSensorBaseURL}/changeSensor?id1=${sensorId}&id2=${selectedSensor}&pos=${tireSelected}&v=${id}`, requestData1),
+          await editarElemento(`${TiresSensorBaseURL}/${selectedSensor}`, requestData),
+          setSelectedSensor(""),
         ])
           .then(() => {
             Swal.fire({
@@ -128,6 +172,9 @@ export function ChangeTire() {
           });
       },
     });
+    localStorage.removeItem("tireSelected");
+    setSelectedSensor(0);
+    sensorId == null;
   };
   return (
     <>
@@ -152,7 +199,7 @@ export function ChangeTire() {
               <Form style={{ width: "70%", margin: "2rem auto" }}>
                 <Form.Group controlId="exampleForm.SelectCustom">
                   <Form.Label>Seleccione el neumativo que colocara</Form.Label>
-                  <Form.Select value={selectedTire} onChange={(event) => setSelectedTire(event.target.value)}>
+                  <Form.Select value={selectedTire} onChange={handleComboTire}>
                     <option value="">Seleccione un Neumatico</option>
                     {tireData &&
                       tireData.map((tire) => (
@@ -175,7 +222,7 @@ export function ChangeTire() {
               <Form style={{ width: "70%", margin: "2rem auto" }}>
                 <Form.Group controlId="exampleForm.SelectCustom">
                   <Form.Label>Seleccione el sensor que colocara</Form.Label>
-                  <Form.Select value={selectedSensor} onChange={(event) => setSelectedSensor(event.target.value)}>
+                  <Form.Select value={selectedSensor} onChange={handleComboSensor}>
                     {sensorData &&
                       sensorData.map((sensor) => (
                         <option key={sensor.id} value={sensor.id}>

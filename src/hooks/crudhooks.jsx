@@ -27,6 +27,8 @@ export const useTireDetails = (vehicleId, positioning) => {
             headers: { Authorization: `Bearer ${token}` },
           });
           const data2 = response2.data;
+          console.log(data2)
+          console.log(data2[0])
           if (data && data.length > 0) {
             const {
               pressure,
@@ -40,9 +42,10 @@ export const useTireDetails = (vehicleId, positioning) => {
             setSensorCode(`${identificationCode}`);
             setTireId(id);
           }
-          if (data2 && data2.length > 0) {
-            const { codname, id } = data2[0];
-            setTireCode(`${codname}`);
+          if (data2 && data2.codname) {
+            const { codname, id } = data2;
+            setTireCode(codname);
+            //setTireCode(`${codname}`);
             setSensorId(id);
           }
         } catch (error) {

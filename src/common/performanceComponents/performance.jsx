@@ -9,7 +9,7 @@ import { Graphics } from "./graphics/graphics";
 import { ListItems2 } from "../../hooks/crudhooks";
 import { PerformanceTireAllYearslyURL, PerformanceTireDaylyURL, PerformanceTireMonthlyURL, PerformanceTireYearlyURL } from "../../api/apiurl";
 
-export function Performance() {
+export function Performance() { 
   const navigation = useNavigate();
   const [dataDay, setDataDay] = useState();
   const [dayLabels, setDayLabels] = useState();
