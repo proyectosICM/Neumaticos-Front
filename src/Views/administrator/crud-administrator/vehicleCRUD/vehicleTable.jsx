@@ -5,19 +5,29 @@ import { VehicleCompanyURL, VehicleURL } from "../../../../api/apiurl";
 import { GuardarElementos, ListItems2, editarElemento } from "../../../../hooks/crudhooks";
 import { GrEdit } from "react-icons/gr";
 import { VehicleModal } from "./vehicleModal";
+import { ListPaginatedData } from "../../../../hooks/listPaginatedData";
+import { PaginacionUtils } from "../../../../hooks/paginacionUtils";
 
 export function VehicleTable() {
+  const company = localStorage.getItem("empresa");
+  // State to show the modal
   const [showModal, setShowModal] = useState();
+  // Pagination states
+  const [pageNumber, setPageNumber] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+
   const [data, setData] = useState();
   const [datosaEditar, setDatosAEditar] = useState();
 
-  const handleList = () => {
-    ListItems2(VehicleURL, setData);
+  const handleList = (pageNumber) => {
+    // ListItems2(TiresBaseURL, setData);
+    ListPaginatedData(`${VehicleCompanyURL}?companyId=${company}&page=${pageNumber}`, setData, setTotalPages, setCurrentPage);
   };
 
   useEffect(() => {
-    handleList();
-  }, []);
+    handleList(pageNumber);
+  }, [pageNumber]);
 
   const handleCargarDatos = (dto) => {
     setDatosAEditar(dto);
@@ -66,7 +76,7 @@ export function VehicleTable() {
     editarElemento(`${VehicleURL}/${dto.id}`, requestData)
       .then(() => {
         handleList();
-       // console.log("d")
+        // console.log("d")
       })
       .catch((error) => {
         console.error("Error al guardar el neumático:", error);
@@ -114,7 +124,7 @@ export function VehicleTable() {
             ))}
         </tbody>
       </Table>
-
+      <PaginacionUtils setPageNumber={setPageNumber} setCurrentPage={setCurrentPage} currentPage={currentPage} totalPages={totalPages} />
       <VehicleModal show={showModal} onHide={() => setShowModal()} guardar={handleGuardar} editar={handleEditar} datosaEditar={datosaEditar} />
     </>
   );

@@ -41,6 +41,8 @@ export const TiresByVehicleURL = `${TiresBaseURL}/vehicle`;
 // Retrieves tires based on vehicle ID and tire position
 export const TiresByVehicleAndPositionURL = `${TiresBaseURL}/findByVehicleModelIdAndPositioningLocationCode`;
 
+export const TiresByCompanyIdURL = `${TiresBaseURL}/findByCompanyModelId`
+
 /**
  * Tires Sensor
  */
@@ -53,6 +55,8 @@ export const TiresSensorByVehicleURL = `${TiresSensorBaseURL}/vehicle`;
 
 // Retrieves tires based on vehicle ID and tire position
 export const TiresSensorByVehicleAndPositionURL = `${TiresSensorBaseURL}/byVehicleAndPositioning`;
+
+export const TireSensorByCompanyIdURL = `${TiresSensorBaseURL}/findByCompanyModelId`
 
 /**
  * Irregularities 

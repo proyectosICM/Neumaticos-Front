@@ -2,22 +2,33 @@ import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { GuardarElementos, ListItems2, editarElemento } from "../../../../hooks/crudhooks";
-import { TiresSensorBaseURL } from "../../../../api/apiurl";
+import { TireSensorByCompanyIdURL, TiresSensorBaseURL } from "../../../../api/apiurl";
 import { GrEdit } from "react-icons/gr";
 import { SensorModal } from "./sensorModal";
+import { ListPaginatedData } from "../../../../hooks/listPaginatedData";
+import { PaginacionUtils } from "../../../../hooks/paginacionUtils";
+import { sensorRequestData } from "./sensorDTO";
 
 export function SensorTable() {
+  // State to show the modal
   const [showModal, setShowModal] = useState();
+  // Pagination states
+  const [pageNumber, setPageNumber] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+
   const [data, setData] = useState();
   const [datosaEditar, setDatosAEditar] = useState();
+  const company = localStorage.getItem("empresa");
 
-  const handleList = () => {
-    ListItems2(TiresSensorBaseURL, setData);
+  const handleList = (pageNumber) => {
+    // ListItems2(TiresBaseURL, setData);
+    ListPaginatedData(`${TireSensorByCompanyIdURL}?companyId=${company}&page=${pageNumber}`, setData, setTotalPages, setCurrentPage);
   };
 
   useEffect(() => {
-    handleList();
-  }, []);
+    handleList(pageNumber);
+  }, [pageNumber]);
 
   const handleCargarDatos = (dto) => {
     setDatosAEditar(dto);
@@ -25,6 +36,8 @@ export function SensorTable() {
   };
 
   const handleGuardar = (dto) => {
+    const requestData = sensorRequestData(dto);
+    /*
     const requestData = {
       identificationCode: dto.identificationCode,
       status: true,
@@ -40,14 +53,14 @@ export function SensorTable() {
           : {
               id: dto.posicionamiento,
             },
-      company: {
+      companyModel: {
         id: 1,
       },
     };
-
+*/
     GuardarElementos(TiresSensorBaseURL, requestData)
       .then(() => {
-        handleList(); // Actualiza la lista una vez que se haya completado el guardado
+        handleList(pageNumber); // Actualiza la lista una vez que se haya completado el guardado
       })
       .catch((error) => {
         console.error("Error al guardar el neumático:", error);
@@ -72,13 +85,13 @@ export function SensorTable() {
           : {
               id: dto.posicionamiento,
             },
-      company: {
+      companyModel: {
         id: 1,
       },
     };
     editarElemento(`${TiresSensorBaseURL}/${dto.id}`, requestData)
       .then(() => {
-        handleList();
+        handleList(pageNumber);
       })
       .catch((error) => {
         console.error("Error al guardar el neumático:", error);
@@ -127,7 +140,7 @@ export function SensorTable() {
             ))}
         </tbody>
       </Table>
-
+      <PaginacionUtils setPageNumber={setPageNumber} setCurrentPage={setCurrentPage} currentPage={currentPage} totalPages={totalPages} />
       <SensorModal show={showModal} onHide={() => setShowModal()} guardar={handleGuardar} editar={handleEditar} datosaEditar={datosaEditar} />
     </>
   );

@@ -6,7 +6,7 @@ export function ListPaginatedData (url, setData,setTotalPages, setCurrentPage) {
     try {
       const token = await localStorage.getItem("token");
       const response = await axios.get(`${url}`, {
-        headers: {
+        headers: { 
           Authorization: `Bearer ${token}`,
         },
       });

@@ -4,10 +4,21 @@ import { BsPlusCircleFill } from "react-icons/bs";
 import { TireModal } from "./tireModal";
 import { GrEdit } from "react-icons/gr";
 import { GuardarElementos, ListItems2, editarElemento } from "../../../../hooks/crudhooks";
-import { TiresBaseURL } from "../../../../api/apiurl";
+import { TiresBaseURL, TiresByCompanyIdURL } from "../../../../api/apiurl";
+import { PaginacionUtils } from "../../../../hooks/paginacionUtils";
+import { ListPaginatedData } from "../../../../hooks/listPaginatedData";
 
 export function TireTable() {
+  const company = localStorage.getItem("empresa");
+  // State to show the modal
   const [showModal, setShowModal] = useState(false);
+  // Pagination states
+  const [pageNumber, setPageNumber] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+
+  const [data, setData] = useState();
+  const [datosaEditar, setDatosAEditar] = useState();
 
   const handleGuardar = (dto) => {
     const requestData = {
@@ -25,7 +36,7 @@ export function TireTable() {
           : {
               id: dto.vehicle,
             },
-      companyModel: { 
+      companyModel: {
         id: 1,
       },
     };
@@ -70,22 +81,19 @@ export function TireTable() {
     setShowModal(false);
   };
 
-  const [data, setData] = useState();
-
-  const handleList = () => {
-    ListItems2(TiresBaseURL, setData);
+  const handleList = (pageNumber) => {
+    // ListItems2(TiresBaseURL, setData);
+    ListPaginatedData(`${TiresByCompanyIdURL}?companyId=${company}&page=${pageNumber}`, setData, setTotalPages, setCurrentPage);
   };
 
   useEffect(() => {
-    handleList();
-  }, []);
+    handleList(pageNumber);
+  }, [pageNumber]);
 
   const handleCargarDatos = (dat) => {
     setDatosAEditar(dat);
     setShowModal(true);
   };
-
-  const [datosaEditar, setDatosAEditar] = useState();
 
   return (
     <>
@@ -124,7 +132,7 @@ export function TireTable() {
             ))}
         </tbody>
       </Table>
-
+      <PaginacionUtils setPageNumber={setPageNumber} setCurrentPage={setCurrentPage} currentPage={currentPage} totalPages={totalPages} />
       <TireModal show={showModal} onHide={() => setShowModal(false)} guardar={handleGuardar} editar={handleEditar} datosaEditar={datosaEditar} />
     </>
   );
