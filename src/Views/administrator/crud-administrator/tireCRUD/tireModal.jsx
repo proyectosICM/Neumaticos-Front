@@ -68,7 +68,7 @@ export function TireModal({ show, onHide, guardar, editar, datosaEditar }) {
   };
 
   useEffect(() => {
-    if (datosaEditar) {
+    if (datosaEditar && datosaEditar.vehicleModel && datosaEditar.vehicleModel.vehicleType != null) {
       ListItems2(`${PositioningvehicleType}?vehicleTypeId=${datosaEditar.vehicleModel.vehicleType.id}`, setPosiciones);
     }
   }, [datosaEditar]);

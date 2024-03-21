@@ -111,7 +111,7 @@ export function VehicleTable() {
                 <td>{dato.id}</td>
                 <td>{dato.placa}</td>
                 <td>{dato.vehicleType && dato.vehicleType.name}</td>
-                <td>{dato.company && dato.company.name}</td>
+                <td>{dato.companyModel && dato.companyModel.name}</td>
                 <td>{dato.standardTemperature}</td>
                 <td>{dato.standardPressure}</td>
                 <td>{dato.status ? "Habilitado" : "Inhabilitado"}</td>

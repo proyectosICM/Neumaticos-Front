@@ -19,6 +19,7 @@ const axiosInstance = axios.create({
  * It allows users to input their credentials and handles the login process.
  */
 export function Login() {
+  // State variables for managing user login credentials and error messages
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -88,7 +89,6 @@ export function Login() {
         </Form>
         {error && <p>{error}</p>}
       </div>
-
     </div>
   );
 }
