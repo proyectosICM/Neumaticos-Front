@@ -22,7 +22,6 @@ export function SensorTable() {
   const company = localStorage.getItem("empresa");
 
   const handleList = (pageNumber) => {
-    // ListItems2(TiresBaseURL, setData);
     ListPaginatedData(`${TireSensorByCompanyIdURL}?companyId=${company}&page=${pageNumber}`, setData, setTotalPages, setCurrentPage);
   };
 
@@ -37,27 +36,7 @@ export function SensorTable() {
 
   const handleGuardar = (dto) => {
     const requestData = sensorRequestData(dto);
-    /*
-    const requestData = {
-      identificationCode: dto.identificationCode,
-      status: true,
-      vehicleModel:
-        dto.vehicle == ""
-          ? null
-          : {
-              id: dto.vehicle,
-            },
-      positioning:
-        dto.posicionamiento == ""
-          ? null
-          : {
-              id: dto.posicionamiento,
-            },
-      companyModel: {
-        id: 1,
-      },
-    };
-*/
+
     GuardarElementos(TiresSensorBaseURL, requestData)
       .then(() => {
         handleList(pageNumber); // Actualiza la lista una vez que se haya completado el guardado
@@ -70,25 +49,8 @@ export function SensorTable() {
   };
 
   const handleEditar = (dto) => {
-    const requestData = {
-      identificationCode: dto.identificationCode,
-      status: true,
-      vehicleModel:
-        dto.vehicle == ""
-          ? null
-          : {
-              id: dto.vehicle,
-            },
-      positioning:
-        dto.posicionamiento == ""
-          ? null
-          : {
-              id: dto.posicionamiento,
-            },
-      companyModel: {
-        id: 1,
-      },
-    };
+    const requestData = sensorRequestData(dto);
+
     editarElemento(`${TiresSensorBaseURL}/${dto.id}`, requestData)
       .then(() => {
         handleList(pageNumber);

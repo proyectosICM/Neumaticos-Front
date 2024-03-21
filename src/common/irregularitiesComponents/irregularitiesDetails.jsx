@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { ListItems } from "../../hooks/crudhooks";
-import { ITTURL, ITTbyIrregularityURL, ITTiURL, ImageFiles, IrregularitiesTiredBaseURL } from "../../api/apiurl";
+import React, { useEffect, useState } from "react";
+import { ListItems, ListItems2 } from "../../hooks/crudhooks";
+import { ITTNameURL, ITTURL, ITTbyIrregularityURL, ITTiURL, ImageFiles, IrregularitiesTiredBaseURL } from "../../api/apiurl";
 import { Button, Modal, Table } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { PerformancePanel } from "../vehicleComponents/performancePanel";
@@ -25,8 +25,6 @@ export function IrregularitiesDetails() {
   ListItems(`${ImageFiles}?company=${companyId}&irregularity=${id}`, setImages);
 
   // ListItems(`${ImageFiles}`)
-  console.log(companyId);
-  console.log(images);
 
   const vehicleId = +localStorage.getItem("vehicleId");
 
@@ -58,13 +56,23 @@ export function IrregularitiesDetails() {
   };
 
   const [selectedImage, setSelectedImage] = useState();
+  const [detailsImage, setDetailsImage] = useState();
+
+  useEffect(() => {
+    if (selectedImage) {
+      ListItems2(`${ITTNameURL}?imageName=${selectedImage.name}&irregularityId=${id}`, setDetailsImage);
+      //setDetailsImage()
+    }
+  }, [selectedImage]);
+
+  const [imageDetail, setImageDetail] = useState("");
 
   const handleFullImage = (index) => {
     setShowModal(true);
     setSelectedImage(images[index]);
     setImagesId(index);
   };
-  
+
   const uploadImage = async () => {
     if (!selectedFile) {
       alert("Por favor, selecciona un archivo.");
@@ -75,7 +83,7 @@ export function IrregularitiesDetails() {
     formData.append("file", selectedFile);
     formData.append("irregularitiesTireModelId", id);
     formData.append("companyModelId", 1);
-    formData.append("details", "NO");
+    formData.append("details", imageDetail);
 
     try {
       const token = await localStorage.getItem("token");
@@ -90,6 +98,7 @@ export function IrregularitiesDetails() {
         Swal.fire("Imagen cargada con éxito");
         setPreviewUrl(null);
         setSelectedFile(null);
+        setImageDetail(""); 
       } else {
         Swal.fire("Error al cargar la imagen");
       }
@@ -103,17 +112,16 @@ export function IrregularitiesDetails() {
 
   const handleChangeImage = (direction) => {
     let newIndex = direction === "+" ? imagesId + 1 : imagesId - 1;
-  
+
     if (newIndex >= images.length) {
       newIndex = 0;
     } else if (newIndex < 0) {
       newIndex = images.length - 1;
     }
-  
+
     setSelectedImage(images[newIndex]);
     setImagesId(newIndex);
   };
-  
 
   return (
     <div style={{ border: "2px solid", width: "100%" }}>
@@ -201,6 +209,14 @@ export function IrregularitiesDetails() {
             {previewUrl && (
               <div style={{ width: "40%", height: "40%", margin: "0% 30%" }}>
                 <img src={previewUrl} alt="Preview" style={{ width: "100%", margin: "5% 0%", height: "100%", objectFit: "cover" }} />
+                <h1>Agregar Detalle</h1>
+                <input
+                  type="text"
+                  placeholder="Detalle de la imagen"
+                  value={imageDetail}
+                  onChange={(e) => setImageDetail(e.target.value)}
+                  style={{ margin: "10px 0", padding: "10px", width: "100%" }}
+                />
                 <Button onClick={() => uploadImage()}>Enviar Imagen</Button>
               </div>
             )}
@@ -224,12 +240,20 @@ export function IrregularitiesDetails() {
               <Modal.Header closeButton style={{ width: "150%", backgroundColor: "white", color: "white" }}></Modal.Header>
               <Modal.Body style={{ width: "150%", backgroundColor: "black" }}>
                 <div style={{ alignItems: "center", justifyItems: "center", justifyItems: "center", display: "flex", flexDirection: "row" }}>
-                  <FaAngleLeft onClick={() => handleChangeImage("-")}  style={{ color: "white", cursor: "pointer", width: "25%", height: "100px", fontSize: "200px" }} />
+                  <FaAngleLeft
+                    onClick={() => handleChangeImage("-")}
+                    style={{ color: "white", cursor: "pointer", width: "25%", height: "100px", fontSize: "200px" }}
+                  />
 
-                  {selectedImage && <img src={selectedImage.url} alt="Imagen seleccionada" style={{ width: "50%" }} />}
+                  {selectedImage && <img src={selectedImage.url} alt="Imagen seleccionada" style={{ width: "50%", height: "400px" }} />}
 
-                  <FaAngleRight onClick={() => handleChangeImage("+")}  style={{ color: "white", cursor: "pointer", width: "25%", height: "100px", fontSize: "200px" }} />
+                  <FaAngleRight
+                    onClick={() => handleChangeImage("+")}
+                    style={{ color: "white", cursor: "pointer", width: "25%", height: "100px", fontSize: "200px" }}
+                  />
                 </div>
+                <h1>Detalle</h1>
+                <h1>{detailsImage && detailsImage.details}</h1>
               </Modal.Body>
             </Modal>
           </div>

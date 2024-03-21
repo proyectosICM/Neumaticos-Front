@@ -19,6 +19,7 @@ export const InfoUserURL = `${UserURL}/info/`;
 export const VehicleURL = `${apiURL}vehicle`;
 export const VehicleCompanyURL = `${apiURL}vehicle/findByCompany`;
 export const VehicleCompanyStatusURL = `${apiURL}vehicle/findByCompanyAndStatus`;
+export const VehicleTypeAndCompanyURL = `${VehicleURL}/findByVehicleTypeAndCompany`;
 
 
 /**
@@ -29,6 +30,7 @@ export const ITTiURL = `${apiURL}IIT/image`;
 export const ITTbyIrregularityURL = `${apiURL}IIT/byIrregularities`;
 export const ServerITT = `${apiURL}IIT/byIrregularities`;
 export const ImageFiles = `${apiURL}files/allImages`;
+export const ITTNameURL = `${ITTURL}/name`
 /**
  * Tires
  */

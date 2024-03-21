@@ -19,7 +19,7 @@ import { useNotAuthorized } from "../../hooks/useNotAuthorized";
  * Additionally, it integrates PerformancePanel and IrregularitiesPanel for a comprehensive overview of vehicle performance and issues.
  */
 export function DetailsVehicle() {
-  const navigation = useNavigate();
+  const navigation = useNavigate(); 
   /**
    * Retrieves the vehicle's ID from the URL parameters, ensuring that the ID can be passed to subcomponents for fetching and displaying vehicle-specific data. This ID is crucial for rendering detailed information, performance metrics, and irregularities for the specified vehicle within the supervisor's view.
    */

@@ -7,6 +7,7 @@ import { GuardarElementos, ListItems2, editarElemento } from "../../../../hooks/
 import { TiresBaseURL, TiresByCompanyIdURL } from "../../../../api/apiurl";
 import { PaginacionUtils } from "../../../../hooks/paginacionUtils";
 import { ListPaginatedData } from "../../../../hooks/listPaginatedData";
+import { TireRequestData } from "./tireDTO";
 
 export function TireTable() {
   const company = localStorage.getItem("empresa");
@@ -21,7 +22,8 @@ export function TireTable() {
   const [datosaEditar, setDatosAEditar] = useState();
 
   const handleGuardar = (dto) => {
-    const requestData = {
+    const requestData = TireRequestData(dto);
+   /* const requestData = {
       codname: dto.codname,
       status: dto.estado,
       positioning:
@@ -39,7 +41,8 @@ export function TireTable() {
       companyModel: {
         id: 1,
       },
-    };
+    };*/
+
     GuardarElementos(TiresBaseURL, requestData)
       .then(() => {
         handleList(); // Actualiza la lista una vez que se haya completado el guardado

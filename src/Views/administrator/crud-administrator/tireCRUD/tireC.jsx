@@ -9,7 +9,7 @@ import { TiresBaseURL, TiresSensorBaseURL } from "../../../../api/apiurl";
 export function TireC() {
   const rol = +localStorage.getItem("rol");
 
-  return (
+  return ( 
     <div>
       {rol === 1 ? <NavbarDriver /> : rol === 2 ? <NavbarSupervisor /> : rol === 3 ? <NavbarAdministrator /> : <h1>sd</h1>}
       <div className="menu-container">

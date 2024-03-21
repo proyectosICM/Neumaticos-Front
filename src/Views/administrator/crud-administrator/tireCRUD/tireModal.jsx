@@ -10,6 +10,9 @@ import Swal from "sweetalert2";
 export function TireModal({ show, onHide, guardar, editar, datosaEditar }) {
   const company = +localStorage.getItem("empresa");
   const rol = +localStorage.getItem("rol");
+
+  const [vehicles, setVehicles] = useState([]);
+  const [posiciones, setPosiciones] = useState([]);
   const [noVehicle, setNoVehicle] = useState(false);
 
   const handleSave = (dto) => {
@@ -45,12 +48,9 @@ export function TireModal({ show, onHide, guardar, editar, datosaEditar }) {
     }
   };
 
-  const [vehicles, setVehicles] = useState([]);
-
   useEffect(() => {
     ListItems2(`${VehicleCompanyURL}?companyId=${company}`, setVehicles);
   }, [company]);
-  const [posiciones, setPosiciones] = useState([]);
 
   const handleVehicleChange = (e, setFieldValue) => {
     const selectedValue = parseInt(e.target.value, 10);
@@ -59,12 +59,8 @@ export function TireModal({ show, onHide, guardar, editar, datosaEditar }) {
     if (Array.isArray(vehicles.content)) {
       const vehicleType = vehicles.content.find((v) => v.id === selectedValue);
       if (vehicleType) {
-        console.log(vehicleType.vehicleType.id);
-        console.log(vehicleType);
         setFieldValue("vehicle", e.target.value);
-
         ListItems2(`${PositioningvehicleType}?vehicleTypeId=${vehicleType.vehicleType.id}`, setPosiciones);
-        console.log(vehicles);
       } else {
         setPosiciones("");
       }
@@ -72,19 +68,16 @@ export function TireModal({ show, onHide, guardar, editar, datosaEditar }) {
   };
 
   useEffect(() => {
-    console.log("Si 1");
-    if (posiciones && posiciones.length > 0) {
-      console.log("ds " + posiciones);
-      console.log(posiciones);
-      console.log("Si 2");
+    if (datosaEditar) {
+      ListItems2(`${PositioningvehicleType}?vehicleTypeId=${datosaEditar.vehicleModel.vehicleType.id}`, setPosiciones);
     }
-  }, [posiciones]);
+  }, [datosaEditar]);
 
   const initialValues = {
     id: datosaEditar ? datosaEditar.id : "",
     codname: datosaEditar ? datosaEditar.codname : "",
     estado: datosaEditar ? datosaEditar.status : "",
-    posicionamiento: datosaEditar && datosaEditar.positioning ? datosaEditar.positioning.id : "",
+    posicionamiento: datosaEditar && datosaEditar.positioningModel ? datosaEditar.positioningModel.id : "",
     vehicle: datosaEditar && datosaEditar.vehicleModel ? datosaEditar.vehicleModel.id : "",
     empresa: datosaEditar ? datosaEditar.companyModel.id : "",
   };
@@ -127,8 +120,6 @@ export function TireModal({ show, onHide, guardar, editar, datosaEditar }) {
 
                 {values.estado == "IN_USE" && (
                   <div style={{ width: "100%", display: "flex", flexDirection: "row" }}>
-       
-
                     <div style={{ width: "50%" }}>
                       <h5>VEHICULO</h5>
                       <Field
@@ -149,22 +140,21 @@ export function TireModal({ show, onHide, guardar, editar, datosaEditar }) {
                       <ErrorMessage name="vehicle" component="div" className="error" />
                     </div>
 
-                    {values.estado === "IN_USE" &&
-                      posiciones &&(
-                        <div style={{ width: "50%" }}>
-                          <h5>POSICIONAMIENTO</h5>
-                          <Field as="select" name="posicionamiento" style={{ width: "90%" }} className="inp2-form">
-                            <option value="">Seleccione un posicionamiento</option>
-                            {posiciones &&
-                              posiciones.map((p) => (
-                                <option key={p.id} value={p.id}>
-                                  {p.locationCode} {p.description}
-                                </option>
-                              ))}
-                          </Field>
-                          <ErrorMessage name="posicionamiento" component="div" className="error" />
-                        </div>
-                      )}
+                    {values.estado === "IN_USE" && values.vehicle != "" && posiciones && (
+                      <div style={{ width: "50%" }}>
+                        <h5>POSICIONAMIENTO</h5>
+                        <Field as="select" name="posicionamiento" style={{ width: "90%" }} className="inp2-form">
+                          <option value="">Seleccione un posicionamiento</option>
+                          {posiciones &&
+                            posiciones.map((p) => (
+                              <option key={p.id} value={p.id}>
+                                {p.locationCode} {p.description}
+                              </option>
+                            ))}
+                        </Field>
+                        <ErrorMessage name="posicionamiento" component="div" className="error" />
+                      </div>
+                    )}
                   </div>
                 )}
                 {rol == 4 && (
