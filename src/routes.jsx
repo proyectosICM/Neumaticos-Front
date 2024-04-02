@@ -1,5 +1,3 @@
-import { Redirect } from "./Views/login/redirect";
-import { Welcome } from "./Views/login/welcome";
 import { Login } from "./Views/login/login";
 import { VehicleMenu } from "./common/vehicleComponents/vehicleMenu";
 import { SADashboard } from "./Views/systemAdministrator/saDashboard";
@@ -17,6 +15,7 @@ import { ChangeTire } from "./common/changeTire";
 import { TireC } from "./Views/administrator/crud-administrator/tireCRUD/tireC";
 import { SensorC } from "./Views/administrator/crud-administrator/sensorCRUD/sensorC";
 import { VehicleC } from "./Views/administrator/crud-administrator/vehicleCRUD/vehicleC";
+import { WelcomeAndRedirect } from "./Views/login/welcomeAndRedirect";
 
 
 // Array of route definitions for the application
@@ -26,10 +25,8 @@ export const routes = [
 
   // Route for the login page
   { path: "/login", component: <Login /> },
-  // Route for the welcome page after successful login
-  { path: "/welcome", component: <Welcome /> },
-  // Route for redirecting users after certain actions
-  { path: "/redirect", component: <Redirect /> },
+
+  { path: "/redirectandW", component: <WelcomeAndRedirect /> },
 
   { path: "/notAuthorized", component: <NotAuthorized /> },
 

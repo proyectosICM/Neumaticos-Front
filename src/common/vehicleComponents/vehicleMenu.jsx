@@ -39,14 +39,12 @@ export function VehicleMenu() {
    * Function to fetch and update the list of vehicles based on pagination and company.
    * @param {number} page - The page number to retrieve.
    */
-
   useEffect(() => {
     const Listar = async (page) => {
       ListPaginatedData(`${VehicleCompanyURL}?companyId=${company}&page=${page}`, setData, setTotalPages, setCurrentPage);
-      console.log("Listado")
     };
     Listar(pageNumber);
-  }, []);
+  }, [pageNumber]);
 
   ListItems(VehicleTypeURL, setVehicletypes);
 
@@ -68,12 +66,12 @@ export function VehicleMenu() {
 
       <div className="menu-container">
         <div className="titulo">
-          <h1> Vehiculos de la Empresa</h1>
+          <h2> Vehiculos de la Empresa</h2>
         </div>
 
         <div className="titulo">
           <h5>Filtrar por</h5>
-          <div style={{ width: "50%", margin: "0.2rem auto" }}>
+          <div style={{ width: "50%", margin: "0.1rem auto" }}>
             <Form.Select aria-label="Default select example" onChange={handleType}>
               <option>Todos</option>
               {vehicletypes &&
@@ -84,8 +82,6 @@ export function VehicleMenu() {
                 ))}
             </Form.Select>
           </div>
-
-
         </div>
 
         {data && data.map((d, index) => <VehicleItem key={index} data={d} />)}

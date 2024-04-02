@@ -1,68 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
-import "./login.css";
-import axios from "axios";
-import { base, loginURL } from "../../api/apiurl";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { useForm } from "react-hook-form";
+import { useAuth } from "./useAuth";
 import { LogoutToken } from "../../hooks/logoutToken";
+import "./login.css";
 
-// Creating an instance of axios with base URL and credentials
-const axiosInstance = axios.create({
-  baseURL: base,
-  withCredentials: true,
-});
-
-/**
- * Login component for user authentication.
- * It allows users to input their credentials and handles the login process.
- */
+// Login component using React Hook Form for form validation and custom useAuth hook for authentication logic
 export function Login() {
-  // State variables for managing user login credentials and error messages
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  // Initialize form handling with react-hook-form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  // Custom hook to manage login logic
+  const { login, isLoading, error } = useAuth();
 
-  // Hook to access navigation functionality
-  const navigate = useNavigate();
-
-  /**
-   * Function to handle the login process.
-   * @param {Object} e - The event object.
-   */
-  const handleLogin = async (e) => {
-    // Prevent the default form submission behavior
-    e.preventDefault();
-
-    try {
-      // Attempt to login by making a POST request to the login endpoint
-      const response = await axiosInstance.post(loginURL, {
-        username,
-        password,
-      });
-      setError("");
-      const { token, Username } = response.data;
-      localStorage.setItem("token", token);
-      localStorage.setItem("Username", Username);
-      navigate("/welcome", { state: { username: Username } });
-    } catch (error) {
-      setError("Error en la autenticación");
-      console.log(error);
-    }
+  // Handle form submission
+  const onSubmit = (data) => {
+    login(data.username, data.password);
   };
 
-  // Checking if a token is present in localStorage
+
+  const navigate = useNavigate();
+  // Retrieve token from local storage to check user's authentication status
   const token = localStorage.getItem("token");
 
-  // useEffect hook to automatically navigate to the welcome page if a token is present
+  // Redirect user if already logged in
   useEffect(() => {
     if (token) {
-      navigate("/redirect");
+      navigate("/menu");
     }
-  }, [navigate]);
+  }, [navigate, token]);
 
-  // Invoking the LogoutToken function to check the validity of the access token and, if invalid, terminating the session
+  // Check token's validity and logout if it's invalid or expired
   LogoutToken();
 
   return (
@@ -72,22 +45,29 @@ export function Login() {
         <h1>
           <FaUserCircle />
         </h1>
-        <Form onSubmit={handleLogin}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          {/* Username input field */}
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Usuario</Form.Label>
-            <Form.Control type="text" placeholder="Ingresa el usuario" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <Form.Control type="text" placeholder="Ingresa el usuario" {...register("username", { required: true })} />
+            {errors.username && <span>Este campo es obligatorio</span>}
           </Form.Group>
 
+          {/* Password input field */}
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Contraseña</Form.Label>
-            <Form.Control type="password" placeholder="Ingresa la contraseña" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <Form.Control type="password" placeholder="Ingresa la contraseña" {...register("password", { required: true })} />
+            {/* Display error message if password field is empty */}
+            {errors.password && <span>Este campo es obligatorio</span>}
           </Form.Group>
 
-          <Button variant="primary" type="submit" className="login-button">
+          {/* Submit button */}
+          <Button variant="primary" type="submit" disabled={isLoading}>
             Iniciar sesión
           </Button>
+          {/* Display error message if login fails */}
+          {error && <div>{error}</div>}
         </Form>
-        {error && <p>{error}</p>}
       </div>
     </div>
   );

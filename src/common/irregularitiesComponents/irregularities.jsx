@@ -28,7 +28,7 @@ export function Irregularities() {
   
 
   useEffect(() => {
-    let url;
+    let url; 
     if (p === "v") {
       url = `${IrregularitiesByCompanyAndVehiclePageURL}?companyId=${companyId}&vehicleId=${vehicleId}`;
     } else if (p == "g") {

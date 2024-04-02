@@ -4,7 +4,7 @@ export const base = "http://192.168.1.232:8082";
 // URL for user authentication (POST request)
 export const loginURL = `${base}/login`;
 
-// Base URL for all API requests
+// Base URL for all API requests 
 export const apiURL = `${base}/api/`;
 
 // VehicleTypes

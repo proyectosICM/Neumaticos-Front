@@ -13,7 +13,7 @@ import { CiCamera } from "react-icons/ci";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-export function IrregularitiesDetails() {
+export function IrregularitiesDetails() { 
   const navigation = useNavigate();
   const { id, b } = useParams();
   const [data, setData] = useState();

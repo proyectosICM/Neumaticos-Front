@@ -13,7 +13,7 @@ import { LogoutToken } from "../../hooks/logoutToken";
  */
 export function VehicleItem({ data }) {
   LogoutToken();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
   const rol = localStorage.getItem("rol");
 
   return (

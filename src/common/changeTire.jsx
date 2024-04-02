@@ -77,8 +77,6 @@ export function ChangeTire() {
 
 
   const handleTire = () => {
-    console.log(tireId);
-    console.log(tireSelected);
     if ((tireId != null) & (selectedTire != 0)) {
       const requestData = {
         codname: codnameSelected,

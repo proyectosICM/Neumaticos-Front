@@ -28,7 +28,7 @@
 
 
 .item-card {
-  height: 18rem;
+  height: 16rem;
   width: 16rem;
   margin: 1.5rem 1.5rem 1.0rem;
   /* Otros estilos según sea necesario */
@@ -42,7 +42,8 @@
   color: white;
   cursor: pointer;
   border: 2px white solid;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  padding: 1.2rem;
 }
 
 .icon-card {
@@ -51,7 +52,7 @@
 
 .item-body {
   margin: 0px;
-  font-size: 1.2rem;
+
   /*
  border: 2px white solid;
 */
