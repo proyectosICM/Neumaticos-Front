@@ -139,11 +139,10 @@ export function ChangeTire() {
       positioning: {
         id: tireSelected,
       },
-      company: {
+      companyModel: {
         id: company,
       },
     };
-
     Swal.fire({
       title: "Procesando...",
       text: "Por favor, espere.",
@@ -152,7 +151,7 @@ export function ChangeTire() {
         Swal.showLoading();
         Promise.all([
           await editarElemento(`${TiresSensorBaseURL}/${selectedSensor}`, requestData),
-          setSelectedSensor(""),
+          setSelectedSensor(0),
         ])
           .then(() => {
             Swal.fire({
@@ -173,6 +172,8 @@ export function ChangeTire() {
     localStorage.removeItem("tireSelected");
     setSelectedSensor(0);
     sensorId == null;
+
+
   };
   return (
     <>
@@ -221,6 +222,7 @@ export function ChangeTire() {
                 <Form.Group controlId="exampleForm.SelectCustom">
                   <Form.Label>Seleccione el sensor que colocara</Form.Label>
                   <Form.Select value={selectedSensor} onChange={handleComboSensor}>
+                  <option value="">Seleccione un Sensor</option>
                     {sensorData &&
                       sensorData.map((sensor) => (
                         <option key={sensor.id} value={sensor.id}>

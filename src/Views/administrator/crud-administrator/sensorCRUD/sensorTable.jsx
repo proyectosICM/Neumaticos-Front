@@ -50,7 +50,7 @@ export function SensorTable() {
 
   const handleEditar = (dto) => {
     const requestData = sensorRequestData(dto);
-
+    console.log(requestData);
     editarElemento(`${TiresSensorBaseURL}/${dto.id}`, requestData)
       .then(() => {
         handleList(pageNumber);
