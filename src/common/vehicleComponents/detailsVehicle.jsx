@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import "../../styles/vehicle-info.css";
-import { Button } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import { NavbarDriver } from "../../Views/driver/navbarDriver";
 import { NavbarSupervisor } from "../../Views/supervisor/navbarSupervisor";
 import { NavbarAdministrator } from "../../Views/administrator/navabarAdministrator";
@@ -59,10 +59,30 @@ export function DetailsVehicle() {
         <div className="gas-panel">
           <div className="gas-imagen"></div>
           <div className="gas-data">
-            <p>Dia de instalacion </p>
-            <p>22/01/2023</p>
-            <p>Hora de instalacion </p>
-            <p>08:33:54</p>
+            <Table variant="dark" striped bordered hover>
+              <thead>
+                <th>Día de instalación</th>
+                <th>Hora de instalación</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>22/04/2024</td>
+                  <td>08:35</td>
+                </tr>
+                <tr>
+                  <td>22/04/2024</td>
+                  <td>09:51</td>
+                </tr>
+                <tr>
+                  <td>22/04/2024</td>
+                  <td>10:45</td>
+                </tr>
+                <tr>
+                  <td>22/04/2024</td>
+                  <td>11:05</td>
+                </tr>
+              </tbody>
+            </Table>
           </div>
           <div className="gas-stats">
             <GasGraphics />
