@@ -14,7 +14,7 @@ export function Graphics({ titulo, data, labs }) {
     plugins: {
       legend: {
         position: "top",
-      },
+      }, 
       title: {
         display: true,
         text: `${titulo}`,

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "./truck-styles.css";
+import "../../../styles/truck-styles.css";
 import { useTireDetails } from "../../../hooks/crudhooks";
 export const TruckWith6Tires = ({ vehicleId }) => {
   const [positioning, setPositioning] = useState(null);

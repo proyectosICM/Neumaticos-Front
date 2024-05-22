@@ -1,8 +1,6 @@
 import { Login } from "./Views/login/login";
 import { VehicleMenu } from "./common/vehicleComponents/vehicleMenu";
 import { SADashboard } from "./Views/systemAdministrator/saDashboard";
-import { SupervisorDashboard } from "./Views/supervisor/supervisorDashboard";
-import { ForkliftWith4Tires } from "./common/tireComponents/forkliftsTypes/forkliftWith4Tires";
 import { SupervisorFullPerformance } from "./Views/supervisor/supervisorFullPerformance";
 import { CaPanel } from "./Views/administrator/crud-administrator/ca-panel";
 import { Irregularities } from "./common/irregularitiesComponents/irregularities";

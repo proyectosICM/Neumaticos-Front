@@ -14,7 +14,7 @@ export function CaItem({ name, ruta }) {
   const navigate = useNavigate();
   const rol = localStorage.getItem("rol");
 
-  return (
+  return ( 
     <div className="item-card">
       <div className="item-body">
         <div>

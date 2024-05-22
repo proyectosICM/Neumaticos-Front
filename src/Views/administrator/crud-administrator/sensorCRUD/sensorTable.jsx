@@ -29,6 +29,14 @@ export function SensorTable() {
     handleList(pageNumber);
   }, [pageNumber]);
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      handleList(pageNumber);
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [pageNumber]);
+
   const handleCargarDatos = (dto) => {
     setDatosAEditar(dto);
     setShowModal(true);

@@ -14,14 +14,14 @@ import { LogoutToken } from "../../hooks/logoutToken";
 export function VehicleItem({ data }) {
   LogoutToken();
   const navigate = useNavigate(); 
-  const rol = localStorage.getItem("rol");
+  const rol = localStorage.getItem("rol"); 
 
   return (
     <div className="item-card">
       {/* Display basic vehicle information */}  
       <div className="item-body">
         <div>
-          <strong>Empresa:</strong> {data.company && data.company.name}
+          <strong>Empresa:</strong> {data.companyModel && data.companyModel.name}
         </div>
         <div>
           <strong>Placa:</strong> {data && data.placa}

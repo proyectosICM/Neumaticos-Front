@@ -27,8 +27,6 @@ export const useTireDetails = (vehicleId, positioning) => {
             headers: { Authorization: `Bearer ${token}` },
           });
           const data2 = response2.data;
-          console.log(data2)
-          console.log(data2[0])
           if (data && data.length > 0) {
             const {
               pressure,
@@ -118,11 +116,15 @@ export function ListItemsPaginated(url, setData) {
         console.log("Data updated");
       } catch (error) {
         console.error("Error listing items", error);
-        const token = await localStorage.getItem("token");
       }
     };
 
-    fetchData();
+    fetchData(); // Primera ejecución
+
+    const intervalId = setInterval(fetchData, 1000); // Ejecutar cada 1 segundo
+
+    return () => clearInterval(intervalId); // Limpiar el intervalo cuando el componente se desmonte
+
   }, [url, setData]);
 }
 

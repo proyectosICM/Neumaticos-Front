@@ -11,7 +11,7 @@
     width: 10rem;
     height: 90%;
     margin: 1rem auto;
-    background-image: url('../../../images/truck.jpeg');
+    background-image: url('../../src/images/truck.jpeg');
     background-position: center;
     background-size: cover;
 }
@@ -38,7 +38,7 @@
     margin: 0.5rem 0%;
     background-position: center;
     background-size: cover;
-    background-image: url('../../../images/llanta.jpg');
+    background-image: url('../../src/images/llanta.jpg');
     cursor: pointer;
 }
 

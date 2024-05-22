@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import "./styles/vehicle-info.css";
+
 import { useNavigate } from "react-router-dom";
 
 import { VehicleCompanyStatusURL, VehicleURL } from "../../api/apiurl";
 import { ListItems } from "../../hooks/crudhooks";
 import { useNotAuthorized } from "../../hooks/useNotAuthorized";
-
+import "../../styles/vehicle-info.css"
 /**
  * Displays detailed information for a specific vehicle identified by its vehicleId.
  * Fetches data from the server and renders it in a formatted layout.

@@ -1,13 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { routes } from './routes';
-import './GeneralStyles/menus-items.css';
-import { LogoutToken } from './hooks/logoutToken';
+import './styles/menus-items.css';
+
 function App() {
 
-
- 
   return (
     <div className="App" style={{ width:"100%", height:"100%", backgroundColor:"black"}}>
       <Router>

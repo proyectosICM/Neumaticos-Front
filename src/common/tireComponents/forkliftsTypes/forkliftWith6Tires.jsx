@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import { TireInfo } from "../common/tireComponents/tireInfo"; // Asumiendo que tienes un componente TireInfo para la información del neumático
-import "./forklift-styles.css";
+import "../../../styles/forklift-styles.css";
 import { useTireDetails } from "../../../hooks/crudhooks";
 
 /**

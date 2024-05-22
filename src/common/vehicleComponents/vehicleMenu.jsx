@@ -16,7 +16,7 @@ import { LogoutToken } from "../../hooks/logoutToken";
  * Component that displays a menu of vehicles.
  * It fetches vehicle data from the server based on company and pagination.
  */
-export function VehicleMenu() {
+export function VehicleMenu() { 
   // Hook to handle logout when the token is not available
   LogoutToken();
 
@@ -79,7 +79,7 @@ export function VehicleMenu() {
                   <option key={index} value={d.id}>
                     {d.name}
                   </option>
-                ))}
+                ))} 
             </Form.Select>
           </div>
         </div>

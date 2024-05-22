@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { CaItem } from "./ca-item";
 
-export function CaPanel() {
+export function CaPanel() { 
   const navigate = useNavigate();
   return (
     <>

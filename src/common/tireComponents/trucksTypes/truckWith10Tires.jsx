@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import { TireInfo } from "../common/tireComponents/tireInfo"; // Asumiendo que tienes un componente TireInfo para la información del neumático
 
-import "./truck-styles.css";
+import "../../../styles/truck-styles.css";
 import { useTireDetails } from "../../../hooks/crudhooks";
 export const TruckWith10Tires = ({ vehicleId }) => {
   const [positioning, setPositioning] = useState(null);

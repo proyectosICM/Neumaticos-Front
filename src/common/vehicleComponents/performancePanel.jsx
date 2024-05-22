@@ -48,7 +48,7 @@ export function PerformancePanel({ vehicleId, bdetails, title }) {
     <div style={{ width: "100%", height: "90%", padding: "2rem 0 0 0" }}>
       <h2>{title}</h2>
       {renderVehicleComponent()}
-
+      
     </div>
   );
 }
