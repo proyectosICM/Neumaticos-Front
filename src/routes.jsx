@@ -52,7 +52,7 @@ export const routes = [
   // Administrator
 
   //Panel crud for administrator
-  { path: "/ca-panel", component: <CaPanel /> },
+  { path: "/ca-panel", component: <CaPanel /> }, 
 
   // CRUD Neumaticos
   { path: "/tireCRUD", component: <TireC /> },
