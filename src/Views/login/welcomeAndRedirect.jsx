@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { InfoUserURL } from "../../api/apiurl";
-import { ListItems, ListItems2 } from "../../hooks/crudhooks";
+import { ListItems2 } from "../../hooks/crudhooks";
 import { LogoutToken } from "../../hooks/logoutToken";
 
 export function WelcomeAndRedirect() {
   const navigate = useNavigate();
-  const [info, setInfo] = useState(null);
   const username = localStorage.getItem("Username");
 
-  LogoutToken();
+  const [info, setInfo] = useState(null);
 
-  // Obtiene información del usuario
   useEffect(() => {
     ListItems2(`${InfoUserURL}${username}`, setInfo);
   }, [username]);
 
-  // Redirige al usuario basado en su rol una vez que la información está disponible
+  LogoutToken();
+
   useEffect(() => {
     if (info) {
       localStorage.setItem("rol", info.role.id);
@@ -39,7 +39,6 @@ export function WelcomeAndRedirect() {
           path = "/";
           break;
       }
-
       navigate(path);
     }
   }, [info, navigate]);

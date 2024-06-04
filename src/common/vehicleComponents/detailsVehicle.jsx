@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -12,12 +12,24 @@ import { PerformancePanel } from "./performancePanel";
 import { IrregularitiesPanel } from "./irregularitiesPanel";
 import { useNotAuthorized } from "../../hooks/useNotAuthorized";
 import { GasGraphics } from "./gas-graphics";
+import { ListItems } from "../../hooks/crudhooks";
+import { GasChangesRecentURL, PositioningvehicleType } from "../../api/apiurl";
 
 /**
  * SupervisorVinfo component, representing the supervisor-specific view for vehicle information.
  * It includes the NavbarSupervisor for navigation and the VehicleInfo component for displaying vehicle details.
  * Additionally, it integrates PerformancePanel and IrregularitiesPanel for a comprehensive overview of vehicle performance and issues.
  */
+
+function formatDate(dateArray) {
+  const [year, month, day] = dateArray;
+  return `${String(day).padStart(2, '0')}/${String(month).padStart(2, '0')}/${String(year).slice(-2)}`;
+}
+
+function formatTime(timeArray) {
+  const [hours, minutes, seconds] = timeArray;
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
 export function DetailsVehicle() {
   const navigation = useNavigate();
   /**
@@ -27,6 +39,10 @@ export function DetailsVehicle() {
 
   localStorage.setItem("vehicleId", id);
   const rol = +localStorage.getItem("rol");
+
+  const [gasChangeData, setGasChangeData] = useState();
+
+  ListItems(`${GasChangesRecentURL}/${id}`, setGasChangeData);
 
   return (
     <div style={{ width: "100%", height: "100%", border: "2px solid   " }}>
@@ -65,22 +81,12 @@ export function DetailsVehicle() {
                 <th>Hora de instalación</th>
               </thead>
               <tbody>
-                <tr>
-                  <td>22/04/2024</td>
-                  <td>08:35</td>
-                </tr>
-                <tr>
-                  <td>22/04/2024</td>
-                  <td>09:51</td>
-                </tr>
-                <tr>
-                  <td>22/04/2024</td>
-                  <td>10:45</td>
-                </tr>
-                <tr>
-                  <td>22/04/2024</td>
-                  <td>11:05</td>
-                </tr>
+              {gasChangeData && gasChangeData.map((data, index) => (
+                  <tr key={index}>
+                    <td>{formatDate(data.changeDate)}</td>
+                    <td>{formatTime(data.changeTime)}</td>
+                  </tr>
+                ))}
               </tbody>
             </Table>
           </div>

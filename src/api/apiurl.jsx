@@ -86,7 +86,11 @@ export const PerformanceTireYearlyURL = `${PerformanceTireURL}/monthly-averages`
 // Retrieves the most recent irregularities across all vehicles.
 export const PerformanceTireAllYearslyURL = `${PerformanceTireURL}/yearly-averages`;
 
-
+/**
+ * Gas Data
+ */
+export const GasChangesURL = `${apiURL}gas-changes`;
+export const GasChangesRecentURL = `${GasChangesURL}/recent`;
 /**
  * Positioning
  */
