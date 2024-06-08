@@ -91,6 +91,11 @@ export const PerformanceTireAllYearslyURL = `${PerformanceTireURL}/yearly-averag
  */
 export const GasChangesURL = `${apiURL}gas-changes`;
 export const GasChangesRecentURL = `${GasChangesURL}/recent`;
+export const GasChangeOverRecordsURL = `${GasChangesURL}/records-page`;
+
+export const GasRecordsURL = `${apiURL}gas-records`;
+export const GasRecordsVehiclePages = `${GasRecordsURL}/vehicle-page`
+
 /**
  * Positioning
  */

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
+import axios from "axios";
 import { Button } from "react-bootstrap";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-export function Graphics({ titulo, data, labs }) {
+export function GasGraphic({ titulo, data, labs }) {
   const options = {
     responsive: true,
     plugins: {
@@ -21,6 +22,7 @@ export function Graphics({ titulo, data, labs }) {
 
   const [labels, setLabels] = useState();
  
+  //ListItems2(`${PerformanceTireDaylyURL}?tireId=1&year=2024&month=2&day=15`, setData);
   useEffect(() => {
     let lbl = [];
     switch (labs) {

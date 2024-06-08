@@ -9,6 +9,7 @@ import { IrregularitiesByCompanyAndVehiclePageURL, IrregularitiesByCompanyPageUR
 import { PaginacionUtils } from "../../hooks/paginacionUtils";
 import { ListPaginatedData } from "../../hooks/listPaginatedData";
 import { LogoutToken } from "../../hooks/logoutToken";
+import RoleBasedNavbar from "../roleBasedNavbar";
 
 export function Irregularities() {
   LogoutToken();
@@ -17,7 +18,6 @@ export function Irregularities() {
 
   const { p } = useParams();
 
-  // Pagination state
   const [pageNumber, setPageNumber] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -42,8 +42,8 @@ export function Irregularities() {
   
   return (
     <div style={{width:"100%", height:"100%", border:"2px solid"}}>
-      {/* Render the supervisor-specific navigation bar */}
-      {rol === 1 ? <NavbarDriver /> : rol === 2 ? <NavbarSupervisor /> : rol === 3 ? <NavbarAdministrator /> : <h1>sd</h1>}
+      <RoleBasedNavbar/>
+
 
       {p === "v" && (
         <Button className="button-back" onClick={() => navigation(`/detalles/${vehicleId}`)}>
@@ -90,7 +90,6 @@ export function Irregularities() {
                   <td>{incidencia.detailsIrregularity}</td>
                   <td>{incidencia.status ? "Activo" : "Inactivo"}</td>
                   <td>
-                    {/*   <Button onClick={() => handleDetails(incidencia.id)}>Ver detalles</Button> */}
                     <Button onClick={() => navigation(`/incidencia-detalles/${incidencia.id}/${p}`)}>Ver detalles</Button>
                   </td>
                 </tr>

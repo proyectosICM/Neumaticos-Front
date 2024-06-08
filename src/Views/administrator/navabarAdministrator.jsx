@@ -2,10 +2,6 @@ import React from "react";
 import { Button, Nav, Navbar } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-/**
- * Navbar component for the System Administrator dashboard.
- * It includes navigation links and a logout button.
- */
 export function NavbarAdministrator() {
   const navigation = useNavigate();
 

@@ -10,7 +10,7 @@ import { ListItems2 } from "../../hooks/crudhooks";
 import { PerformanceTireAllYearslyURL, PerformanceTireDaylyURL, PerformanceTireMonthlyURL, PerformanceTireYearlyURL } from "../../api/apiurl";
 import RoleBasedNavbar from "../roleBasedNavbar";
 
-export function Performance() { 
+export function GasPerformancePanel() { 
   const navigation = useNavigate();
   const [dataDay, setDataDay] = useState();
   const [dayLabels, setDayLabels] = useState();

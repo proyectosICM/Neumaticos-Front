@@ -14,6 +14,8 @@ import { TireC } from "./Views/administrator/crud-administrator/tireCRUD/tireC";
 import { SensorC } from "./Views/administrator/crud-administrator/sensorCRUD/sensorC";
 import { VehicleC } from "./Views/administrator/crud-administrator/vehicleCRUD/vehicleC";
 import { WelcomeAndRedirect } from "./Views/login/welcomeAndRedirect";
+import { GasChangeOverRecords } from "./common/gasComponents/gasChangeOverRecords";
+import { GasPerformanceRecords } from "./common/gasComponents/gasPerformanceRecords";
 
 
 // Array of route definitions for the application
@@ -48,7 +50,9 @@ export const routes = [
 
   { path: "/panel-performance", component: <SupervisorFullPerformance /> },
 
-
+  // Gas 
+  { path: "/registro-cambios-gas/:id", component: <GasChangeOverRecords /> },
+  { path: "/registro-rendimiento-gas/:id", component: <GasPerformanceRecords /> },
   // Administrator
 
   //Panel crud for administrator

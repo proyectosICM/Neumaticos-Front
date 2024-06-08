@@ -10,15 +10,12 @@ import { NavbarDriver } from "./../../Views/driver/navbarDriver";
 import { NavbarAdministrator } from "./../../Views/administrator/navabarAdministrator";
 import { ListPaginatedData } from "../../hooks/listPaginatedData";
 import { LogoutToken } from "../../hooks/logoutToken";
+import RoleBasedNavbar from "../roleBasedNavbar";
 
-
-export function VehicleMenu() { 
+export function VehicleMenu() {
   LogoutToken();
-  
+
   const company = localStorage.getItem("empresa");
-  const rol = +localStorage.getItem("rol");
-
-
 
   const [pageNumber, setPageNumber] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
@@ -38,19 +35,22 @@ export function VehicleMenu() {
 
   const handleType = (e) => {
     const selectedTypeId = e.target.value;
-    
-    setData("")
-    if(selectedTypeId === "Todos"){
+    setData("");
+    if (selectedTypeId === "Todos") {
       ListPaginatedData(`${VehicleCompanyURL}?companyId=${company}&page=${pageNumber}`, setData, setTotalPages, setCurrentPage);
     } else {
-      ListPaginatedData(`${VehicleTypeAndCompanyURL}?vehicleTypeId=${selectedTypeId}&companyId=${company}&page=${pageNumber}`, setData, setTotalPages, setCurrentPage);
+      ListPaginatedData(
+        `${VehicleTypeAndCompanyURL}?vehicleTypeId=${selectedTypeId}&companyId=${company}&page=${pageNumber}`,
+        setData,
+        setTotalPages,
+        setCurrentPage
+      );
     }
   };
 
   return (
     <div>
-      {rol === 1 ? <NavbarDriver /> : rol === 2 ? <NavbarSupervisor /> : rol === 3 ? <NavbarAdministrator /> : <h1>sd</h1>}
-
+      <RoleBasedNavbar />
       <div className="menu-container">
         <div className="titulo">
           <h2> Vehiculos de la Empresa</h2>
@@ -66,7 +66,7 @@ export function VehicleMenu() {
                   <option key={index} value={d.id}>
                     {d.name}
                   </option>
-                ))} 
+                ))}
             </Form.Select>
           </div>
         </div>
