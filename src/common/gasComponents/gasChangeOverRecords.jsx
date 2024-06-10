@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import { NavbarDriver } from "../../Views/driver/navbarDriver";
-import { NavbarSupervisor } from "../../Views/supervisor/navbarSupervisor";
-import { NavbarAdministrator } from "../../Views/administrator/navabarAdministrator";
 import { useNavigate, useParams } from "react-router-dom";
 import { ListPaginatedData } from "../../hooks/listPaginatedData";
-import { GasChangeOverRecordsURL } from "../../api/apiurl";
+import { GasChangeOverRecordsURL, GasChangesExportURL } from "../../api/apiurl";
 import { PaginacionUtils } from "../../hooks/paginacionUtils";
 import { formatDate, formatTime } from "../../utils/timeFormatters";
 import RoleBasedNavbar from "../roleBasedNavbar";
 
 export function GasChangeOverRecords() {
   const navigation = useNavigate();
-  const rol = +localStorage.getItem("rol");
-
   const { id } = useParams();
 
   const [pageNumber, setPageNumber] = useState(0);
@@ -22,12 +17,36 @@ export function GasChangeOverRecords() {
 
   const [data, setData] = useState(null);
 
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     const Listar = async (page) => {
       ListPaginatedData(`${GasChangeOverRecordsURL}/${id}?page=${page}`, setData, setTotalPages, setCurrentPage);
     };
     Listar(pageNumber);
   }, [pageNumber, id]);
+
+  const handleDownload = async () => {
+    try {
+      const response = await fetch(`${GasChangesExportURL}/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "gas_changes.xlsx";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    } catch (error) {
+      console.error("Error downloading the file", error);
+    }
+  };
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
@@ -57,7 +76,9 @@ export function GasChangeOverRecords() {
           </tbody>
         </Table>
 
-        <Button variant="success">Exportar excel</Button>
+        <Button variant="success" onClick={handleDownload}>
+          Exportar excel
+        </Button>
       </div>
 
       <PaginacionUtils setPageNumber={setPageNumber} setCurrentPage={setCurrentPage} currentPage={currentPage} totalPages={totalPages} />

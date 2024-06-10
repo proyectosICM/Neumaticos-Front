@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import RoleBasedNavbar from "../roleBasedNavbar";
+
 import { Button, Table } from "react-bootstrap";
 import { LogoutToken } from "../../hooks/logoutToken";
 import { useNavigate, useParams } from "react-router-dom";
@@ -7,6 +7,9 @@ import { ListPaginatedData } from "../../hooks/listPaginatedData";
 import { GasRecordsVehiclePages } from "../../api/apiurl";
 import { PaginacionUtils } from "../../hooks/paginacionUtils";
 import { formatDate, formatTime } from "../../utils/timeFormatters";
+import { GasPerformancePanel } from "./graphics/gasPerformancePanel";
+import RoleBasedNavbar from './../roleBasedNavbar';
+
 
 export function GasPerformanceRecords() {
   LogoutToken();
@@ -64,6 +67,7 @@ export function GasPerformanceRecords() {
         <PaginacionUtils setPageNumber={setPageNumber} setCurrentPage={setCurrentPage} currentPage={currentPage} totalPages={totalPages} />
 
         <h1> Estadisticas de rendimiento</h1>
+        <GasPerformancePanel />
       </div>
     </div>
   );

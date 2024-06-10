@@ -93,9 +93,16 @@ export const GasChangesURL = `${apiURL}gas-changes`;
 export const GasChangesRecentURL = `${GasChangesURL}/recent`;
 export const GasChangeOverRecordsURL = `${GasChangesURL}/records-page`;
 
+// Excels
+export const GasChangesExportURL = `${GasChangesURL}/export`;
+
 export const GasRecordsURL = `${apiURL}gas-records`;
 export const GasRecordsVehiclePages = `${GasRecordsURL}/vehicle-page`
 
+export const GasRecordsStatsHAURL = `${GasRecordsURL}/hourly-averages`
+export const GasRecordsStatsDAURL = `${GasRecordsURL}/daily-averages`
+export const GasRecordsStatsMAURL = `${GasRecordsURL}/monthly-averages`
+export const GasRecordsStatsYAURL = `${GasRecordsURL}/yearly-averages`
 /**
  * Positioning
  */

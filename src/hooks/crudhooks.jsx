@@ -76,6 +76,7 @@ export function ListItems(url, setData) {
           },
         });
         setData(response.data);
+        console.log("2");
       } catch (error) {
         const token = await localStorage.getItem("token");
       }
@@ -99,7 +100,32 @@ export function ListItems2(url, setData) {
       const token = await localStorage.getItem("token");
     }
   };
+
   fetchData();
+}
+
+export function ListItemsTimed(url, setData) {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = await localStorage.getItem("token");
+        const response = await axios.get(`${url}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setData(response.data);
+      } catch (error) {
+        const token = await localStorage.getItem("token");
+      }
+    };
+
+    fetchData();
+
+    const intervalId = setInterval(fetchData, 2000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 }
 
 export function ListItemsPaginated(url, setData) {
@@ -124,7 +150,6 @@ export function ListItemsPaginated(url, setData) {
     const intervalId = setInterval(fetchData, 1000); // Ejecutar cada 1 segundo
 
     return () => clearInterval(intervalId); // Limpiar el intervalo cuando el componente se desmonte
-
   }, [url, setData]);
 }
 

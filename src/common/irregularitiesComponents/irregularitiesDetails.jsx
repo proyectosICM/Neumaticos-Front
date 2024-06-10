@@ -12,6 +12,7 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { CiCamera } from "react-icons/ci";
 import axios from "axios";
 import Swal from "sweetalert2";
+import RoleBasedNavbar from "../roleBasedNavbar";
 
 export function IrregularitiesDetails() { 
   const navigation = useNavigate();
@@ -122,11 +123,10 @@ export function IrregularitiesDetails() {
     setSelectedImage(images[newIndex]);
     setImagesId(newIndex);
   };
-
+ 
   return (
     <div style={{ border: "2px solid", width: "100%" }}>
-      {/* Render the supervisor-specific navigation bar */}
-      {rol === 1 ? <NavbarDriver /> : rol === 2 ? <NavbarSupervisor /> : rol === 3 ? <NavbarAdministrator /> : <h1>sd</h1>}
+      <RoleBasedNavbar />
       <Button className="button-back" onClick={() => handleBack()}>
         Atras
       </Button>
