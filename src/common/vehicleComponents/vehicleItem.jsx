@@ -8,6 +8,14 @@ export function VehicleItem({ data }) {
   LogoutToken();
   const navigate = useNavigate(); 
 
+  const handleDetails = () => {
+    navigate(`/detalles/${data.id}`)
+
+    localStorage.setItem("vehicleId", data.id);
+    
+    localStorage.setItem("vehicleType", data.vehicleType.id);
+  }
+
   return (
     <div className="item-card">
       <div className="item-body">
@@ -26,7 +34,7 @@ export function VehicleItem({ data }) {
 
       <Button
         style={{ width: "80%" }}
-        onClick={() => navigate(`/detalles/${data.id}`)}
+        onClick={() => handleDetails()}
         variant="outline-primary"
         title="Editar"
         className="float-end"

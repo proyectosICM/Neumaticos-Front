@@ -12,7 +12,7 @@ import { PerformancePanel } from "./performancePanel";
 import { IrregularitiesPanel } from "./irregularitiesPanel";
 import { GasGraphics } from "./gas-graphics";
 import { ListItems } from "../../hooks/crudhooks";
-import { GasChangesRecentURL } from "../../api/apiurl";
+import { GasChangesRecentURL, VehicleURL } from "../../api/apiurl";
 import { LogoutToken } from "../../hooks/logoutToken";
 import { formatDate, formatTime } from "../../utils/timeFormatters";
 import RoleBasedNavbar from "../roleBasedNavbar";
@@ -24,15 +24,23 @@ export function DetailsVehicle() {
 
   localStorage.setItem("vehicleId", id);
 
+  const vehicleType = localStorage.getItem("vehicleType");
   const [gasChangeData, setGasChangeData] = useState();
+  const [data, setData] = useState(null);
 
+  ListItems(`${VehicleURL}/${id}`, setData);
   ListItems(`${GasChangesRecentURL}/${id}`, setGasChangeData);
+
+  const handleBack = () => {
+    localStorage.removeItem("vehicleType");
+    navigation(`/menu`);
+  };
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <RoleBasedNavbar />
 
-      <Button className="button-back" onClick={() => navigation(`/menu`)}>
+      <Button className="button-back" onClick={() => handleBack()}>
         Atras
       </Button>
       <div className="menu-container-border">
@@ -52,37 +60,40 @@ export function DetailsVehicle() {
           <Button onClick={() => navigation(`/cambiar-neumatico/${id}`)}>Registar cambio de llantas</Button>
         </div>
 
-        <div className="gas-panel">
-          <div className="gas-imagen"></div>
-          <div className="gas-data">
-            <Table variant="dark" striped bordered hover>
-              <thead>
-                <tr>
-                  <th>Día de instalación</th>
-                  <th>Hora de instalación</th>
-                </tr>
-              </thead>
-              <tbody>
-                {gasChangeData &&
-                  gasChangeData.map((data, index) => (
-                    <tr key={index}>
-                      <td>{formatDate(data.changeDate)}</td>
-                      <td>{formatTime(data.changeTime)}</td>
-                    </tr>
-                  ))}
-              </tbody>
-            </Table>
-            <Button style={{ margin: "0px" }} onClick={() => navigation(`/registro-cambios-gas/${id}`)}>
-              Ver registros completos
-            </Button>
+        {(vehicleType == 1 || vehicleType == 2) && (
+          <div className="gas-panel">
+            <div className="gas-imagen"></div>
+            <div className="gas-data">
+              <Table variant="dark" striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>Día de instalación</th>
+                    <th>Hora de instalación</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {gasChangeData &&
+                    gasChangeData.map((data, index) => (
+                      <tr key={index}>
+                        <td>{formatDate(data.changeDate)}</td>
+                        <td>{formatTime(data.changeTime)}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </Table>
+              <Button style={{ margin: "0px" }} onClick={() => navigation(`/registro-cambios-gas/${id}`)}>
+                Ver registros completos
+              </Button>
+            </div>
+
+            <div className="gas-stats">
+              <GasGraphics />
+              <Button style={{ margin: "0px" }} onClick={() => navigation(`/registro-rendimiento-gas/${id}`)}>
+                Ver registros completos
+              </Button>
+            </div>
           </div>
-          <div className="gas-stats">
-            <GasGraphics />
-            <Button style={{ margin: "0px" }} onClick={() => navigation(`/registro-rendimiento-gas/${id}`)}>
-              Ver registros completos
-            </Button>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

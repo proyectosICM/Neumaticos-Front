@@ -4,7 +4,7 @@ import { Button, Table } from "react-bootstrap";
 import { LogoutToken } from "../../hooks/logoutToken";
 import { useNavigate, useParams } from "react-router-dom";
 import { ListPaginatedData } from "../../hooks/listPaginatedData";
-import { GasRecordsVehiclePages } from "../../api/apiurl";
+import { GasRecordsExportURL, GasRecordsVehiclePages } from "../../api/apiurl";
 import { PaginacionUtils } from "../../hooks/paginacionUtils";
 import { formatDate, formatTime } from "../../utils/timeFormatters";
 import { GasPerformancePanel } from "./graphics/gasPerformancePanel";
@@ -13,7 +13,7 @@ import RoleBasedNavbar from './../roleBasedNavbar';
 
 export function GasPerformanceRecords() {
   LogoutToken();
-  const navigation = useNavigate();
+  const navigation = useNavigate(); 
 
   const { id } = useParams();
 
@@ -22,13 +22,35 @@ export function GasPerformanceRecords() {
   const [totalPages, setTotalPages] = useState(0);
 
   const [data, setData] = useState(null);
-
+  const token = localStorage.getItem("token");
   useEffect(() => {
     const Listar = async (page) => {
       ListPaginatedData(`${GasRecordsVehiclePages}/${id}?page=${page}`, setData, setTotalPages, setCurrentPage);
     };
     Listar(pageNumber);
   }, [pageNumber, id]);
+
+  const handleDownload = async () => {
+    try {
+      const response = await fetch(`${GasRecordsExportURL}/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "gas_records.xlsx";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    } catch (error) {
+      console.error("Error downloading the file", error);
+    }
+  };
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
@@ -63,7 +85,7 @@ export function GasPerformanceRecords() {
           </tbody>
         </Table>
         
-        <Button variant="success">Exportar excel</Button>
+        <Button variant="success" onClick={handleDownload}>Exportar excel</Button>
         <PaginacionUtils setPageNumber={setPageNumber} setCurrentPage={setCurrentPage} currentPage={currentPage} totalPages={totalPages} />
 
         <h1> Estadisticas de rendimiento</h1>

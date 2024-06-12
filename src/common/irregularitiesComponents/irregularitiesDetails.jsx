@@ -4,10 +4,6 @@ import { ITTNameURL, ITTURL, ITTbyIrregularityURL, ITTiURL, ImageFiles, Irregula
 import { Button, Modal, Table } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { PerformancePanel } from "../vehicleComponents/performancePanel";
-import { NavbarDriver } from "../../Views/driver/navbarDriver";
-import { NavbarSupervisor } from "../../Views/supervisor/navbarSupervisor";
-import { NavbarAdministrator } from "../../Views/administrator/navabarAdministrator";
-import { LogoutToken } from "../../hooks/logoutToken";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { CiCamera } from "react-icons/ci";
 import axios from "axios";
@@ -109,7 +105,6 @@ export function IrregularitiesDetails() {
     }
   };
 
-  const rol = +localStorage.getItem("rol");
 
   const handleChangeImage = (direction) => {
     let newIndex = direction === "+" ? imagesId + 1 : imagesId - 1;

@@ -99,10 +99,14 @@ export const GasChangesExportURL = `${GasChangesURL}/export`;
 export const GasRecordsURL = `${apiURL}gas-records`;
 export const GasRecordsVehiclePages = `${GasRecordsURL}/vehicle-page`
 
+// Excels
+export const GasRecordsExportURL = `${GasRecordsURL}/export`;
+
 export const GasRecordsStatsHAURL = `${GasRecordsURL}/hourly-averages`
 export const GasRecordsStatsDAURL = `${GasRecordsURL}/daily-averages`
 export const GasRecordsStatsMAURL = `${GasRecordsURL}/monthly-averages`
 export const GasRecordsStatsYAURL = `${GasRecordsURL}/yearly-averages`
+
 /**
  * Positioning
  */
