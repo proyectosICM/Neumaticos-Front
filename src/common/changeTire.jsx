@@ -123,7 +123,7 @@ export function ChangeTire() {
       });
       localStorage.removeItem("tireSelected");
       setSelectedTire(0);
-      tireId == null;
+      //tireId == null;
     }
   };
 
@@ -171,7 +171,7 @@ export function ChangeTire() {
     });
     localStorage.removeItem("tireSelected");
     setSelectedSensor(0);
-    sensorId == null;
+    //sensorId == null;
 
 
   };
