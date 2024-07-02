@@ -1,5 +1,5 @@
 // URL Server
-export const base = "http://192.168.1.232:8082";
+export const base = "https://samloto.com:4005";
 
 // URL for user authentication (POST request)
 export const loginURL = `${base}/login`;
